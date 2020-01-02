@@ -3,50 +3,57 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hzl.cloud</groupId>
-    <artifactId>hadoop-cloud-config</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.2.RELEASE</version>
+        <groupId>com.hzl.cloud</groupId>
+        <artifactId>hadoopcloud-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.hzl.cloud</groupId>
+    <artifactId>hadoop-cloud-register</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+
     <properties>
-        <!-- !!deploy的时候需要开启skip参数!! -->
-        <!--<maven.springboot.skip>true</maven.springboot.skip>-->
-        <spring-boot.version>2.0.4.RELEASE</spring-boot.version>
-        <alibaba.nacos.config>2.1.1.RELEASE</alibaba.nacos.config>
-        <alibaba.nacos.discory>2.1.1.RELEASE</alibaba.nacos.discory>
-        <lombok>1.18.10</lombok>
+        <!--<alibaba.nacos.config>2.1.1.RELEASE</alibaba.nacos.config>-->
+        <!--<alibaba.nacos.discory>2.1.1.RELEASE</alibaba.nacos.discory>-->
+        <!--<lombok>1.18.10</lombok>-->
     </properties>
 
-    <dependencyManagement>
-        <!--https://blog.csdn.net/qq_36838191/article/details/90648774-->
-
-    </dependencyManagement>
 
     <dependencies>
         <!--实现配置的动态变更-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-            <version>${alibaba.nacos.config}</version>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config -->
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+        <!--</dependency>-->
         <!--实现服务的注册与发现-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-nacos-discovery -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-            <version>${alibaba.nacos.discory}</version>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok}</version>
         </dependency>
 
+        <!--pdf操作-->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.1</version>
+        </dependency>
+        <!--二维码依赖-->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
 
 
