@@ -1,10 +1,6 @@
 package com.hzl.hadoop.constant;
 
 /**
- * HnlpConstant
- *
- * @author huifei.liu@hand-chian.com
- * Date: 2018/11/5
  * Description: 对接hnlp常量
  */
 

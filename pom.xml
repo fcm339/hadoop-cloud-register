@@ -20,7 +20,7 @@
         <!--<alibaba.nacos.discory>2.1.1.RELEASE</alibaba.nacos.discory>-->
         <!--<lombok>1.18.10</lombok>-->
         <itextpdf>5.5.13.1</itextpdf>
-        <google.zxing>3.0.0</google.zxing>
+        <google.zxing>3.3.3</google.zxing>
         <httpclient>4.5.9</httpclient>
     </properties>
 
@@ -67,6 +67,7 @@
             <artifactId>httpclient</artifactId>
             <version>${httpclient}</version>
         </dependency>
+
     </dependencies>
 
 
