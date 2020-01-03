@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.springframework.core.io.FileSystemResource;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -60,25 +61,19 @@ public class PdfUtilTest {
      */
 	@Test
 	public void addWaterCode(){
-
-		String file1 = "http://10.200.254.53:8080/hfle/v1/0/files/download-by-key?fileKey=0/1a1d2260dc9a4e5281a0617f92c712ba@%E6%B0%B8%E5%8D%87sql%E6%96%87%E6%A1%A3.pdf&access_token=ad8d22d7-4ec6-4aa7-94de-a6b524fdea4d";
-
 		OutputStream outputStream = null;
 
 		ByteArrayOutputStream tempOutputStream = new ByteArrayOutputStream();
 
-		String url = "http://ekpapp.ysservice.com.cn/km/review/km_review_main/kmReviewMain.do?method=view&fdId=16ef900bd63570235e6fbac4af39609b".replace("http://ekp","http://ekpapp");
-		String contractNumber = "ZFXM2019001443";
-		String water = "厦门永升物业";
+		String url = "http://www.baidu.com";
+		String content = "随意插入";
+		String water = "hadoop";
 
 		try {
-			List<String> fileList = new ArrayList<>();
-
-			fileList.add("/Users/hzl/Desktop/pdf.PDF");
-			concatPDFsNew(fileList, tempOutputStream);
-			InputStream tempInputStream = new FileInputStream("/Users/hzl/Desktop/pdf.PDF");
-			outputStream=new FileOutputStream("/Users/hzl/Desktop/测试.pdf");
-			addPdfTextMark(tempInputStream, tempOutputStream, water, 200, 200, url, contractNumber);
+			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/测试.pdf");
+			//FileInputStream fileInputStream =new FileInputStream(new File("/Users/hzl/Desktop/测试.pdf"));
+			outputStream=new FileOutputStream("/Users/hzl/Desktop/tt.pdf");
+			addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);
 			outputStream.write(tempOutputStream.toByteArray());
 			tempOutputStream.flush();
 			outputStream.flush();
