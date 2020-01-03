@@ -105,9 +105,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 				//是否输出值为null的字段,默认为false。设置后为null的字段会输出
 				SerializerFeature.WriteMapNullValue,
 				//对斜杠’/’进行转义
-				SerializerFeature.WriteSlashAsSpecial,
+				SerializerFeature.WriteSlashAsSpecial
 				//将对象转为array输出
-				SerializerFeature.BeanToArray);
+				//SerializerFeature.BeanToArray
+				);
 
 		//3处理中文乱码问题
 		List<MediaType> fastMediaTypes = new ArrayList<>();
