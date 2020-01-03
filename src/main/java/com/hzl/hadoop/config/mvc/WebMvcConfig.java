@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 /**
  * description
- *
+ * 和WebMvcConfigurerAdapter对比
  * @author hzl 2020/01/03 11:25 AM
  */
 @Configuration
