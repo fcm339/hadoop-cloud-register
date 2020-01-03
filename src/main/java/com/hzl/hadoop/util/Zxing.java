@@ -41,7 +41,7 @@ public class Zxing {
 		// executeForQRBytes();
 
 		//executeForEANFile();
-		 //executeForEANBytes();
+		 executeForEANBytes();
 	}
 
 	public static void executeForQRFile() {
@@ -133,7 +133,7 @@ public class Zxing {
 		// 条形码内容
 		String text = "6943620593115";
 		// 条形码图片导出路径
-		File file = new File("/Users/hzl/Desktop/条形码.jpg");
+		File file = new File("/Users/hzl/Desktop/条形码.png");
 
 		// 条形码参数的构造对象，很多参数赋予了默认值，可自行通过set方法更改
 		ZxingEntity entity = new ZxingEntity();
@@ -154,5 +154,32 @@ public class Zxing {
 		Result result = decoder.decodeByBytes(bytes, entity.getEncoding());
 
 		log.info("扫描结果 - [Text] : " + result.getText() + " [Timestamp] : " + result.getTimestamp() + " [BarcodeFormat] : " + result.getBarcodeFormat() + " [NumBits] : " + result.getNumBits());
+	}
+
+	//返回条形码字节流
+	public static byte[] executeForEANBytesReturn() throws IOException {
+		// 条形码内容
+		String text = "6943620593115";
+
+		// 条形码参数的构造对象，很多参数赋予了默认值，可自行通过set方法更改
+		ZxingEntity entity = new ZxingEntity();
+		entity.setBarcodeFormat(BarcodeFormat.EAN_13);
+		entity.setText(text);
+		//entity.setOutputFile(file);
+		entity.setWidth(560);
+		entity.setHeight(200);
+
+		// 以字节数组格式读取并导出，该方式适合服务端传输给客户端调用
+		ZxingEncoder encoder = new ZxingEncoder();
+		byte[] bytes = encoder.encodeForBytes(entity);
+
+		//ZxingUtil.createFile(bytes, file);
+
+		// 以字节数组格式扫描并解析
+		ZxingDecoder decoder = new ZxingDecoder();
+		Result result = decoder.decodeByBytes(bytes, entity.getEncoding());
+
+		log.info("扫描结果 - [Text] : " + result.getText() + " [Timestamp] : " + result.getTimestamp() + " [BarcodeFormat] : " + result.getBarcodeFormat() + " [NumBits] : " + result.getNumBits());
+		return bytes;
 	}
 }

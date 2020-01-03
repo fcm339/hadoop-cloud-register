@@ -22,6 +22,8 @@
         <itextpdf>5.5.13.1</itextpdf>
         <google.zxing>3.3.3</google.zxing>
         <httpclient>4.5.9</httpclient>
+        <freemarker>2.2.2.RELEASE</freemarker>
+
     </properties>
 
 
@@ -67,6 +69,16 @@
             <artifactId>httpclient</artifactId>
             <version>${httpclient}</version>
         </dependency>
+        <!--模版引擎-->
+        <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-freemarker -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <version>${freemarker}</version>
+        </dependency>
+
+
 
     </dependencies>
 
