@@ -23,7 +23,13 @@ import java.nio.charset.StandardCharsets;
 @Controller
 @Slf4j
 public class FileDownloadController {
-
+	/**
+	 * <p>
+	 * 通用文件下载
+	 * </p>
+	 *
+	 * @author hzl 2020/01/05 2:36 PM
+	 */
 	@GetMapping(value = "/download")
 	public ResponseEntity<InputStreamResource> downFile(@RequestParam String fileName) throws IOException {
 		log.info("文件名称" + fileName);
@@ -38,4 +44,6 @@ public class FileDownloadController {
 				.contentType(MediaType.parseMediaType("application/octet-stream"))
 				.body(new InputStreamResource(file.getInputStream()));
 	}
+
+
 }
