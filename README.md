@@ -31,7 +31,7 @@
 
 集成 email（待开发完善）
 
-日志配置logback实现了slf4j，指定日志目录，分片，日志查询脚本grep.sh
+日志配置logback实现了slf4j，指定日志目录，分片，日志查询脚本grep.sh（完成)
 
 文件功能file服务，开发上传文件接口，开发http请求下载文件的功能(完成，HttpFileDownloadTest)
 
