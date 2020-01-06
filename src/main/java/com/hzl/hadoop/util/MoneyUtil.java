@@ -119,9 +119,4 @@ public class MoneyUtil {
 		return sb.toString();
 	}
 
-
-    /*public static void main(String args[]){
-
-        System.out.println(number2CNMontrayUnit(BigDecimal.valueOf(111111111.11)));
-    }*/
 }

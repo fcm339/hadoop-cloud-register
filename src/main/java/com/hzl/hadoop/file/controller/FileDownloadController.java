@@ -1,5 +1,6 @@
 package com.hzl.hadoop.file.controller;
 
+import com.hzl.hadoop.util.ExcelParseToMapUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
@@ -8,11 +9,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
 
 /**
  * description
@@ -45,5 +50,22 @@ public class FileDownloadController {
 				.body(new InputStreamResource(file.getInputStream()));
 	}
 
+	/**
+	 * <p>
+	 * 通用文件上传
+	 * </p>
+	 *
+	 * @author hzl 2020/01/06 11:00 AM
+	 */
 
+	@PostMapping(value = "/upload")
+	public ResponseEntity<Map<String, List<Map<String, String>>>> uploadFile(MultipartFile file){
+		Map<String, List<Map<String, String>>> result=null;
+		try {
+			result=ExcelParseToMapUtil.parseExcelFile(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(result);
+	}
 }
