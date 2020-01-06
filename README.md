@@ -5,6 +5,11 @@
 
 集成mybatis，druid数据库连接池(是否可以动态修改连接数)，多数据源(读写分离,主从数据库同步的延迟),
     分页
+    mybatis:完成
+    druid:完成
+    mybatis工具包：
+    多数据源：
+    读写分离：
 
 集成springsecurity
 
@@ -27,7 +32,7 @@
 
 日志配置
 
-文件功能file服务，开发上传文件接口，开发http请求下载文件的功能
+文件功能file服务，开发上传文件接口，开发http请求下载文件的功能(完成，HttpFileDownloadTest)
 
 增加word分析组件，关键字搜索（有些文件中不允许出现一些关键字）hadoop文件分析
 

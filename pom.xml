@@ -25,6 +25,7 @@
         <freemarker>2.2.2.RELEASE</freemarker>
         <apache.poi>4.1.1</apache.poi>
         <poi-ooxml>4.1.1</poi-ooxml>
+        <druid>1.1.21</druid>
     </properties>
 
 
@@ -95,6 +96,13 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi-ooxml}</version>
+        </dependency>
+        <!--druid连接池-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid}</version>
         </dependency>
 
     </dependencies>
