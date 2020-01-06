@@ -10,6 +10,7 @@
     mybatis工具包：
     多数据源：
     读写分离：
+    执行sql脚本：
 
 集成springsecurity
 
@@ -30,10 +31,11 @@
 
 集成 email（待开发完善）
 
-日志配置
+日志配置logback实现了slf4j，指定日志目录，分片，日志查询脚本grep.sh
 
 文件功能file服务，开发上传文件接口，开发http请求下载文件的功能(完成，HttpFileDownloadTest)
 
 增加word分析组件，关键字搜索（有些文件中不允许出现一些关键字）hadoop文件分析
 
 
+开发启动脚本start.sh idea配置(-Xms0m -Xmx512m -Dspring.profiles.active=local)

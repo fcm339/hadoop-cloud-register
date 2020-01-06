@@ -29,12 +29,12 @@ import java.io.FileNotFoundException;
 public class FileuploadExcelParseTest {
 	@Before
 	public void init() {
-		System.out.println("开始测试-----------------");
+		log.info("开始测试-----------------");
 	}
 
 	@After
 	public void after() {
-		System.out.println("测试结束-----------------");
+		log.info("测试结束-----------------");
 	}
 
 

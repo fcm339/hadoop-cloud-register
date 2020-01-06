@@ -29,7 +29,7 @@ import java.util.List;
 @Slf4j
 public class PdfUtil {
 	//字体文件
-	private static final String FONTS_PATH = "/fonts/simsun.ttf";
+	public static final String FONTS_PATH = "/fonts/simsun.ttf";
 
 	public static final BaseColor water = new BaseColor(224, 224, 224);
 
