@@ -2,6 +2,7 @@ package com.hzl.hadoop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 
 @EnableDiscoveryClient
-@SpringBootApplication
+@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
 @EnableWebMvc
 public class RegisterApplication {
 

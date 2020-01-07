@@ -9,9 +9,10 @@
     druid:完成
     mybatis工具包：
     多数据源：
-    读写分离：
+    读写分离：参考：https://www.cnblogs.com/cjsblog/p/9712457.html，https://mp.weixin.qq.com/s/uivql_NMhWSnjknL9o5M3A（完成）
     执行sql脚本：groovy或者后期根据mybatis开发一个，或者不开发
     mybatis一级，二级缓存设置
+    集成jpa
     
 集成springsecurity
 
