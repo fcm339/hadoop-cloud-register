@@ -4,21 +4,22 @@
 
 
 集成mybatis，druid数据库连接池(是否可以动态修改连接数)，多数据源(读写分离,主从数据库同步的延迟),
-    分页
+    分页:https://github.com/pagehelper/Mybatis-PageHelper(完成)
     mybatis:完成
     druid:完成
     mybatis工具包：
     多数据源：
     读写分离：
-    执行sql脚本：
-
+    执行sql脚本：groovy或者后期根据mybatis开发一个，或者不开发
+    mybatis一级，二级缓存设置
+    
 集成springsecurity
 
 集成定时器，队列只消费一次
 
 集成分布式事务和分布式锁，缓存：
     参考：https://github.com/Nepxion/Aquarius 
-    集成redis:
+    集成  redis:
     集成：zookeeper
     
 集成条形码，模版引擎组件 https://github.com/Nepxion/Zxing(完成)
@@ -29,7 +30,7 @@
 
 开发权限，aop
 
-集成 email（待开发完善）
+集成 email（完成，后期集成数据库）
 
 日志配置logback实现了slf4j，指定日志目录，分片，日志查询脚本grep.sh（完成)
 
@@ -39,3 +40,5 @@
 
 
 开发启动脚本start.sh idea配置(-Xms0m -Xmx512m -Dspring.profiles.active=local)
+
+集成gitlib ci/cd

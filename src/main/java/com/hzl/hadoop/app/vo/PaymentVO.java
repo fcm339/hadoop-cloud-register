@@ -34,6 +34,6 @@ public class PaymentVO {
 
 	private List<HashMap> receiptList;
 
-	private BigDecimal money;
+	//private BigDecimal money;
 
 }

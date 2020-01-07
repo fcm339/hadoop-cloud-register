@@ -14,7 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class MailConfig {
+public class MailInfo {
 
 	private String from;
 

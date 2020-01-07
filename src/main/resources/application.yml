@@ -20,10 +20,16 @@ spring:
       template-loader-path: classpath:/templates/
   #邮件配置信息，后期可保存到数据库
   mail:
-    host:
-    username: 1620516418@qq.com
+    host: hwhzsmtp.qiye.163.com
+    username:
     password:
-    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
   #mysql连接
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
