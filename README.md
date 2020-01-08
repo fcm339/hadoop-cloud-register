@@ -4,11 +4,12 @@
 
 
 集成mybatis，druid数据库连接池(是否可以动态修改连接数)，多数据源(读写分离,主从数据库同步的延迟),
+
     分页:https://github.com/pagehelper/Mybatis-PageHelper(完成)
     mybatis:完成
     druid:完成
     mybatis工具包：
-    多数据源：
+    多数据源：完成 数据源注解@DataSource必须在mapper注入前执行，事务回滚待测试
     读写分离：参考：https://www.cnblogs.com/cjsblog/p/9712457.html，https://mp.weixin.qq.com/s/uivql_NMhWSnjknL9o5M3A（完成）
     执行sql脚本：groovy或者后期根据mybatis开发一个，或者不开发
     mybatis一级，二级缓存设置

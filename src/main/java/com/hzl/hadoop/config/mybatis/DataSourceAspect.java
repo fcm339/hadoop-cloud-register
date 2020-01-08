@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 
 /**
  * description
- *
+ * 通过切片读取注解@DataSource，在建立初始化连接前指定当前线程的数据源
  * @author hzl 2020/01/07 9:59 PM
  */
 
@@ -31,17 +31,17 @@ public class DataSourceAspect {
 
 		DataSource dataSource = method.getAnnotation(DataSource.class);
 		if (dataSource == null) {
-			DynamicDataSource.setDataSource(DBTypeEnum.MASTER.value());
+			DBContextHolder.setDataSource(DBTypeEnum.MASTER.value());
 		} else if(DBTypeEnum.MASTER.value().equals(dataSource.name())){
-			DynamicDataSource.setDataSource(dataSource.name());
+			DBContextHolder.setDataSource(dataSource.name());
 		}else{
-			DynamicDataSource.slave();
+			DBContextHolder.setDataSource(dataSource.name());
 		}
 
 		try {
 			return point.proceed();
 		} finally {
-			DynamicDataSource.clearDataSource();
+			DBContextHolder.clearDataSource();
 		}
 	}
 

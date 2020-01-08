@@ -2,6 +2,8 @@ package com.hzl.hadoop.config.mybatis;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -14,21 +16,25 @@ import javax.sql.DataSource;
 
 /**
  * description
- *
+ * 给数据源设置事务
  * @author hzl 2020/01/07 11:14 PM
  */
 @EnableTransactionManagement
 @Configuration
+@MapperScan({"**.mapper"})
 public class MyBatisConfig {
 
 	@Resource(name = "dataSource")
 	private DataSource myRoutingDataSource;
 
+	@Value("${mybatis.mapperLocations}")
+	private String scanMapperPath;
+
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(myRoutingDataSource);
-		sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:/mapper/*.xml"));
+		sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(scanMapperPath));
 		return sqlSessionFactoryBean.getObject();
 	}
 
@@ -36,4 +42,6 @@ public class MyBatisConfig {
 	public PlatformTransactionManager platformTransactionManager() {
 		return new DataSourceTransactionManager(myRoutingDataSource);
 	}
+
+
 }

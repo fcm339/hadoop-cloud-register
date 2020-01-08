@@ -1,8 +1,12 @@
 package com.hzl.hadoop.config.mybatis;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.hzl.hadoop.constant.DBTypeEnum;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -24,23 +28,25 @@ public class DynamicDataSourceConfig {
 
 	@Bean
 	@ConfigurationProperties("spring.datasource.master")
+	@Primary
 	public DataSource masterDataSource() {
-		return DataSourceBuilder.create().build();
+		return DruidDataSourceBuilder.create().build();
 	}
 
 	@Bean
 	@ConfigurationProperties("spring.datasource.slave1")
 	public DataSource slaveDataSource() {
-		return DataSourceBuilder.create().build();
+		return DruidDataSourceBuilder.create().build();
 	}
 
 	@Bean
-	@Primary
-	public DynamicDataSource dataSource(DataSource xiaobinMasterDataSource, DataSource xiaobinSlaveDataSource) {
+	public DynamicDataSource dataSource(@Qualifier("masterDataSource") DataSource masterDataSource, @Qualifier("slaveDataSource") DataSource slaveDataSource) {
 		Map<Object, Object> targetDataSources = new HashMap<>();
-		targetDataSources.put(DBTypeEnum.MASTER.value(), xiaobinMasterDataSource);
-		targetDataSources.put(DBTypeEnum.SLAVE1.value(), xiaobinSlaveDataSource);
-		return new DynamicDataSource(xiaobinMasterDataSource, targetDataSources);
+		targetDataSources.put(DBTypeEnum.MASTER.value(), masterDataSource);
+		if(slaveDataSource!=null){
+			targetDataSources.put(DBTypeEnum.SLAVE1.value(), slaveDataSource);
+		}
+		return new DynamicDataSource(masterDataSource, targetDataSources);
 	}
 
 }

@@ -1,7 +1,9 @@
 package com.hzl.hadoop.config.mybatis;
 
 import com.hzl.hadoop.constant.DBTypeEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.springframework.lang.Nullable;
 
 import javax.sql.DataSource;
 import java.util.Map;
@@ -13,11 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author hzl 2020/01/07 9:56 PM
  */
+@Slf4j
 public class DynamicDataSource extends AbstractRoutingDataSource {
-
-	private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
-
-	private static final AtomicInteger counter = new AtomicInteger(-1);
 
 
 	public DynamicDataSource(DataSource defaultTargetDataSource, Map<Object, Object> targetDataSources) {
@@ -26,35 +25,12 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 		super.afterPropertiesSet();
 	}
 
+	@Nullable
 	@Override
 	protected Object determineCurrentLookupKey() {
-		return getDataSource();
+		log.info("当前线程获取的数据源"+DBContextHolder.getDataSource());
+		return DBContextHolder.getDataSource();
 	}
 
-	public static void setDataSource(String dataSource) {
-		contextHolder.set(dataSource);
-	}
 
-	public static String getDataSource() {
-		return contextHolder.get();
-	}
-
-	public static void clearDataSource() {
-		contextHolder.remove();
-	}
-
-	public static void slave() {
-		//  轮询
-		int index = counter.getAndIncrement() % 2;
-		if (counter.get() > 9999) {
-			counter.set(-1);
-		}
-		if (index == 0) {
-			setDataSource(DBTypeEnum.SLAVE1.value());
-			System.out.println("切换到slave1");
-		}else {
-			setDataSource(DBTypeEnum.SLAVE2.value());
-			System.out.println("切换到slave2");
-		}
-	}
 }
