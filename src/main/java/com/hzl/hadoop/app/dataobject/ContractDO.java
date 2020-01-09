@@ -2,6 +2,7 @@ package com.hzl.hadoop.app.dataobject;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
@@ -20,7 +21,10 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ContractDO {
-
+	//jpa注解
+	@Id
+	@Column(name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String contractNumber;
 	private String contractName;
@@ -157,4 +161,7 @@ public class ContractDO {
 	private String otherSpecialTerms;
 
 	private String remark;
+	//非数据库字段
+	@Transient
+	private String sss;
 }
