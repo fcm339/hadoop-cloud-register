@@ -74,7 +74,7 @@ public class PdfUtilTest {
 		String water = "hadoop";
 
 		try {
-			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/测试.pdf");
+			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/11-通用--绿化养护合同-1.pdf");
 			//FileInputStream fileInputStream =new FileInputStream(new File("/Users/hzl/Desktop/测试.pdf"));
 			outputStream=new FileOutputStream("/Users/hzl/Desktop/tt.pdf");
 			addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);

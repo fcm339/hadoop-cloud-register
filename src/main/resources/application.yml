@@ -97,6 +97,8 @@ spring:
           login-password: admin
       db-type: mysql
 
+  jpa:
+    show-sql: true
 
 ribbon:
   nacos:

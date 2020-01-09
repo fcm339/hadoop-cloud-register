@@ -228,7 +228,6 @@ public class PdfUtil {
 
 		PdfReader reader = new PdfReader(put, "PDF".getBytes());
 		PdfStamper stamp = new PdfStamper(reader, out);
-		log.info("二维码1-1" + codeStr);
 		// 加二维码
 		if (!StringUtils.isBlank(codeStr)) {
 			addCode(codeStr, stamp);
@@ -244,7 +243,6 @@ public class PdfUtil {
 
 		// 加二维码结束
 		// 添加水印
-		byte loop = 3;
 		if (!StringUtils.isBlank(textMark)) {
 
 			PdfGState gs = new PdfGState();
@@ -258,9 +256,9 @@ public class PdfUtil {
 			for (int i = 1; i <= pageSize; i++) {
 
 
-				// 水印在之前文本下
+				// 水印在文本下
 				under = stamp.getUnderContent(i);
-				//水印在之前文本上
+				//水印在文本上
 				// under = stamp.getOverContent(i);
 				under.beginText();
 				// 文字水印 颜色
