@@ -1,6 +1,7 @@
 import com.hzl.hadoop.util.PdfUtil;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.*;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.core.io.FileSystemResource;
 
@@ -18,6 +19,7 @@ import static com.hzl.hadoop.util.PdfUtil.concatPDFsNew;
  *
  * @author hzl 2020/01/02 5:52 PM
  */
+@Slf4j
 public class PdfUtilTest {
 
 	@Test
@@ -74,10 +76,10 @@ public class PdfUtilTest {
 		String water = "hadoop";
 
 		try {
-			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/11-通用--绿化养护合同-1.pdf");
+			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/IR01869002.pdf");
 			//FileInputStream fileInputStream =new FileInputStream(new File("/Users/hzl/Desktop/测试.pdf"));
 			outputStream=new FileOutputStream("/Users/hzl/Desktop/tt.pdf");
-			addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);
+			//addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);
 			outputStream.write(tempOutputStream.toByteArray());
 			tempOutputStream.flush();
 			outputStream.flush();
@@ -181,4 +183,28 @@ public class PdfUtilTest {
 		}
 	}
 
+
+	/**
+	 * <p>
+	 * 获取pdf文字内容测试
+	 * </p>
+	 *
+	 * @author hzl 2020/01/10 2:43 PM
+	 */
+	@Test
+	public void getPdfFileStr() throws IOException {
+		File tempInputStream = new File("/Users/hzl/Desktop/IR01869002.pdf");
+
+		FileInputStream fileInputStream = new FileInputStream(tempInputStream);
+
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		byte[] buffers = new byte[1024*4];
+		int n = 0;
+		while (-1 != (n = fileInputStream.read(buffers))) {
+			output.write(buffers, 0, n);
+		}
+		log.info(PdfUtil.getPdfFileStr(output.toByteArray()));
+		output.flush();
+		output.close();
+	}
 }

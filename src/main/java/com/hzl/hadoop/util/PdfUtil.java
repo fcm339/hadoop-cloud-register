@@ -7,6 +7,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -416,5 +417,34 @@ public class PdfUtil {
 			columnText.go();
 		}
 		//stamper.close();
+	}
+
+	/**
+	 * <p>
+	 * 获取pdf文字内容
+	 * </p>
+	 *
+	 * @author hzl 2020/01/10 2:41 PM
+	 */
+	public static String getPdfFileStr(byte[] bytes){
+		// 存放读取出的文档内容
+		String content = "";
+		try {
+			// 读取pdf所使用的输出流
+			PdfReader reader = new PdfReader(bytes);
+			// 获得页数
+			int PageNum = reader.getNumberOfPages();
+
+			for (int i = 1; i <= PageNum; i++) {
+				// 读取第i页的文档内容
+				content += PdfTextExtractor.getTextFromPage(reader, i);
+			}
+		} catch (IOException e) {
+			log.info("错误：" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return content;
+
 	}
 }
