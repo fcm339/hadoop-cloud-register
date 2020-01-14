@@ -23,7 +23,9 @@
     注解执行时机：启动，调用，结束（bean的生命周期）
     针对spring的生命周期，开发对应的实现类例子，供后期复制调用
     
-    
+集成easyexcel,文件位置com.hzl.hadoop.file.excel.ExcelDone，demo待完善
+
+   
 开发多线程工具类：
 
 增加io流操作工具类

@@ -26,6 +26,7 @@
         <apache.poi>4.1.1</apache.poi>
         <poi-ooxml>4.1.1</poi-ooxml>
         <druid>1.1.21</druid>
+        <easyexcel>2.1.6</easyexcel>
     </properties>
 
 
@@ -105,7 +106,13 @@
             <version>${druid}</version>
         </dependency>
 
-
+        <!--阿里开源的excel工具-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>${easyexcel}</version>
+        </dependency>
 
     </dependencies>
 
