@@ -20,6 +20,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Table(name="hcbm_contract")
 public class ContractDO {
 	//jpa注解
 	@Id

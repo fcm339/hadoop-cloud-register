@@ -1,9 +1,11 @@
 package com.hzl.hadoop.app.service.impl;
 
 import com.hzl.hadoop.app.dataobject.ContractDO;
-import com.hzl.hadoop.app.mapper.Contractmapper;
 import com.hzl.hadoop.app.service.MybatisService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.hzl.hadoop.app.mapper.Contractmapper;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,18 +16,24 @@ import org.springframework.transaction.annotation.Transactional;
  * @author hzl 2020/01/08 9:45 AM
  */
 @Component
-public class MybatisServiceimpl implements MybatisService {
+@Slf4j
+public class MybatisServiceimpl implements MybatisService,DisposableBean {
 
 	@Autowired
-	Contractmapper contractmapper;
+	private Contractmapper contractmapper;
 
-//	@Autowired
+	//	@Autowired
 //	ContractSlavemapper contractSlavemapper;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public ContractDO select() {
-		return contractmapper.select();
+		return contractmapper.selectOne(ContractDO.builder().id(950L).build());
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		log.info("MybatisServiceimpl执行销毁方法");
 	}
 
 //	@Override

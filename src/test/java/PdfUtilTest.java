@@ -193,7 +193,7 @@ public class PdfUtilTest {
 	 */
 	@Test
 	public void getPdfFileStr() throws IOException {
-		File tempInputStream = new File("/Users/hzl/Desktop/IR01869002.pdf");
+		File tempInputStream = new File("/Users/hzl/Desktop/Java NIO通信框架在电信领域的实践.pdf");
 
 		FileInputStream fileInputStream = new FileInputStream(tempInputStream);
 

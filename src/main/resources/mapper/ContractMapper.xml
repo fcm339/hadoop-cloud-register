@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hzl.hadoop.app.mapper.Contractmapper">
 
-    <select id="select" resultType="com.hzl.hadoop.app.dataobject.ContractDO">
+    <select id="selectTest" resultType="com.hzl.hadoop.app.dataobject.ContractDO">
         select * from hcbm_contract limit 1
     </select>
 </mapper>

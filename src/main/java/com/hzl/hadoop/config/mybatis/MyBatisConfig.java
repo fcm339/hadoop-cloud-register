@@ -2,6 +2,7 @@ package com.hzl.hadoop.config.mybatis;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +18,12 @@ import javax.sql.DataSource;
 /**
  * description
  * 给数据源设置事务
+ *
  * @author hzl 2020/01/07 11:14 PM
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan({"**.mapper"})
+@MapperScan({"classpath*:/mapper/*.xml"})
 public class MyBatisConfig {
 
 	@Resource(name = "dataSource")
@@ -43,5 +45,8 @@ public class MyBatisConfig {
 		return new DataSourceTransactionManager(myRoutingDataSource);
 	}
 
-
+//	@Bean
+//	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+//		return new SqlSessionTemplate(sqlSessionFactory);
+//	}
 }

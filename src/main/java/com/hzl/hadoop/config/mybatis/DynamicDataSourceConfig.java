@@ -33,19 +33,27 @@ public class DynamicDataSourceConfig {
 		return DruidDataSourceBuilder.create().build();
 	}
 
-	@Bean
-	@ConfigurationProperties("spring.datasource.slave1")
-	public DataSource slaveDataSource() {
-		return DruidDataSourceBuilder.create().build();
-	}
+//	@Bean
+//	@ConfigurationProperties("spring.datasource.slave1")
+//	public DataSource slaveDataSource() {
+//		return DruidDataSourceBuilder.create().build();
+//	}
+
+//	@Bean
+//	public DynamicDataSource dataSource(@Qualifier("masterDataSource") DataSource masterDataSource, @Qualifier("slaveDataSource") DataSource slaveDataSource) {
+//		Map<Object, Object> targetDataSources = new HashMap<>();
+//		targetDataSources.put(DBTypeEnum.MASTER.value(), masterDataSource);
+//		if(slaveDataSource!=null){
+//			targetDataSources.put(DBTypeEnum.SLAVE1.value(), slaveDataSource);
+//		}
+//		return new DynamicDataSource(masterDataSource, targetDataSources);
+//	}
 
 	@Bean
-	public DynamicDataSource dataSource(@Qualifier("masterDataSource") DataSource masterDataSource, @Qualifier("slaveDataSource") DataSource slaveDataSource) {
+	public DynamicDataSource dataSource(@Qualifier("masterDataSource") DataSource masterDataSource) {
 		Map<Object, Object> targetDataSources = new HashMap<>();
 		targetDataSources.put(DBTypeEnum.MASTER.value(), masterDataSource);
-		if(slaveDataSource!=null){
-			targetDataSources.put(DBTypeEnum.SLAVE1.value(), slaveDataSource);
-		}
+
 		return new DynamicDataSource(masterDataSource, targetDataSources);
 	}
 
