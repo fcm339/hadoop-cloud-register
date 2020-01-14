@@ -3,7 +3,7 @@ package com.hzl.hadoop.util;
 /**
  * HttpResponseException
  *
- * @author huifei.liu@hand-chian.com
+ * @author hzl
  * Date: 2018/11/2
  * Description: http 响应异常
  */

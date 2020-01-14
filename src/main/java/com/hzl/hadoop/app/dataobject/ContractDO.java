@@ -10,7 +10,6 @@ import java.util.Date;
 /**
  * 合同基本信息
  *
- * @author chunqiang.bai@hand-china.com
  * @date 2018/06/14
  */
 

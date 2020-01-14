@@ -23,7 +23,6 @@ import javax.sql.DataSource;
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan({"classpath*:/mapper/*.xml"})
 public class MyBatisConfig {
 
 	@Resource(name = "dataSource")
