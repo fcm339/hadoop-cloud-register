@@ -249,7 +249,7 @@ public class PdfUtil {
 			PdfGState gs = new PdfGState();
 			// gs.setFillOpacity(0.2f);
 			// 设置笔触字体不透明度为0.4f
-			gs.setStrokeOpacity(0.4f);
+			gs.setFillOpacity(0.5f);
 			// 原pdf文件的总页数
 			int pageSize = reader.getNumberOfPages();
 
@@ -268,7 +268,7 @@ public class PdfUtil {
 				under.setFontAndSize(font, 16);
 				// 文字水印 起始位置
 				under.setTextMatrix(textWidth, textHeight);
-				Rectangle pageSize1 = reader.getPageSize(1);
+				Rectangle pageSize1 = reader.getPageSize(i);
 				float height = pageSize1.getHeight();
 				float width = pageSize1.getWidth();
 				// 设置透明度
@@ -325,6 +325,7 @@ public class PdfUtil {
 			PdfContentByte waterMar;
 
 			PdfGState gs = new PdfGState();
+			gs.setFillOpacity(1f);
 			long startTime = System.currentTimeMillis();
 			log.info("PDF加二维码 start" + codeStr);
 
@@ -407,6 +408,11 @@ public class PdfUtil {
 
 		for (int i = 1; i <= 1; i++) {
 			PdfContentByte over = stamper.getOverContent(i);
+			PdfGState gs = new PdfGState();
+			// 设置非笔划操作不透明度为1f
+			gs.setFillOpacity(1f);
+			over.setGState(gs);
+			over.setColorFill(BaseColor.BLACK);
 			ColumnText columnText = new ColumnText(over);
 			// llx 和 urx  最小的值决定离左边的距离. lly 和 ury 最大的值决定离下边的距离
 			columnText.setSimpleColumn(600, 750, 400, 750);
