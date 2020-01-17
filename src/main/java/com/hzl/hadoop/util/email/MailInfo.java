@@ -16,8 +16,10 @@ import lombok.*;
 @ToString
 public class MailInfo {
 
+	//发件人
 	private String from;
 
+	//收件人
 	private String to;
 
 

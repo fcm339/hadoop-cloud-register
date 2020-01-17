@@ -42,7 +42,9 @@
     集成：zookeeper
     集成 spring cache
     集成 缓存监控
-   
+    
+    分布式锁的使用场景，判断数据是否被多个用户共享。
+    
 开发多线程工具类：
 
 
@@ -57,7 +59,7 @@
 
 
 文件功能file服务，开发上传文件接口，开发http请求下载文件的功能(完成，HttpFileDownloadTest)
-
+    添加文件压缩解压操作，大文件网络传输有问题
 
 开发启动脚本start.sh idea配置(-Xms0m -Xmx512m -Dspring.profiles.active=local)
 
