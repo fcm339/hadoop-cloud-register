@@ -12,7 +12,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * 启动nacos命令：sh startup.sh -m standalone
  * 默认密码：nacos/nacos
  * druid的管理界面http://localhost:8888/druid/login.html
- * 账号密码：
+ * 账号密码：admin,admin
  *
  * @author hzl 2019/12/27 3:44 PM
  */

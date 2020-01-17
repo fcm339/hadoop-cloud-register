@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author hzl 2020/01/03 10:24 PM
  */
 @RestController
-public class MvcJsonConfig {
+public class MvcJsonController {
     @Autowired
 	MybatisService mybatisService;
 
@@ -38,6 +38,7 @@ public class MvcJsonConfig {
 
 		return new ResponseEntity<ContractDO>(mybatisService.select(), HttpStatus.OK);
 	}
+
 	/**
 	 * <p>
 	 * slave1数据库读取

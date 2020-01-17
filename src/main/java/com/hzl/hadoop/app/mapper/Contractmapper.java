@@ -13,4 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface Contractmapper extends BaseMapperUtil<ContractDO> {
 
 	ContractDO selectTest();
+
+	int update();
 }

@@ -10,39 +10,46 @@
 
     分页:https://github.com/pagehelper/Mybatis-PageHelper(完成)
     集成jpa（完成，集成了mybatis工具包后基本不会用）
-    mybatis:完成（封装了jpa）
+    mybatis:完成
     druid:完成
-    mybatis工具包：https://github.com/abel533/Mapper（完成）
-    多数据源：完成 数据源注解@DataSource必须在mapper注入前执行，事务回滚待测试
+    mybatis工具包：https://github.com/abel533/Mapper（完成(封装了jpa）
+    多数据源：完成 数据源注解@DataSource必须在mapper注入前执行，事务回滚待测试完成
     读写分离：参考：https://www.cnblogs.com/cjsblog/p/9712457.html，https://mp.weixin.qq.com/s/uivql_NMhWSnjknL9o5M3A（完成）
+        通过hadoop.openMulti配置来开启和关闭多数据，如果不配置默认开启单数据源
     执行sql脚本：groovy或者后期根据mybatis开发一个，或者不开发
-    mybatis一级（默认开启，和sqlsession的生命周期一致），二级缓存设置
+    mybatis一级（默认开启，和sqlsession的生命周期一致）关闭，二级缓存设置(不用)
+        缓存：热点数据存放缓存，不经常修改的数据，用户权限，字典数据，配置信息
+        
+集成条形码，模版引擎组件 https://github.com/Nepxion/Zxing(完成)
+
     
-开发权限，aop用于自定义注解功能实现，方法代理(学习资料：https://github.com/Nepxion/Matrix)
+开发权限，aop用于自定义注解功能实现，方法代理(学习资料：https://github.com/Nepxion/Matrix)(待深入学习和完善)
 
     注解执行时机：启动，调用，结束（bean的生命周期）
-    针对spring的生命周期，开发对应的实现类例子，供后期复制调用
+    针对spring的生命周期，开发对应的实现类例子，供后期复制调用（完成）
+    
     
 集成easyexcel,文件位置com.hzl.hadoop.file.excel.ExcelDone，demo待完善
 
-   
-开发多线程工具类：
 
-增加io流操作工具类
-
-集成springsecurity
-
-集成定时器，队列只消费一次
+增加io流操作工具类(后期实际运用中完善)
 
 集成分布式事务和分布式锁，缓存：(数据库相关完成后需要开始了)
     
-    参考：https://github.com/Nepxion/Aquarius 
+    参考： 
     集成  redis:
+    集成kafka，rocketmq
     集成：zookeeper
-    
-集成条形码，模版引擎组件 https://github.com/Nepxion/Zxing(完成)
+    集成 spring cache
+    集成 缓存监控
+   
+开发多线程工具类：
 
-集成kafka，rocketmq
+
+集成定时器，队列只消费一次
+
+
+集成springsecurity
 
 集成dubbo，rpc,netty(nio)
 
@@ -58,6 +65,7 @@
 
 
 ----大数据相关（后期开发一个客服系统，先将基础框架搭建完善，悲伤的百度搜索引擎）
+
 1：集成 Elasticsearch（docker安装）
 
      中文分词软件：https://github.com/ysc/word（分析文本关键字，问答系统中文分析）
@@ -79,3 +87,6 @@
    
    
 ----前端最后做
+以ant design pro为基础开发
+    文档：https://www.yuque.com/ant-design/course
+    项目：https://pro.ant.design/index-cn

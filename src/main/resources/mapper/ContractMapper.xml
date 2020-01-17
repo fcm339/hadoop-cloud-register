@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hzl.hadoop.app.mapper.Contractmapper">
+    <update id="update">
+        UPDATE hcbm_contract set contract_name='测试' where id=950
+    </update>
 
     <select id="selectTest" resultType="com.hzl.hadoop.app.dataobject.ContractDO">
         select * from hcbm_contract limit 1

@@ -3,6 +3,7 @@ package com.hzl.hadoop.util;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -29,5 +30,19 @@ public class LocalDateFormate {
 			return localDateConvert ;
 		}
 
+	}
+
+	/**
+	 * <p>
+	 * @Description localDateTime转换成string
+	 * @param date 时间
+	 * @param type 样式
+	 * </p>
+	 *
+	 * @author hzl 2020/01/16 10:22 AM
+	 */
+	public static String localDateTimeToString(LocalDateTime date, String type) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(type);
+		return date.format(formatter);
 	}
 }

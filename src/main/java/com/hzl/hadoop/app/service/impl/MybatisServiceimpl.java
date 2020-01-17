@@ -2,6 +2,7 @@ package com.hzl.hadoop.app.service.impl;
 
 import com.hzl.hadoop.app.dataobject.ContractDO;
 import com.hzl.hadoop.app.service.MybatisService;
+import com.hzl.hadoop.exception.CommonException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class MybatisServiceimpl implements MybatisService,DisposableBean {
 	@Override
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public ContractDO select() {
+
+		//int i=contractmapper.update();
+//		if(i==1){
+//			throw new CommonException("回滚测试");
+//		}
 		return contractmapper.selectOne(ContractDO.builder().id(950L).build());
 	}
 
