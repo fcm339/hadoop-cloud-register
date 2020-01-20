@@ -10,6 +10,7 @@
 
     分页:https://github.com/pagehelper/Mybatis-PageHelper(完成)
     集成jpa（完成，集成了mybatis工具包后基本不会用）
+    tk:完成
     mybatis:完成
     druid:完成
     mybatis工具包：https://github.com/abel533/Mapper（完成(封装了jpa）
@@ -19,9 +20,16 @@
     执行sql脚本：groovy或者后期根据mybatis开发一个，或者不开发
     mybatis一级（默认开启，和sqlsession的生命周期一致）关闭，二级缓存设置(不用)
         缓存：热点数据存放缓存，不经常修改的数据，用户权限，字典数据，配置信息
+    mysql:集群和主从，分库分表（待整理文档，做成docker镜像）
+    执行存储过程实例（待开发)，
+    批处理sql开发包括插入和更新(待开发)
+    mybaits拦截器开发（待开发）
+    mybatis存储日期类型自动将时间缩短，更新2019-09-01会变成2019-08-31（bug待修复）\
+    String类型转换成Date时区显示有问题（bug）方法：localStringToDate
         
 集成条形码，模版引擎组件 https://github.com/Nepxion/Zxing(完成)
 
+多语言功能开发
     
 开发权限，aop用于自定义注解功能实现，方法代理(学习资料：https://github.com/Nepxion/Matrix)(待深入学习和完善)
 
@@ -37,7 +45,13 @@
 集成分布式事务和分布式锁，缓存：(数据库相关完成后需要开始了)
     
     参考： 
-    集成  redis:
+    集成  redis: 
+            redistemplate工具类（写了今本的，其他的开发中待完善）
+            jackson配置，fastjson配置，gson配置
+            cache注解实例（待完成），
+            redistemplate测试类（待完成），
+            redis分布式锁（待开发），
+            整理redis主从和集群文档
     集成kafka，rocketmq
     集成：zookeeper
     集成 spring cache
@@ -59,11 +73,12 @@
 
 
 文件功能file服务，开发上传文件接口，开发http请求下载文件的功能(完成，HttpFileDownloadTest)
-    添加文件压缩解压操作，大文件网络传输有问题
+     
+     添加文件压缩解压操作，大文件网络传输有问题
 
 开发启动脚本start.sh idea配置(-Xms0m -Xmx512m -Dspring.profiles.active=local)
 
-集成gitlib ci/cd,自动构建docker镜像
+集成gitlib ci/cd,自动构建docker镜像，k8部署
 
 
 ----大数据相关（后期开发一个客服系统，先将基础框架搭建完善，悲伤的百度搜索引擎）

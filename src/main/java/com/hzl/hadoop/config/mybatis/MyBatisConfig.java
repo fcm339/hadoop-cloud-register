@@ -31,7 +31,6 @@ public class MyBatisConfig {
 
 	@Bean(name = "clusterSqlSessionFactory")
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
-		System.out.println("you-----");
 
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(myRoutingDataSource);

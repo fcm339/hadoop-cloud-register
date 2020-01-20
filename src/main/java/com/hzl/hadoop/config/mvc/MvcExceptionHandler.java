@@ -1,4 +1,4 @@
-package com.hzl.hadoop.exception;
+package com.hzl.hadoop.config.mvc;
 
 import com.hzl.hadoop.constant.ExceptionCode;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class MvcExceptionHandler {
 	@ResponseBody
 	@ExceptionHandler(value =Exception.class )
 	public Map exceptionHander(Exception e, HttpServletRequest req){
-		log.error("异常"+e.getMessage());
+		log.error("异常"+e);
 		HashMap map=new HashMap();
 		map.put("code", ExceptionCode.ERROR);
 		map.put("message",e.getMessage());

@@ -4,9 +4,11 @@ import com.hzl.hadoop.constant.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,10 +19,21 @@ import java.util.concurrent.TimeUnit;
  * redistemplate操作工具类
  * 待完善添加boundGeoOps，boundZSetOps
  * 说明：java集合列举以及和redis类型的对应关系
+ * java: List , Set, Map都是接口，前两个继承至Collection接口，Map为独立接口
+ Set下有HashSet，LinkedHashSet，TreeSet
+ List下有ArrayList，Vector，LinkedList
+ Map下有Hashtable，LinkedHashMap，HashMap，TreeMap
+ Collection接口下还有个Queue接口，有PriorityQueue类
+ redis：
+ Redis 字符串(String)
+ Redis 哈希(Hash)
+ Redis 列表(List)
+ Redis 集合(Set)
+ Redis 有序集合(sorted set)
  * @author hzl 2020/01/17 8:30 PM
  */
 @Component
-public class RedisUtils {
+public class RedisUtils{
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
 
@@ -45,6 +58,16 @@ public class RedisUtils {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	/**
+	 * 指定key在指定的日期过期
+	 *
+	 * @param key
+	 * @param date
+	 */
+	public void expireKeyAt(String key, Date date) {
+		redisTemplate.expireAt(key, date);
 	}
 
 	/**
@@ -595,6 +618,8 @@ public class RedisUtils {
 	public void convertAndSend(String channel, Object message) {
 		redisTemplate.convertAndSend(channel, message);
 	}
+
+	//=========zset有序不可重复集合操作 用法 start============
 
 
 	//=========BoundListOperations 用法 start============

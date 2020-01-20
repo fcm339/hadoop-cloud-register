@@ -8,4 +8,11 @@
     <select id="selectTest" resultType="com.hzl.hadoop.app.dataobject.ContractDO">
         select * from hcbm_contract limit 1
     </select>
+
+    <update id="updateDate">
+        UPDATE hcbm_contract set signature_date=#{localDate}  where id=950
+    </update>
+    <update id="updateDate1">
+        UPDATE hcbm_contract set signature_date=#{localDate}  where id=950
+    </update>
 </mapper>

@@ -229,10 +229,6 @@ public class PdfUtil {
 
 		PdfReader reader = new PdfReader(put, "PDF".getBytes());
 		PdfStamper stamp = new PdfStamper(reader, out);
-		// 加二维码
-		if (!StringUtils.isBlank(codeStr)) {
-			addCode(codeStr, stamp);
-		}
 
 		if (StringUtils.isNotBlank(contractNumber)) {
 			addContent(reader, stamp, contractNumber);
@@ -258,7 +254,7 @@ public class PdfUtil {
 
 
 				// 水印在文本下
-				under = stamp.getUnderContent(i);
+				under = stamp.getOverContent(i);
 				//水印在文本上
 				// under = stamp.getOverContent(i);
 				under.beginText();
@@ -307,6 +303,11 @@ public class PdfUtil {
 				// 添加水印结束
 				under.endText();
 			}
+		}
+
+		// 加二维码
+		if (!StringUtils.isBlank(codeStr)) {
+			addCode(codeStr, stamp);
 		}
 
 		stamp.close();// 关闭
@@ -432,7 +433,7 @@ public class PdfUtil {
 	 *
 	 * @author hzl 2020/01/10 2:41 PM
 	 */
-	public static String getPdfFileStr(byte[] bytes){
+	public static String getPdfFileStr(byte[] bytes) {
 		// 存放读取出的文档内容
 		String content = "";
 		try {

@@ -3,6 +3,10 @@ package com.hzl.hadoop.app.mapper;
 import com.hzl.hadoop.app.dataobject.ContractDO;
 import com.hzl.hadoop.config.mybatis.BaseMapperUtil;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * description
@@ -15,4 +19,9 @@ public interface Contractmapper extends BaseMapperUtil<ContractDO> {
 	ContractDO selectTest();
 
 	int update();
+
+	int updateDate(@Param("localDate") LocalDate localDate);
+
+	int updateDate1(@Param("localDate") Date localDate);
+
 }

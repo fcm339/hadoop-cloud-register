@@ -1,4 +1,4 @@
-package com.hzl.hadoop.exception.controller;
+package com.hzl.hadoop.app.controller;
 
 import com.hzl.hadoop.exception.CommonException;
 import org.springframework.web.bind.annotation.RequestMapping;

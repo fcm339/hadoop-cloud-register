@@ -1,11 +1,16 @@
 package com.hzl.hadoop.app.dataobject;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 合同基本信息
@@ -19,7 +24,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name="hcbm_contract")
+@Table(name = "hcbm_contract")
 public class ContractDO {
 	//jpa注解
 	@Id
@@ -38,9 +43,15 @@ public class ContractDO {
 	private Long departmentId;
 	private String belongingDepartmentName;
 	private Long belongingDepartmentId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate signatureDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
-	private LocalDate endDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JSONField(format = "yyyy-MM-dd")
+	private LocalDateTime endDate;
 	private BigDecimal amount;
 	private String paymentModeCode;
 	private String signatureTypeCode;
@@ -59,6 +70,8 @@ public class ContractDO {
 	private Long contentId;
 	private Long lineFieldId;
 	private String creator;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date creationDate;
 	private Long version;
 	private String editMode;
@@ -164,4 +177,6 @@ public class ContractDO {
 	//非数据库字段
 	@Transient
 	private String sss;
+
+	//List<ContractDO> contractDOList;
 }

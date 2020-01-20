@@ -34,6 +34,7 @@ public class MybatisServiceimpl implements MybatisService,DisposableBean {
 //		if(i==1){
 //			throw new CommonException("回滚测试");
 //		}
+		log.info("查询结果"+contractmapper.selectOne(ContractDO.builder().id(950L).build()));
 		return contractmapper.selectOne(ContractDO.builder().id(950L).build());
 	}
 

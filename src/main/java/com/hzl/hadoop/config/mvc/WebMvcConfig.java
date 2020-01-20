@@ -1,11 +1,12 @@
 package com.hzl.hadoop.config.mvc;
 
-import ch.qos.logback.classic.pattern.DateConverter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.hzl.hadoop.constant.DataConstant;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.alibaba.fastjson.JSON.DEFFAULT_DATE_FORMAT;
 
 /**
  * description
@@ -53,17 +56,21 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	/**
 	 * <p>
 	 * 配置格式化器
+	 * springmvc 接受http请求会把请求参数自动绑定映射到controller的请求参数上
+	 * spring没有默认配置将字符串转换为日期类型，
 	 * </p>
+	 * 对请求参数的格式化处理，可以在该方法中配置
 	 *
 	 * @author hzl 2020/01/03 11:34 AM
 	 */
 	@Override
 	protected void addFormatters(FormatterRegistry registry) {
-//		if (true) {
-//			registry.addConverter(new DateConverter());
-//			registry.addConverter(new LocalDateConverter());
-//		}
-//		super.addFormatters(registry);
+		super.addFormatters(registry);
+		registry.addConverter(new LocaldateConvert());
+		registry.addConverter(new LocaldateConvert.StringToLocaldatetimeConvert());
+		// TODO: 2020/1/20 string转换date有问题
+		registry.addConverter(new LocaldateConvert.StringToDateConvert());
+		super.addFormatters(registry);
 	}
 
 	/**
@@ -108,7 +115,11 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 				SerializerFeature.WriteSlashAsSpecial
 				//将对象转为array输出
 				//SerializerFeature.BeanToArray
-				);
+				//SerializerFeature.WriteDateUseDateFormat
+		);
+
+		//全局指定日期格式,如果需要特殊处理，在字段上配置@JSONField(format = "yyyy-MM-dd")
+		fastJsonConfig.setDateFormat(DataConstant.DATETIME);
 
 		//3处理中文乱码问题
 		List<MediaType> fastMediaTypes = new ArrayList<>();
