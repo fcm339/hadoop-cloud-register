@@ -3,7 +3,7 @@
 
 日志配置logback实现了slf4j，指定日志目录，分片，日志查询脚本grep.sh（完成)
 
-集成mvc，WebMvcConfigurationSupport
+集成mvc，WebMvcConfigurationSupport，json处理，日期格式处理
 
 
 集成mybatis，druid数据库连接池(是否可以动态修改连接数)，多数据源(读写分离,主从数据库同步的延迟),
@@ -50,7 +50,10 @@
             jackson配置，fastjson配置，gson配置
             cache注解实例（待完成），
             redistemplate测试类（待完成），
-            redis分布式锁（待开发），
+            redis分布式锁（待开发）
+                集成Redisson实现分布式操作（https://github.com/redisson/redisson）
+                https://gitee.com/ztp/redisson-spring-boot-starter(选用这个jar)
+                第一步：读取配置文件生成Config对象
             整理redis主从和集群文档
     集成kafka，rocketmq
     集成：zookeeper
@@ -59,13 +62,15 @@
     
     分布式锁的使用场景，判断数据是否被多个用户共享。
     
+集成支付功能 （https://github.com/Javen205/IJPay，https://gitee.com/javen205/IJPay，https://github.com/easy-pay/spring-boot-easy-pay）
+    
 开发多线程工具类：
 
 
 集成定时器，队列只消费一次
 
 
-集成springsecurity
+集成springsecurity,开启https用nginx，开发一套完善的权限控制组件(使用简单，性能优越)
 
 集成dubbo，rpc,netty(nio)
 
@@ -78,7 +83,7 @@
 
 开发启动脚本start.sh idea配置(-Xms0m -Xmx512m -Dspring.profiles.active=local)
 
-集成gitlib ci/cd,自动构建docker镜像，k8部署
+集成gitlib ci/cd,自动构建docker镜像，k8部署，参考资料：https://gitee.com/itmuch/docker-book（已经下载到本地）
 
 
 ----大数据相关（后期开发一个客服系统，先将基础框架搭建完善，悲伤的百度搜索引擎）

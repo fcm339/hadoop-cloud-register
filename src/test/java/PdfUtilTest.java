@@ -76,10 +76,10 @@ public class PdfUtilTest {
 		String water = "hadoop";
 
 		try {
-			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/IR01869002.pdf");
-			//FileInputStream fileInputStream =new FileInputStream(new File("/Users/hzl/Desktop/测试.pdf"));
+			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/pdf.pdf");
+			//FileInputStream fileInputStream =new FileInputStream(new File("/Users/hzl/Desktop/pdf.pdf"));
 			outputStream=new FileOutputStream("/Users/hzl/Desktop/tt.pdf");
-			//addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);
+			addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);
 			outputStream.write(tempOutputStream.toByteArray());
 			tempOutputStream.flush();
 			outputStream.flush();
