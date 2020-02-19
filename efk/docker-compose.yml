@@ -36,7 +36,6 @@ services:
     volumes:
       - ./data:/path/to/data
       - ./logs:/path/to/logs
-      - ./plugins/elasticsearch:/path/to/plugins
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
   kibana:
@@ -45,7 +44,6 @@ services:
     volumes:
 #      - /etc/localtime:/etc/localtime
       - ./kibana.yml:/usr/share/kibana/config/kibana.yml
-      - ./plugins/kibana/:/usr/share/kibana/plugins:rw
 
     links:
       - "elasticsearch"
