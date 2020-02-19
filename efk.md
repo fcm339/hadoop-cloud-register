@@ -1,3 +1,5 @@
+#后期将这三个镜像上传到个人阿里云镜像仓库
+
 kibana: localhost:5601
 
 elastisearch:localhost:9200
