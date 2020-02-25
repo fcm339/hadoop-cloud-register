@@ -24,7 +24,7 @@
     执行存储过程实例（待开发)，
     批处理sql开发包括插入和更新(待开发)
     mybaits拦截器开发（待开发）
-    mybatis存储日期类型自动将时间缩短，更新2019-09-01会变成2019-08-31（bug待修复）\
+    mybatis存储日期类型自动将时间缩短，更新2019-09-01会变成2019-08-31（已经修复）\
     String类型转换成Date时区显示有问题（bug）方法：localStringToDate
         
 集成条形码，模版引擎组件 https://github.com/Nepxion/Zxing(完成)
@@ -63,6 +63,8 @@
     分布式锁的使用场景，判断数据是否被多个用户共享。
     
 集成支付功能 （https://github.com/Javen205/IJPay，https://gitee.com/javen205/IJPay，https://github.com/easy-pay/spring-boot-easy-pay）
+    
+    在支付的和FreeMarkerZxingController条形码基础上开发报销单业务逻辑
     
 开发多线程工具类：
 

@@ -9,5 +9,5 @@ management:
         include: '*'
 
 hadoop:
-  openMulti: true #是否开启多数据源
+  openMulti: false #是否开启多数据源
   redisson:

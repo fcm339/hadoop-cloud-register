@@ -1,12 +1,11 @@
 package com.hzl.hadoop.app.service.impl;
 
 import com.hzl.hadoop.app.dataobject.ContractDO;
+import com.hzl.hadoop.app.mapper.Contractmapper;
 import com.hzl.hadoop.app.service.MybatisService;
-import com.hzl.hadoop.exception.CommonException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.hzl.hadoop.app.mapper.Contractmapper;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @Slf4j
-public class MybatisServiceimpl implements MybatisService,DisposableBean {
+public class MybatisServiceimpl implements MybatisService, DisposableBean {
 
 	@Autowired
 	private Contractmapper contractmapper;
@@ -34,8 +33,8 @@ public class MybatisServiceimpl implements MybatisService,DisposableBean {
 //		if(i==1){
 //			throw new CommonException("回滚测试");
 //		}
-		log.info("查询结果"+contractmapper.selectOne(ContractDO.builder().id(950L).build()));
-		return contractmapper.selectOne(ContractDO.builder().id(950L).build());
+		log.info("查询结果" + contractmapper.selectOne(ContractDO.builder().id(1L).build()));
+		return contractmapper.selectOne(ContractDO.builder().id(1L).build());
 	}
 
 	@Override

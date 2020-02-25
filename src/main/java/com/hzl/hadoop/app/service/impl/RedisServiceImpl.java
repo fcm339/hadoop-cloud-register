@@ -37,15 +37,16 @@ public class RedisServiceImpl implements RedisService {
 		ContractDO contractDO=null;
 		try{
 			ValueOperations<String, ContractDO> operations = redisTemplate.opsForValue();
-			 contractDO = operations.get("contract_query:950");
+			 contractDO = operations.get("contract_query:1");
 			if (contractDO == null) {
 				log.info("从数据库获取");
-				contractDO = contractmapper.selectOne(ContractDO.builder().id(950L).build());
+				contractDO = contractmapper.selectOne(ContractDO.builder().id(1L).build());
 				List<ContractDO> contractDOList =new ArrayList<>();
 				contractDOList.add(new ContractDO());
 				//contractDO.setContractDOList(contractDOList);
-				operations.set("contract_query:950", contractDO);
+				operations.set("contract_query:1", contractDO);
 			} else {
+				//date类型的数据存到redis后多了四个小时
 				log.info("从redis中读取"+contractDO.toString());
 			}
 		}catch (Exception e){
@@ -57,7 +58,6 @@ public class RedisServiceImpl implements RedisService {
 
 	@Override
 	public int update(LocalDate localDate) {
-		// TODO: 2020/1/20 日期存到数据库时间变了 2019-09-01变成了2019-08-30 
 		log.info("日期"+localDate);
 		//contractmapper.updateByPrimaryKeySelective(ContractDO.builder().signatureDate(localDate).id(950L).build());
 		contractmapper.updateDate(localDate);
@@ -66,7 +66,7 @@ public class RedisServiceImpl implements RedisService {
 
 	@Override
 	public int update(Date localDate) {
-		contractmapper.updateDate1(new Date("2019-09-01"));
+		contractmapper.updateDate1(localDate);
 		return 0;
 	}
 }

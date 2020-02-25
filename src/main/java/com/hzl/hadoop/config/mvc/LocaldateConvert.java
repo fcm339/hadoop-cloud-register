@@ -40,6 +40,7 @@ public class LocaldateConvert implements Converter<String, LocalDate> {
 
 		@Override
 		public Date convert(String s) {
+			log.info("前端收到的日期类型"+s);
 			return LocalDateFormate.localStringToDate(s);
 		}
 	}

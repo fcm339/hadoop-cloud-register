@@ -49,8 +49,8 @@ public class ContractDO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JSONField(format = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:dd")
+	@JSONField(format = "yyyy-MM-dd HH:mm:dd")
 	private LocalDateTime endDate;
 	private BigDecimal amount;
 	private String paymentModeCode;
@@ -70,8 +70,8 @@ public class ContractDO {
 	private Long contentId;
 	private Long lineFieldId;
 	private String creator;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:dd")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:dd")
 	private Date creationDate;
 	private Long version;
 	private String editMode;

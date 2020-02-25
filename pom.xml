@@ -129,6 +129,16 @@
             <artifactId>commons-compress</artifactId>
             <version>${commons-compress}</version>
         </dependency>
+        <!--集成elasticsearch,进行文件索引-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+        <!--热部署jar-->
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-devtools</artifactId>
+         </dependency>
 
     </dependencies>
 

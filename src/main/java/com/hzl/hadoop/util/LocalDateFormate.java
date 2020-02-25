@@ -76,9 +76,9 @@ public class LocalDateFormate {
 	}
 
 	/**
+	 *CST可视为美国、澳大利亚、古巴或中国的标准时间。百度百科
 	 *
-	 *
-	 * @param stringDate 2019-09-01
+	 * @param stringDate 2019-09-01或者2019-09-01 00:00:00
 	 * @author hzl 2020-01-20 6:51 PM
 	 * @return
 	 */
@@ -87,7 +87,12 @@ public class LocalDateFormate {
 			return null;
 		} else {
 			try {
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DataConstant.DATETIME);
+				SimpleDateFormat simpleDateFormat = null;
+				if(stringDate.length()>10){
+					simpleDateFormat=new SimpleDateFormat(DataConstant.DATETIME);
+				}else{
+					simpleDateFormat=new SimpleDateFormat(DataConstant.DATE);
+				}
 				//默认东八区
 				simpleDateFormat.setTimeZone(TimeZone.getTimeZone(DataConstant.SHANGHAI));
 				return simpleDateFormat.parse(stringDate);

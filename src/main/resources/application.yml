@@ -18,6 +18,11 @@ spring:
       content-type: text/html
       # #模板加载路径 按需配置 ,默认路径是 classpath:/templates/
       template-loader-path: classpath:/templates/
+  #开启热部署
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java #重启目录
   #邮件配置信息，后期可保存到数据库
   mail:
     host: hwhzsmtp.qiye.163.com
@@ -41,7 +46,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     master:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://10.200.254.54:3306/hcbm_contract?useUnicode=true&characterEncoding=utf-8&useSSL=false}
+          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/hcbm_contract?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai}
           username: ${SPRING_DATASOURCE_USERNAME:hcbm}
           password: ${SPRING_DATASOURCE_PASSWORD:hcbm}
           initial-size: 5  # 初始化大小
@@ -63,7 +68,7 @@ spring:
 
     slave1:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://10.200.254.56:3306/hcbm_contract?useUnicode=true&characterEncoding=utf-8&useSSL=false}
+          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://10.200.254.56:3306/hcbm_contract?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai}
           username: ${SPRING_DATASOURCE_USERNAME:hcbm}
           password: ${SPRING_DATASOURCE_PASSWORD:hcbm}
           initial-size: 5  # 初始化大小

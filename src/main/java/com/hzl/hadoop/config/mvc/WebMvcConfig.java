@@ -68,7 +68,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		super.addFormatters(registry);
 		registry.addConverter(new LocaldateConvert());
 		registry.addConverter(new LocaldateConvert.StringToLocaldatetimeConvert());
-		// TODO: 2020/1/20 string转换date有问题
 		registry.addConverter(new LocaldateConvert.StringToDateConvert());
 		super.addFormatters(registry);
 	}
@@ -110,9 +109,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 				//消除对同一对象循环引用的问题，默认为false（如果不配置有可能会进入死循环）
 				SerializerFeature.DisableCircularReferenceDetect,
 				//是否输出值为null的字段,默认为false。设置后为null的字段会输出
-				SerializerFeature.WriteMapNullValue,
+				SerializerFeature.WriteMapNullValue
 				//对斜杠’/’进行转义
-				SerializerFeature.WriteSlashAsSpecial
+				//SerializerFeature.WriteSlashAsSpecial
 				//将对象转为array输出
 				//SerializerFeature.BeanToArray
 				//SerializerFeature.WriteDateUseDateFormat

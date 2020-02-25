@@ -10,9 +10,9 @@
     </select>
 
     <update id="updateDate">
-        UPDATE hcbm_contract set signature_date=#{localDate}  where id=950
+        UPDATE hcbm_contract set signature_date=#{localDate}  where id=1
     </update>
     <update id="updateDate1">
-        UPDATE hcbm_contract set signature_date=#{localDate}  where id=950
+        UPDATE hcbm_contract set signature_date=#{localDate}  where id=1
     </update>
 </mapper>

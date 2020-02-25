@@ -29,7 +29,9 @@ public class LocalDateFormateTest {
 
 	@Test
 	public void localStringToDate(){
-		// TODO: 2020/1/20 时区有问题 
-		log.info(LocalDateFormate.localStringToDate("2019-09-01 00:00:00").toString());
+		String s="2019-09-01";
+
+		System.out.println(s.length());
+		log.info(LocalDateFormate.localStringToDate("2019-09-01").toString());
 	}
 }
