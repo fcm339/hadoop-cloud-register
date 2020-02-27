@@ -3,7 +3,9 @@
 
 日志配置logback实现了slf4j，指定日志目录，分片，日志查询脚本grep.sh（完成)
 
-集成mvc，WebMvcConfigurationSupport，json处理，日期格式处理
+集成mvc完成，WebMvcConfigurationSupport完成，json处理完成，日期格式处理完成
+
+集成webflux 待开发
 
 
 集成mybatis，druid数据库连接池(是否可以动态修改连接数)，多数据源(读写分离,主从数据库同步的延迟),
@@ -47,10 +49,10 @@
     参考： 
     集成  redis: 
             redistemplate工具类（写了今本的，其他的开发中待完善）
-            jackson配置，fastjson配置，gson配置
+            jackson配置完成，fastjson配置待阿里bug修复后期，gson配置不要了
             cache注解实例（待完成），
             redistemplate测试类（待完成），
-            redis分布式锁（待开发）
+            redis分布式锁（开发中）
                 集成Redisson实现分布式操作（https://github.com/redisson/redisson）
                 https://gitee.com/ztp/redisson-spring-boot-starter(选用这个jar)
                 第一步：读取配置文件生成Config对象
@@ -64,7 +66,9 @@
     
 集成支付功能 （https://github.com/Javen205/IJPay，https://gitee.com/javen205/IJPay，https://github.com/easy-pay/spring-boot-easy-pay）
     
-    在支付的和FreeMarkerZxingController条形码基础上开发报销单业务逻辑
+    在支付的和FreeMarkerZxingController条形码基础上开发报销单业务逻辑，结合消息中间件，异步处理报销单不是直接插入数据库
+    用户提交报销单后直接发送到消息中间件并提示用户提交成功，后续处理由消息中间件分发给服务异步处理，减少并发和对数据库造车的压力
+    https://www.cnblogs.com/lizm166/p/11023373.html
     
 开发多线程工具类：
 

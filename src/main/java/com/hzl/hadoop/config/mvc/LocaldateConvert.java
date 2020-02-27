@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * description
  * 参考DateFormatterRegistrar，springmvc没有定义java8日期类型的转换，前台传时间类型绑定到请求方法的参数时，如果参数类型为localdate会报错
- *
+ * 作用：将前端日期字符串转换成java日期类型
  * @author hzl 2020/01/20 4:52 PM
  */
 @Slf4j
