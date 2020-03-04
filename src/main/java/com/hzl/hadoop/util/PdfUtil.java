@@ -5,6 +5,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.hzl.hadoop.exception.CommonException;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
@@ -252,7 +253,7 @@ public class PdfUtil {
 
 			for (int i = 1; i <= pageSize; i++) {
 
-
+				log.info("纸张大小"+i+"页"+reader.getPageSize(i));
 				// 水印在文本下
 				under = stamp.getOverContent(i);
 				//水印在文本上
@@ -267,6 +268,7 @@ public class PdfUtil {
 				Rectangle pageSize1 = reader.getPageSize(i);
 				float height = pageSize1.getHeight();
 				float width = pageSize1.getWidth();
+
 				// 设置透明度
 				under.setGState(gs);
 				for (int l = 1; l <= 3; ++l) {
@@ -307,7 +309,7 @@ public class PdfUtil {
 
 		// 加二维码
 		if (!StringUtils.isBlank(codeStr)) {
-			addCode(codeStr, stamp);
+			addCode(codeStr, stamp,reader);
 		}
 
 		stamp.close();// 关闭
@@ -321,7 +323,7 @@ public class PdfUtil {
 	 *
 	 * @author hzl 2020/01/02 6:10 PM
 	 */
-	public static void addCode(String codeStr, PdfStamper stamper) {
+	public static void addCode(String codeStr, PdfStamper stamper,PdfReader reader) {
 		try {
 			PdfContentByte waterMar;
 
@@ -340,9 +342,11 @@ public class PdfUtil {
 
 			// 创建水印图片
 			com.itextpdf.text.Image itextimage = Image.getInstance((addQRCode(codeStr)).toByteArray());
-
+			//A4x595.0F, y842.0F，115，72
+			log.info("第一页纸张大小"+reader.getPageSize(1));
+			Rectangle rectangle=reader.getPageSize(1);
 			// 水印图片位置
-			itextimage.setAbsolutePosition(480, 770);
+			itextimage.setAbsolutePosition(rectangle.getWidth()-115, rectangle.getHeight()-72);
 			// 边框固定
 			itextimage.scaleToFit(60, 60);
 			// 设置旋转弧度
@@ -415,8 +419,12 @@ public class PdfUtil {
 			over.setGState(gs);
 			over.setColorFill(BaseColor.BLACK);
 			ColumnText columnText = new ColumnText(over);
+			Rectangle rectangle=reader.getPageSize(1);
+
+			log.info(rectangle.getLeft()+":"+rectangle.getBottom()+":"+rectangle.getRight()+":"+rectangle.getTop());
 			// llx 和 urx  最小的值决定离左边的距离. lly 和 ury 最大的值决定离下边的距离
-			columnText.setSimpleColumn(600, 750, 400, 750);
+			//595.0F, 842.0F
+			columnText.setSimpleColumn(rectangle.getRight()+5, rectangle.getTop()-92, rectangle.getRight()-195, rectangle.getTop()-92);
 			Paragraph elements = new Paragraph(0, new Chunk("合同编号:" + contractNumber));
 			// 设置字体，如果不设置添加的中文将无法显示
 			elements.setFont(font);
@@ -428,7 +436,7 @@ public class PdfUtil {
 
 	/**
 	 * <p>
-	 * 获取pdf文字内容
+	 * 获取pdf文字内容,部分特殊的pdf无法识别，例如扫描件
 	 * </p>
 	 *
 	 * @author hzl 2020/01/10 2:41 PM
@@ -454,4 +462,6 @@ public class PdfUtil {
 		return content;
 
 	}
+
+
 }

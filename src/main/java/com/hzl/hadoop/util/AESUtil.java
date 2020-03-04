@@ -8,6 +8,7 @@ import java.security.SecureRandom;
 
 /**
  * description，对称加密解密算法
+ * 可以开发成restfull接口供外部系统调用，解决非java系统的情况
  *
  * @author hzl 2019/08/08 11:17 PM
  */
@@ -23,7 +24,8 @@ public class AESUtil {
 	 */
 	public static String encrypt(String content, String key) {
 		try {
-			KeyGenerator kgen = KeyGenerator.getInstance("AES");// 构造密钥生成器，指定为AES算法，不区分大小写
+			// 构造密钥生成器，指定为AES算法，不区分大小写
+			KeyGenerator kgen = KeyGenerator.getInstance("AES");
 			SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
 			secureRandom.setSeed(key.getBytes());
 			kgen.init(128, secureRandom);
@@ -32,7 +34,8 @@ public class AESUtil {
 			SecretKeySpec secretKeySpec = new SecretKeySpec(enCodeFormat, "AES");
 			Cipher cipher = Cipher.getInstance("AES");
 			byte[] byteContent = content.getBytes("utf-8");
-			cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);// ENCRYPT_MODE指加密操作
+			// ENCRYPT_MODE指加密操作
+			cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
 			byte[] byteRresult = cipher.doFinal(byteContent);
 			StringBuffer sb = new StringBuffer();
 			for (int i = 0; i < byteRresult.length; i++) {
@@ -76,9 +79,11 @@ public class AESUtil {
 			byte[] enCodeFormat = secretKey.getEncoded();
 			SecretKeySpec secretKeySpec = new SecretKeySpec(enCodeFormat, "AES");
 			Cipher cipher = Cipher.getInstance("AES");
-			cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);// Decrypt_mode指解密操作
+			// Decrypt_mode指解密操作
+			cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
 			byte[] result = cipher.doFinal(byteRresult);
-			return new String(result, "utf-8");// 不加utf-8，中文时会乱码
+			// 不加utf-8，中文时会乱码
+			return new String(result, "utf-8");
 		} catch (Exception e) {
 			return "";
 		}

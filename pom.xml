@@ -29,6 +29,7 @@
         <easyexcel>2.1.6</easyexcel>
         <ant>1.10.7</ant>
         <commons-compress>1.19</commons-compress>
+        <activiti>7.1.0.M6</activiti>
     </properties>
 
 
@@ -139,6 +140,23 @@
              <groupId>org.springframework.boot</groupId>
              <artifactId>spring-boot-devtools</artifactId>
          </dependency>
+        <!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>4.2.2</version>
+            <type>pom</type>
+        </dependency>
+        <!--集成工作流-->
+        <!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring -->
+        <!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring-boot-starter -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter</artifactId>
+            <version>${activiti}</version>
+        </dependency>
+
+
 
     </dependencies>
 

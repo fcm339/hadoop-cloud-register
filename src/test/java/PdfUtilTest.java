@@ -71,14 +71,14 @@ public class PdfUtilTest {
 
 		ByteArrayOutputStream tempOutputStream = new ByteArrayOutputStream();
 
-		String url = "http://www.baidu.com";
-		String content = "随意插入";
-		String water = "hadoop";
+		String url = "http://ekp.ysservice.com.cn/km/review/km_review_main/kmReviewMain.do?method=view&fdId=17076c17dec1f3dfb8679f54116a7542";
+		String content = "ZFIT2020000041";
+		String water = "上海永升物业";
 
 		try {
-			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/pdf.pdf");
+			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/图片格式的pdf.pdf");
 			//FileInputStream fileInputStream =new FileInputStream(new File("/Users/hzl/Desktop/pdf.pdf"));
-			outputStream=new FileOutputStream("/Users/hzl/Desktop/tt.pdf");
+			outputStream=new FileOutputStream("/Users/hzl/Desktop/ss.pdf");
 			addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);
 			outputStream.write(tempOutputStream.toByteArray());
 			tempOutputStream.flush();
@@ -98,8 +98,8 @@ public class PdfUtilTest {
 	 */
 	@Test
 	public void pdfAdd() throws IOException {
-		FileSystemResource tempInputStream1 = new FileSystemResource("/Users/hzl/Desktop/有问题的附近.pdf");
-		FileSystemResource tempInputStream2 = new FileSystemResource("/Users/hzl/Desktop/测试.pdf");
+		FileSystemResource tempInputStream1 = new FileSystemResource("/Users/hzl/Desktop/上海永升物业管理有限公司企业微信考勤机F1产品销售框架协议.pdf");
+		FileSystemResource tempInputStream2 = new FileSystemResource("/Users/hzl/Desktop/上海永升物业管理有限公司企业微信考勤机F1产品销售框架协议1.pdf");
 		List<InputStream> streamOfPDFFiles = new ArrayList<>();
 		OutputStream outputStream=new FileOutputStream("/Users/hzl/Desktop/tt.pdf");
 
@@ -193,7 +193,7 @@ public class PdfUtilTest {
 	 */
 	@Test
 	public void getPdfFileStr() throws IOException {
-		File tempInputStream = new File("/Users/hzl/Desktop/Java NIO通信框架在电信领域的实践.pdf");
+		File tempInputStream = new File("/Users/hzl/Desktop/无人零售设备合作协议(瑞划算永升丽景).pdf");
 
 		FileInputStream fileInputStream = new FileInputStream(tempInputStream);
 
