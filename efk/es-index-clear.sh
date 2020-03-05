@@ -1,24 +1,8 @@
 #!/bin/sh
-target_dir=`pwd`
-jar_name='register'
-branch_name='local'
+#只保留1天内的日志索引
+LAST_DATA=`date -d "-1 days" "+%Y.%m.%d"`
+#删除上个月份所有的索引
+curl -XDELETE 'http://localhost:9200/*-'${LAST_DATA}'*'
 
-
-pid=`ps ax | grep -i $jar_name | grep $target_dir | grep java | grep -v grep | awk '{print $1}'`
-if [ -z "$pid" ] ; then
-        echo "没有服务在运行----------"
-else
-    echo "服务运行中..."
-    kill ${pid}
-fi
-echo "开始git pull..."
-git pull origin master
-mvn clean package -U -DskipTests=true
-cd target
-mv hadoop.jar ${jar_name}.jar
-
-nohup java -jar \
--Xms512m -Xmx1024m \
--Dspring.profiles.active=local \
- ./$jar_name.jar > ../logs/$jar_name.log &
-tail -f ../logs/$jar_name.log
+#每天的凌晨一点清除索引
+#0 1 * * *  ./es-index-clear.sh
