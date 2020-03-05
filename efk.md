@@ -25,20 +25,23 @@ docker build --pull -t fluent:local .
     
     
 #导出镜像
-密码：3kdf$Fhn9s
-docker save elasticsearch:6.8.2>elasticsearch.tar
-scp -r elasticsearch.tar root@10.200.254.53:/root/efk
+docker save elasticsearch:7.6.0>elasticsearch.tar
+scp -r elasticsearch.tar root@localhost:/root/efk
 docker load <elasticsearch.tar
 
 
-docker save fluent:local>fluent.tar
-scp -r fluent.tar root@10.200.254.53:/root/efk
-docker load <fluent.tar
+docker save docker.elastic.co/beats/filebeat:7.6.0>filebeat.tar
+scp -r filebeat.tar root@localhost:/root/efk
+docker load <filebeat.tar
 
 
-docker save kibana:6.8.2>kibana.tar
-scp -r kibana.tar root@10.200.254.53:/root/efk
+docker save kibana:7.6.0>kibana.tar
+scp -r kibana.tar root@localhost:/root/efk
 docker load <kibana.tar
+
+docker save logstash:7.6.0>logstash.tar
+scp -r logstash.tar root@localhost:/root/efk
+docker load <logstash.tar
 
 #启动docker-compose
 docker-compose up -d

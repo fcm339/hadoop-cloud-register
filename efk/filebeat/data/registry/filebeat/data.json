@@ -1,1 +1,0 @@
-[{"source":"/var/log/test911/log_error.log","offset":22447,"timestamp":"2020-03-05T08:47:27.2781135Z","ttl":-1,"type":"log","meta":null,"FileStateOS":{"inode":45396459,"device":81}},{"source":"/var/log/test911/log_info.log","offset":175890,"timestamp":"2020-03-05T08:47:20.7467812Z","ttl":-1,"type":"log","meta":null,"FileStateOS":{"inode":45390750,"device":81}}]

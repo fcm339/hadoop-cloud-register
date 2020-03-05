@@ -6,5 +6,5 @@ services:
     volumes:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./data:/usr/share/filebeat/data
-      - /Users/hzl/Desktop/hadoopcloud/hadoop-cloud-register/logs:/var/log/test911/
+      - /root/hcbm/logs:/var/log/test911/
     restart: always

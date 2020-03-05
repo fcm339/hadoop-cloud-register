@@ -28,6 +28,7 @@ logs/
 *.zip
 *.tar.gz
 *.rar
+*.tar
 
 # system ignore
 .DS_Store
