@@ -1,24 +1,7 @@
 version: '3'
 services:
-  fluentd:
-    image: fluent:local
-    volumes:
-      - ./fluent.conf:/fluentd/etc/fluent.conf
-      - ../logs:/fluentd/logs
-    links:
-      - "elasticsearch"
-    ports:
-      - "24224:24224"
-      - "24224:24224/udp"
-    logging:
-        driver: "json-file"
-        options:
-            max-size: 100m
-            max-file: "5"
-    restart: always
-
   elasticsearch:
-    image: elasticsearch:6.8.2
+    image: elasticsearch:7.6.0
     container_name: elasticsearch
     ports:
       - "9200:9200"
@@ -34,12 +17,12 @@ services:
         hard: -1
     restart: always
     volumes:
-      - ./data:/path/to/data
-      - ./logs:/path/to/logs
+      - ./data:/usr/share/elasticsearch/data
+      - ./logs:/usr/share/elasticsearch/logs
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
   kibana:
-    image: kibana:6.8.2
+    image: kibana:7.6.0
     container_name: kibana
     volumes:
 #      - /etc/localtime:/etc/localtime
