@@ -60,7 +60,7 @@ public class HttpUtils {
 	private static final String AUTHORIZATION_HEADER = "Authorization";
 	private static final String AUTHORIZATION_BASIC = "Basic";
 
-
+	//basic认证生成请求头中的key值	header.put("Authorization", key);
 	public static String getKey(String user, String password) {
 		String code = user + ":" + password;
 		Map<String, String> bodyParam = new HashMap<>();
