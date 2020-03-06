@@ -7,10 +7,10 @@ processors:
       cache.ttl: 5m
   - add_cloud_metadata: ~
 
-#filebeat.config:
-#  modules:
-#    path: ${path.config}/modules.d/*.yml
-#    reload.enabled: false
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
 #
 #filebeat.autodiscover:
 #  providers:
@@ -50,3 +50,4 @@ output.logstash:
 #      when.contains:
 #        fields:
 #          index: 'change'
+

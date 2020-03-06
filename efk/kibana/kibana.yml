@@ -1,6 +1,6 @@
 xpack.monitoring.ui.container.elasticsearch.enabled: true
 server.port: 5601                               # kibana 监听端口
-server.host: "0"                                # kibana 监听地址，0代表所有地址(0.0.0.0/0)
+server.host: "0.0.0.0"                                # kibana 监听地址，0代表所有地址(0.0.0.0/0)
 #server.basePath: ""
 #server.rewriteBasePath: false
 #server.maxPayloadBytes: 1048576

@@ -5,6 +5,9 @@ services:
     container_name: filebeat
     volumes:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - ./data:/usr/share/filebeat/data
+      #需要收集日志的目录
       - /root/hcbm/logs:/var/log/test911/
+       # 把logs和data共享出来
+      - ${PWD}/logs:/usr/share/filebeat/logs
+      - ${PWD}/data:/usr/share/filebeat/data
     restart: always
