@@ -42,7 +42,7 @@ public class FileuploadExcelParseTest {
 	public void upload() {
 
 		try {
-			File file = new File("/Users/hzl/Desktop/永升物业_业财一体化（一期）项目_签约主体导入脚本1.3.xlsx");
+			File file = new File("/Users/hzl/Desktop/1.3.xlsx");
 
 			FileInputStream fileInputStream = new FileInputStream(file);
 
