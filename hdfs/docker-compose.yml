@@ -1,18 +1,19 @@
 version: '3'
 services:
-  mysql:
+  hadoop:
     container_name: hadoopnamenode
     image: hadoop:1.0
-    ports:
-    - "3306:3306"
-    environment:
-      MYSQL_USER: hzl
-      MYSQL_PASSWORD: test
-      MYSQL_DATABASE: database
-      MYSQL_ROOT_PASSWORD: root
-    volumes:
-    - ./mysql_data:/var/lib/mysql
-    - ./mysql_db.cnf:/etc/mysql/conf.d/mysql_db.cnf
-    - /etc/localtime:/etc/localtime #将宿主机的时区映射到mysql容器
+    user: root
     restart: always
 
+  hadoop1:
+    container_name: hadoopdatanode1
+    image: hadoop:1.0
+    user: root
+    restart: always
+
+  hadoop2:
+    container_name: hadoopdatanode2
+    image: hadoop:1.0
+    user: root
+    restart: always
