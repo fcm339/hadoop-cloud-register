@@ -30,6 +30,7 @@
         <ant>1.10.7</ant>
         <commons-compress>1.19</commons-compress>
         <activiti>7.1.0.M6</activiti>
+        <hadoop-client>3.2.1</hadoop-client>
     </properties>
 
 
@@ -135,18 +136,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
-        <!--热部署jar-->
-         <dependency>
-             <groupId>org.springframework.boot</groupId>
-             <artifactId>spring-boot-devtools</artifactId>
-         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
-        <dependency>
-            <groupId>com.lowagie</groupId>
-            <artifactId>itext</artifactId>
-            <version>4.2.2</version>
-            <type>pom</type>
-        </dependency>
+
         <!--集成工作流-->
         <!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring -->
         <!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring-boot-starter -->
@@ -155,7 +145,19 @@
             <!--<artifactId>activiti-spring-boot-starter</artifactId>-->
             <!--<version>${activiti}</version>-->
         <!--</dependency>-->
+        <!--集成Hadoop开始-->
+        <!--hdfs开始-->
+        <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>${hadoop-client}</version>
+        </dependency>
 
+        <!--hdfs结束-->
+        <!--mapreduce开始-->
+        <!--mapreduce结束-->
+        <!--集成hadoop结束-->
 
 
     </dependencies>

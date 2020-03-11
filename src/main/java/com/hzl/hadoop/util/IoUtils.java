@@ -3,8 +3,10 @@ package com.hzl.hadoop.util;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -90,6 +92,24 @@ public class IoUtils {
 	public void testWrite() throws IOException {
 		File srcFile = new File(basePath + "a.txt");
 		FileUtils.writeStringToFile(srcFile, "测试", StandardCharsets.UTF_8, true);
+	}
+
+	/**
+	 * <p>
+	 * 输入流转换字节数组
+	 * </p>
+	 *
+	 * @author hzl 2020/03/09 4:44 PM
+	 */
+	public static byte[] inputStreamTOByteArray(InputStream inputStream) throws IOException {
+
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		byte[] buffers = new byte[1024 * 4];
+		int n = 0;
+		while (-1 != (n = inputStream.read(buffers))) {
+			output.write(buffers, 0, n);
+		}
+		return output.toByteArray();
 	}
 
 

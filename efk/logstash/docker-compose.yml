@@ -7,7 +7,7 @@ services:
       - /etc/localtime:/etc/localtime
       - ./config/:/usr/share/logstash/config/
       - ./pipeline/:/usr/share/logstash/pipeline/
-      - /Users/hzl/Desktop/hadoopcloud/hadoop-cloud-register/logs:/user/share/logs
+      - ${PWD}/logs:/user/share/logs
     ports:
       - "5044:5044"
       - "9600:9600"

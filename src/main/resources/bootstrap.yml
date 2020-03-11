@@ -10,4 +10,5 @@ management:
 
 hadoop:
   openMulti: false #是否开启多数据源
-  redisson:
+  hdfs:
+    name-node: "hdfs://localhost:9000" #hdfs的nameNode节点ip

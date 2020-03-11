@@ -60,3 +60,6 @@ docker run -i -t logstash:7.6.0 --name logstash
 
 #下载filebeat
 docker pull docker.elastic.co/beats/filebeat:7.6.0
+
+#访问elasticsearch-head
+http://localhost:9100/?base_uri=http://localhost:9200&auth_user=1&auth_password=1

@@ -7,7 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 
 /**
- * description，对称加密解密算法
+ * description，对称加密解密算法,可实现文字和文件加密
  * 可以开发成restfull接口供外部系统调用，解决非java系统的情况
  *
  * @author hzl 2019/08/08 11:17 PM
@@ -50,6 +50,29 @@ public class AESUtil {
 			e.printStackTrace();
 		}
 
+		return null;
+	}
+
+	/**
+	 * 文件加密
+	 *
+	 * @param content 待加密内容
+	 * @param key     加密的密钥
+	 * @return
+	 */
+	public static String encryptFile(byte[] content, String key) {
+
+
+		return null;
+	}
+	/**
+	 * 解密
+	 *
+	 * @param content 待解密内容
+	 * @param key     解密的密钥
+	 * @return
+	 */
+	public static byte[] decryptFile(byte[] content, String key) {
 		return null;
 	}
 
@@ -101,6 +124,9 @@ public class AESUtil {
 	public static void main(String args[]) {
 		System.out.println(encrypt("饿恶533饿"));
 		System.out.println(decrypt("恶额饿43"));
+		//文件加密
+
+		//文件揭秘
 	}
 
 }

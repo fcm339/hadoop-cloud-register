@@ -6,3 +6,6 @@ http.port: 9200
 network.host: 0.0.0.0
 network.publish_host: localhost
 discovery.zen.ping.unicast.hosts: ["localhost"]
+#支持跨域访问
+http.cors.enabled: true
+http.cors.allow-origin: "*"
