@@ -28,6 +28,9 @@ RUN ssh-keygen -t rsa -P '' -f /etc/ssh/ssh_host_rsa_key
 
 RUN mkdir /var/run/sshd
 
+RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+
+
 EXPOSE 22
 
 CMD [ "/usr/sbin/sshd","-D"]
@@ -36,7 +39,10 @@ CMD [ "/usr/sbin/sshd","-D"]
 
 #生成容器并进入 docker run -itd --name hadoopdatenode hadoop:1.0
 
-#进入容器docker exec -i -t 96a2d28cb820 /bin/sh
+#进入容器docker exec -i -t a18b79b4639d /bin/sh
 
 #exit退出容器 cat /etc/ssh/ssh_host_rsa_key.pub>>/etc/ssh/authorized_keys
+
+#ssh-copy-id -i /etc/ssh/ssh_host_rsa_key.pub localhost
+
 
