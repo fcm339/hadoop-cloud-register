@@ -68,7 +68,7 @@ spring:
 
     slave1:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://10.200.254.56:3306/hcbm_contract?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai}
+          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/hcbm_contract?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai}
           username: ${SPRING_DATASOURCE_USERNAME:hcbm}
           password: ${SPRING_DATASOURCE_PASSWORD:hcbm}
           initial-size: 5  # 初始化大小

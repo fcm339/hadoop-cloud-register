@@ -20,7 +20,7 @@
     <!-- 指定hdfs的nameservice为ns1 -->
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://ns1</value>
+        <value>hdfs://localhost:9000</value>
     </property>
     <!-- 指定hadoop临时目录 -->
     <property>

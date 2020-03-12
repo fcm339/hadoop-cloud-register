@@ -34,7 +34,7 @@ filebeat.inputs:
   - /var/log/test911/log_error.log
 
 output.logstash:
-  hosts: ['10.200.254.53:5044']
+  hosts: ['localhost:5044']
 
 
 #output.elasticsearch:

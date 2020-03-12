@@ -5,7 +5,7 @@ server.host: "0.0.0.0"                                # kibana 监听地址，0�
 #server.rewriteBasePath: false
 #server.maxPayloadBytes: 1048576
 server.name: kibana                             # 服务器名称
-elasticsearch.hosts: "http://10.200.254.53:9200"   # ES服务器访问地址
+elasticsearch.hosts: "http://localhost:9200"   # ES服务器访问地址
 #elasticsearch.preserveHost: true
 #kibana.index: ".kibana"
 #kibana.defaultAppId: "home"

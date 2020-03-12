@@ -3,7 +3,7 @@
         将一个文件拆分存储到多个块上
         
         通过文件块备份提高容错能力
-#hdfs中的名次
+#hdfs中的名词
     NameNode：即Master，（namenode命名空间镜像文件和编辑日志文件的形式存储映射信息，文件信息，副本策略信息等）
     1、管理 HDFS 的命名空间。
     2、管理数据块（Block）映射信息
@@ -35,8 +35,65 @@
      1：将元数据时时同步到远程的网络文件系统（NFS）
      2：运行Secondary NameNode
      3：假设namenode挂了，一般是把nfs的文件内容复制到Secondary NameNode，并将Secondary NameNode作为namenode
-#hdfs的shell命令
-    列出文件系统中各个文件由那些块组成
-    hadoop fsck / -files -blocks
     
-#使用centos制作Hadoop镜像
+    
+#使用centos制作Hadoop镜像,只是为了本地开发方便才做的镜像，正式环境不需要
+
+    直接看Dockerfile文件
+
+#配置：
+
+    配置文件目录：/usr/local/hadoop/etc/hadoop
+    
+    第一次启动需要格式化：hadoop namenode -format
+    hdfs启动脚本目录：/usr/local/hadoop/sbin/start-dfs.sh
+    hdfs停止脚本目录：/usr/local/hadoop/sbin/stop-dfs.sh(不要用sh 启动直接./)
+    
+    jps查看启动
+    
+ #hadoop集群写到有道文档
+ 
+ #伪分布式安装配置（用的hadoop3.2.1）
+ 
+    #需要修改的配置，启动容器前在
+        文件：hadoop-env.sh
+        添加:export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+        export HADOOP_HOME=/usr/local/hadoop
+        
+        文件stop-yarn.sh start-yarn.sh,在头部添加如下配置
+        YARN_RESOURCEMANAGER_USER=root
+        HADOOP_SECURE_DN_USER=yarn
+        YARN_NODEMANAGER_USER=root
+        
+        
+        文件:start-dfs.sh,stop-dfs.sh，在头部添加如下配置
+        HDFS_DATANODE_USER=root
+        HADOOP_SECURE_DN_USER=hdfs
+        HDFS_NAMENODE_USER=root
+        HDFS_SECONDARYNAMENODE_USER=root
+        
+        修改的配置文件：
+        core-site.xml
+        hdfs-site.xml
+        mapred-site.xml
+        yarn-site.xml
+        
+        
+     #容器启动后需要手动执行的命令
+        docker exec -it bc664c09ca3a /bin/bash 进入容器
+        #ssh-copy-id -i ~/.ssh/id_rsa.pub 127.0.0.1 ，将公钥发送给localhost，个集群机器要相互发送，可以写在docker-compose里面
+        hadoop namenode -format  第一次启动需要格式化：
+        ./usr/local/hadoop/sbin/start-dfs.sh  启动hdfs
+        ./usr/local/hadoop/sbin/start-yarn.sh 启动yarn
+        jps 查看启动的java应用
+     #命令
+        查看集群状态
+        hadoop dfsadmin -report
+        
+        列出文件系统中各个文件由那些块组成
+        hadoop fsck / -files -blocks
+    
+     #启动成功后输入地址
+         访问HDFS的管理界面：ip:9870
+         
+         访问YARN的管理界面：http://localhost:8088/cluster

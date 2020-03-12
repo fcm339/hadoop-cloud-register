@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * 合同基本信息
+ *
  *
  * @date 2018/06/14
  */

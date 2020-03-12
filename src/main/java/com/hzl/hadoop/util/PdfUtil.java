@@ -425,7 +425,7 @@ public class PdfUtil {
 			// llx 和 urx  最小的值决定离左边的距离. lly 和 ury 最大的值决定离下边的距离
 			//595.0F, 842.0F
 			columnText.setSimpleColumn(rectangle.getRight()+5, rectangle.getTop()-92, rectangle.getRight()-195, rectangle.getTop()-92);
-			Paragraph elements = new Paragraph(0, new Chunk("合同编号:" + contractNumber));
+			Paragraph elements = new Paragraph(0, new Chunk("内容前缀:" + contractNumber));
 			// 设置字体，如果不设置添加的中文将无法显示
 			elements.setFont(font);
 			columnText.addElement(elements);

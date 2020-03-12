@@ -18,7 +18,7 @@
                 location /api/
                 {
                     expires 0;
-                    proxy_pass http://10.200.254.53:8080/;
+                    proxy_pass http://localhost:8080/;
                     proxy_set_header X-Real-IP $remote_addr;
                     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                     proxy_set_header REMOTE-HOST $remote_addr;
@@ -38,7 +38,7 @@
                 location /
                 {
                     expires 0;
-                    proxy_pass http://10.200.254.53:3001/;
+                    proxy_pass http://localhost:3001/;
                     proxy_set_header X-Real-IP $remote_addr;
                     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                     proxy_set_header REMOTE-HOST $remote_addr;

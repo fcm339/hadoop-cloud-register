@@ -1,12 +1,10 @@
 package com.hzl.hadoop.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.io.FileUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -102,15 +100,56 @@ public class IoUtils {
 	 * @author hzl 2020/03/09 4:44 PM
 	 */
 	public static byte[] inputStreamTOByteArray(InputStream inputStream) throws IOException {
-
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		byte[] buffers = new byte[1024 * 4];
-		int n = 0;
-		while (-1 != (n = inputStream.read(buffers))) {
-			output.write(buffers, 0, n);
+		try {
+			byte[] buffers = new byte[1024 * 4];
+			int n = 0;
+			while (-1 != (n = inputStream.read(buffers))) {
+				output.write(buffers, 0, n);
+			}
+			return output.toByteArray();
+		} finally {
+			IOUtils.closeQuietly(output);
+			IOUtils.closeQuietly(inputStream);
 		}
-		return output.toByteArray();
+
 	}
 
 
+	/**
+	 * <p>
+	 * 输入流转换为输出流
+	 * </p>
+	 *
+	 * @author hzl 2020/03/11 10:34 AM
+	 */
+
+	public static void inputToOutPut(InputStream inputStream, ByteArrayOutputStream output) throws IOException {
+		try {
+			byte[] buffers = new byte[1024 * 4];
+			int n = 0;
+			while (-1 != (n = inputStream.read(buffers))) {
+				output.write(buffers, 0, n);
+			}
+		} finally {
+			IOUtils.closeQuietly(inputStream);
+		}
+
+	}
+
+
+	/**
+	 * <p>
+	 * 字节流转换为输入流
+	 * </p>
+	 *
+	 * @author hzl 2020/03/11 10:39 AM
+	 */
+
+	public static InputStream byteArrayToInput(byte[] bytes) {
+
+		ByteArrayInputStream swapStream = new ByteArrayInputStream(bytes);
+		return swapStream;
+
+	}
 }
