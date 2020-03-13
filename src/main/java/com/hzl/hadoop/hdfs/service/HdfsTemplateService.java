@@ -8,6 +8,16 @@ package com.hzl.hadoop.hdfs.service;
 public interface HdfsTemplateService {
 
 	/**
+	 * 判断文件或者目录是否存在
+	 *
+	 * @param null
+	 * @author hzl 2020-03-13 2:05 PM
+	 * @return 
+	 */
+	boolean hasDirOrFile();
+
+
+	/**
 	 * 创建目录
 	 *
 	 * @param null

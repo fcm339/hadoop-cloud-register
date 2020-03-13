@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import java.net.URI;
+
 /**
  * description
  * hdfs客户端配置
@@ -20,15 +22,6 @@ import org.springframework.context.annotation.Bean;
 public class HdfsClientConfig {
 
 
-	/**
-	 * Configuration conf=new Configuration（）；
-	 * 创建一个Configuration对象时，其构造方法会默认加载hadoop中的两个配置文件，
-	 * 分别是hdfs-site.xml以及core-site.xml，这两个文件中会有访问hdfs所需的参数值，
-	 * 主要是fs.default.name，指定了hdfs的地址，有了这个地址客户端就可以通过这个地址访问hdfs了。
-	 * 即可理解为configuration就是hadoop中的配置信息。
-	 *
-	 * @return
-	 */
 	@Bean("fileSystem")
 	public FileSystem createFs(HdfsConfig hdfsConfig) {
 		//读取配置文件,该配置也可以不进行参数设置只声明对象，让他读取服务器的默认配置
@@ -39,15 +32,9 @@ public class HdfsClientConfig {
 		 * 作用自行百度
 		 */
 
-		conf.set("dfs.replication", "1");
-		/*
-		 构造一个配置参数对象，设置一个参数：我们要访问的hdfs的URI
-		 从而FileSystem.get()方法就知道应该是去构造一个访问hdfs文件系统的客户端，以及hdfs的访问地址
-		 new Configuration();的时候，它就会去加载jar包中的hdfs-default.xml
-		 然后再加载classpath下的hdfs-site.xml
-		 */
+		/*conf.set("dfs.replication", "1");
 		conf.set("fs.defaultFS", hdfsConfig.getNameNode());
-
+		*/
 
 		// 文件系统
 		FileSystem fs = null;
@@ -55,14 +42,14 @@ public class HdfsClientConfig {
 		try {
 
 			//如果这样去获取，那conf里面就可以不要配"fs.defaultFS"参数，而且，这个客户端的身份标识已经是hadoop用户
-			//URI uri = new URI(nameNode.trim());
-			// fs = FileSystem.get(uri, conf, "hadoop");
-
+			/*
+				URI uri = new URI(hdfsConfig.getNameNode().trim());
+				fs = FileSystem.get(uri, conf, "hadoop");
+			*/
 			fs = FileSystem.get(conf);
 		} catch (Exception e) {
-			log.error("", e);
+			log.error("hdfs生成文件操作对象失败", e);
 		}
-		log.info("fs.defaultFS: " + conf.get("fs.defaultFS"));
 		return fs;
 	}
 }
