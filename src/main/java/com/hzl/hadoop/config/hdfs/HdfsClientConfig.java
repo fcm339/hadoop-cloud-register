@@ -3,11 +3,9 @@ package com.hzl.hadoop.config.hdfs;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import java.net.URI;
 
 /**
  * description
@@ -18,11 +16,8 @@ import java.net.URI;
 @Slf4j
 @org.springframework.context.annotation.Configuration
 @ConditionalOnProperty(name = "hadoop.hdfs.name-node")
+@EnableConfigurationProperties({HdfsConfig.class})
 public class HdfsClientConfig {
-	//获取hdfs的nameNode节点的ip地址
-	@Value("${hadoop.hdfs.name-node}")
-	private String nameNode;
-
 
 
 	/**
@@ -35,8 +30,8 @@ public class HdfsClientConfig {
 	 * @return
 	 */
 	@Bean("fileSystem")
-	public FileSystem createFs() {
-		//读取配置文件
+	public FileSystem createFs(HdfsConfig hdfsConfig) {
+		//读取配置文件,该配置也可以不进行参数设置只声明对象，让他读取服务器的默认配置
 		Configuration conf = new Configuration();
 
 		/**
@@ -45,14 +40,13 @@ public class HdfsClientConfig {
 		 */
 
 		conf.set("dfs.replication", "1");
-
 		/*
 		 构造一个配置参数对象，设置一个参数：我们要访问的hdfs的URI
 		 从而FileSystem.get()方法就知道应该是去构造一个访问hdfs文件系统的客户端，以及hdfs的访问地址
 		 new Configuration();的时候，它就会去加载jar包中的hdfs-default.xml
 		 然后再加载classpath下的hdfs-site.xml
 		 */
-		conf.set("fs.defaultFS", nameNode);
+		conf.set("fs.defaultFS", hdfsConfig.getNameNode());
 
 
 		// 文件系统

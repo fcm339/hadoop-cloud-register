@@ -88,12 +88,92 @@
         jps 查看启动的java应用
      #命令
         查看集群状态
-        hadoop dfsadmin -report
+        hadoop dfsadmin -report       
         
-        列出文件系统中各个文件由那些块组成
-        hadoop fsck / -files -blocks
-    
      #启动成功后输入地址
          访问HDFS的管理界面：ip:9870
          
          访问YARN的管理界面：http://localhost:8088/cluster
+# hdfs命令
+    
+    列出文件系统中各个文件由那些块组成
+    hadoop fsck / -files -blocks
+    
+    创建目录
+    hadoop fs -mkdir /test
+    
+    显示目录信息
+    hadoop fs -ls hdfs://localhost:9000/
+    
+    将本地文件复制到hdfs(hdfs://localhost:9000/前缀可以省略)
+    hadoop fs -copyFromLocal test.txt /data/test/
+    
+    等同于copyToLocal，就是从hdfs下载文件到本地
+    hadoop fs -get hdfs://localhost:9000/skip.txt
+    
+    将文件从hdfs复制到本地(hdfs://localhost:9000/前缀可以省略)
+    hadoop fs -copyToLocal /data/test/test.txt ./ss.txt
+         
+         
+    等同于copyFromLocal
+    hadoop fs -put test.txt /data/test/
+         
+    将本地文件剪切后复制到hdfs
+    hadoop fs -moveFromLocal sss.txt /data
+    
+    将文件从hdfs剪切后复制到本地(该功能还为实现)
+    hadoop fs -moveToLocal /data/sss.txt cutcopy.txt
+    
+    从hdfs的一个路径拷贝hdfs的另一个路径
+    hadoop fs -cp /data/test/test.txt /data/ship.txt
+    
+    在hdfs目录中移动文件
+    hadoop fs -mv /data/ship.txt /
+    
+    追加一个文件到已经存在文件的末尾
+    hadoop fs -appendToFile ./ss.txt /data/test/test.txt
+    
+    显示文件内容
+    hadoop fs -cat /data/test/test.txt
+    
+    显示文件的末尾
+    hadoop fs -tail /data/test/test.txt
+    
+    以字符串形式打印一个文件的内容
+    hadoop fs -text /data/test/test.txt
+    
+    合并下载的多个文件
+    hadoop fs -getmerge hdfs://localhost:9000/ship.txt hdfs://localhost:9000/data/test/test.txt ./sum.txt
+    
+    
+    删除文件或文件夹
+    hadoop fs -rm -r /data
+   
+    删除空目录,不为空是不会删除的
+    hadoop fs -rmdir /test
+    
+    统计文件系统的可用空间信息
+    hadoop fs -df -h /
+    
+    统计文件夹的大小信息
+    hadoop fs -du -s -h /test
+    
+    统计一个指定目录下的文件节点数量
+    hadoop fs -count /
+    
+    设置hdfs中文件的副本数量
+    hadoop fs -setrep 3 /skip.txt
+    
+    文件权限和linux一样
+    
+    -chgrp 修改用户组
+    -chmod 修改用户权限
+    -chown 修改用户所有者
+    hadoop fs -chmod a+x /ship.txt
+    hadoop fs -chown someuser:somegrp /hello.txt
+    
+ #开发hdfs的java客户端连接
+  
+    配置文件信息：
+    hadoop.hdfs.name-node 为hadoop的namenode节点的ip地址
+    
