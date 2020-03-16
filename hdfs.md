@@ -81,10 +81,10 @@
         
      #容器启动后需要手动执行的命令
         docker exec -it bc664c09ca3a /bin/bash 进入容器
-        #ssh-copy-id -i ~/.ssh/id_rsa.pub 127.0.0.1 ，将公钥发送给localhost，个集群机器要相互发送，可以写在docker-compose里面
+        #ssh-copy-id -i ~/.ssh/id_rsa.pub 127.0.0.1 ，将公钥发送给localhost，个集群机器要相互发送，可以写在docker-compose里面 (通过ssh ip进行测试是否成功)
         hadoop namenode -format  第一次启动需要格式化：
-        ./usr/local/hadoop/sbin/start-dfs.sh  启动hdfs
-        ./usr/local/hadoop/sbin/start-yarn.sh 启动yarn
+        /usr/local/hadoop/sbin/start-dfs.sh  启动hdfs
+        /usr/local/hadoop/sbin/start-yarn.sh 启动yarn
         jps 查看启动的java应用
      #命令
         查看集群状态
@@ -93,7 +93,7 @@
      #启动成功后输入地址
          访问HDFS的管理界面：ip:9870
          
-         访问YARN的管理界面：http://localhost:8088/cluster
+         访问YARN的管理界面：http://ip:8088/cluster
 # hdfs命令
     
     列出文件系统中各个文件由那些块组成

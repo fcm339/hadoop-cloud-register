@@ -21,6 +21,7 @@ public class HdfsConfig {
 	*/
 	private String nameNode;
 
-
+	/*hdfs启动的用户*/
+	private String userName;
 
 }

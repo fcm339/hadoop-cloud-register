@@ -21,7 +21,7 @@ import java.net.URI;
 @EnableConfigurationProperties({HdfsConfig.class})
 public class HdfsClientConfig {
 
-
+	//todo 需完善，是否每次请求后关闭FileSystem，再次请求的时候重新生成，可以写成静态单例，懒加载方式
 	@Bean("fileSystem")
 	public FileSystem createFs(HdfsConfig hdfsConfig) {
 		//读取配置文件,该配置也可以不进行参数设置只声明对象，让他读取服务器的默认配置
@@ -32,9 +32,8 @@ public class HdfsClientConfig {
 		 * 作用自行百度
 		 */
 
-		/*conf.set("dfs.replication", "1");
-		conf.set("fs.defaultFS", hdfsConfig.getNameNode());
-		*/
+		conf.set("dfs.replication", "1");
+		//conf.set("fs.defaultFS", hdfsConfig.getNameNode());
 
 		// 文件系统
 		FileSystem fs = null;
@@ -42,11 +41,9 @@ public class HdfsClientConfig {
 		try {
 
 			//如果这样去获取，那conf里面就可以不要配"fs.defaultFS"参数，而且，这个客户端的身份标识已经是hadoop用户
-			/*
-				URI uri = new URI(hdfsConfig.getNameNode().trim());
-				fs = FileSystem.get(uri, conf, "hadoop");
-			*/
-			fs = FileSystem.get(conf);
+			URI uri = new URI(hdfsConfig.getNameNode().trim());
+			fs = FileSystem.get(uri, conf, hdfsConfig.getUserName().trim());
+
 		} catch (Exception e) {
 			log.error("hdfs生成文件操作对象失败", e);
 		}

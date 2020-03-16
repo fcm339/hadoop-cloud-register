@@ -19,7 +19,7 @@
     <!-- 指定YARN的resourcemanager的地址（伪分布式时就是主机名，localhost或IP地址都行） -->
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>localhost</value>
+        <value>0.0.0.0</value>
     </property>
 
     <!--  MapReduce执行shuffle时获取数据的方式 -->

@@ -1,14 +1,13 @@
 package com.hzl.hadoop.hdfs.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.hzl.hadoop.hdfs.service.HdfsTemplateService;
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IOUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.io.InputStream;
-import java.net.URI;
+import java.io.IOException;
 
 /**
  * description
@@ -25,34 +24,60 @@ public class HdfsTemplateServiceImpl implements HdfsTemplateService {
 	}
 
 	@Override
-	public boolean hasDirOrFile() {
-		return false;
-	}
-
-	@Override
-	public void mkdir(String path) {
-
-	}
-
-	@Override
-	public void dlDir(String path) {
-
-	}
-
-	//todo bug待修复测试，修复后可以进行标准接口的开发
-	public static void main(String args[]) {
-		Configuration conf = new Configuration();
-		InputStream inputStream = null;
-		try {
-			conf.set("dfs.replication", "1");
-
-			FileSystem fs = FileSystem.get(new URI("hdfs://localhost:9000"), conf, "root");
-			inputStream = fs.open(new Path("/ship.txt"));
-			IOUtils.copyBytes(inputStream, System.out, 4096, false);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			IOUtils.closeStream(inputStream);
+	public boolean hasDirOrFile(String path) throws IOException {
+		if (StringUtils.isEmpty(path)) {
+			return false;
 		}
+		FileSystem fs = fileSystem;
+		Path srcPath = new Path(path);
+		boolean isExists = fs.exists(srcPath);
+		return isExists;
+
 	}
+
+	@Override
+	public boolean mkdir(String path) throws IOException {
+		if (StringUtils.isEmpty(path)) {
+			return false;
+		}
+		if (hasDirOrFile(path)) {
+			return true;
+		}
+		FileSystem fs = fileSystem;
+		// 目标路径
+		Path srcPath = new Path(path);
+		boolean isOk = fs.mkdirs(srcPath);
+		//IOUtils.closeStream(fs);
+		return isOk;
+
+	}
+
+	@Override
+	public boolean dlDir(String path, boolean force) throws IOException {
+		if (StringUtils.isEmpty(path)) {
+			return false;
+		}
+		if (!hasDirOrFile(path)) {
+			return false;
+		}
+		FileSystem fs = fileSystem;
+		Path srcPath = new Path(path);
+		boolean isOk = false;
+		if (force) {
+			//true的时候如果删除的是目录，则当前目录的子目录也会删除，如果是文件则只会删除当前文件
+			isOk = fs.delete(srcPath,force);
+		} else {
+			isOk = fs.deleteOnExit(srcPath);
+		}
+		//fs.close();
+		return isOk;
+	}
+
+	//todo 明天继续完善hdfs的文件操作
+	@Override
+	public JSONArray queryTree(String path) {
+		return null;
+	}
+
+
 }
