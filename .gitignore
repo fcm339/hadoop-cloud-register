@@ -7,6 +7,7 @@ target/
 .project
 .classpath
 
+
 # idea ignore
 .idea/
 *.ipr
@@ -38,3 +39,7 @@ Thumbs.db
 
 # test case code
 **/Demo*.java
+
+#docker
+./mysql/mysql_data/
+./mysql/mysql_slave/
