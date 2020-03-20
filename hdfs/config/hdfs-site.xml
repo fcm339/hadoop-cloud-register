@@ -17,8 +17,9 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
+    <!--# 指定只产生一个副本-->
     <property>
-        <name>dfs.replication</name> <!--# 指定只产生一个副本-->
+        <name>dfs.replication</name>
         <value>1</value>
     </property>
     <!--指定namenode节点的文件存储目录-->

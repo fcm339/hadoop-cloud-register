@@ -8,6 +8,9 @@
 
 **mysql分表分库**  
  
+**mysql数据库监控**
+
+    Ganglia， Cacti，Zabbix
 
 
 **mysql查询优化**  

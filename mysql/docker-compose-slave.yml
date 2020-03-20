@@ -13,6 +13,6 @@ services:
     volumes:
     - ./mysql_data_slave:/var/lib/mysql
     - ./mysql_db_slave.cnf:/etc/mysql/conf.d/mysql_db.cnf
-    - /etc/localtime:/etc/localtime #将宿主机的时区映射到mysql容器
+    #- /etc/localtime:/etc/localtime #将宿主机的时区映射到mysql容器,linux上可用
     restart: always
 

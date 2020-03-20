@@ -4,13 +4,16 @@ import com.hzl.hadoop.constant.DataConstant;
 import com.hzl.hadoop.exception.CommonException;
 import org.springframework.util.StringUtils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
+
+import static com.hzl.hadoop.constant.DataConstant.SHANGHAI;
 
 
 /**
@@ -24,7 +27,6 @@ public class LocalDateFormate {
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DataConstant.DATE);
 
 	private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(DataConstant.DATETIME);
-
 
 
 	/**
@@ -76,11 +78,11 @@ public class LocalDateFormate {
 	}
 
 	/**
-	 *CST可视为美国、澳大利亚、古巴或中国的标准时间。百度百科
+	 * CST可视为美国、澳大利亚、古巴或中国的标准时间。百度百科
 	 *
 	 * @param stringDate 2019-09-01或者2019-09-01 00:00:00
-	 * @author hzl 2020-01-20 6:51 PM
 	 * @return
+	 * @author hzl 2020-01-20 6:51 PM
 	 */
 	public static Date localStringToDate(String stringDate) {
 		if (StringUtils.isEmpty(stringDate)) {
@@ -88,13 +90,13 @@ public class LocalDateFormate {
 		} else {
 			try {
 				SimpleDateFormat simpleDateFormat = null;
-				if(stringDate.length()>10){
-					simpleDateFormat=new SimpleDateFormat(DataConstant.DATETIME);
-				}else{
-					simpleDateFormat=new SimpleDateFormat(DataConstant.DATE);
+				if (stringDate.length() > 10) {
+					simpleDateFormat = new SimpleDateFormat(DataConstant.DATETIME);
+				} else {
+					simpleDateFormat = new SimpleDateFormat(DataConstant.DATE);
 				}
 				//默认东八区
-				simpleDateFormat.setTimeZone(TimeZone.getTimeZone(DataConstant.SHANGHAI));
+				simpleDateFormat.setTimeZone(TimeZone.getTimeZone(SHANGHAI));
 				return simpleDateFormat.parse(stringDate);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -103,4 +105,33 @@ public class LocalDateFormate {
 		}
 
 	}
+
+	/**
+	 *
+	 *将long转换为LocalDateTime
+	 * @param timestamp
+	 * @author hzl 2020-03-19 5:46 PM
+	 * @return
+	 */
+	public static LocalDateTime longToLocalDateTime(long timestamp) {
+		Instant instant = Instant.ofEpochMilli(timestamp);
+		//ZoneId zone = ZoneId.systemDefault();
+		ZoneId zone = ZoneId.of(SHANGHAI);
+		return LocalDateTime.ofInstant(instant, zone);
+	}
+
+	/**
+	 *
+	 *将LocalDateTime转换为long
+	 * @param localDateTime
+	 * @author hzl 2020-03-19 5:46 PM
+	 * @return
+	 */
+	public static long localDateTimeTolong(LocalDateTime localDateTime) {
+		//ZoneId zone = ZoneId.systemDefault();
+		ZoneId zone = ZoneId.of(SHANGHAI);
+		Instant instant = localDateTime.atZone(zone).toInstant();
+		return instant.toEpochMilli();
+	}
+
 }

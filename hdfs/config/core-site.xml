@@ -27,4 +27,9 @@
         <name>hadoop.tmp.dir</name>
         <value>file:/usr/local/hadoop/tmp</value>
     </property>
+    <property>
+        <name>fs.hdfs.impl.disable.cache</name>
+        <value>true</value>
+    </property>
+
 </configuration>
