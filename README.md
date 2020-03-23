@@ -118,6 +118,13 @@
    
 -- 文件加密解密
 
+-- 添加了印章图片生成工具类（可以用，在具体应用中调整参数)，改章不具有法律效应，哎废了用来造假倒是可以
+     
+     com.hzl.hadoop.util.seal.SealUtil
+     //生成签章图片
+     https://github.com/localhost02/SealUtil
+     //pdf插入电子签章图片，并添加证书具有法律效应（证书要钱，个人不愿意出钱，公司一般和e签宝合作。想赚钱真难）
+     https://blog.csdn.net/do_bset_yourself/article/details/78171897
 
 ## java爬虫开发
 Java爬虫工程师（SH）(深圳平安综合金融服务有限公司)

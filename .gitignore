@@ -41,5 +41,5 @@ Thumbs.db
 **/Demo*.java
 
 #docker
-./mysql/mysql_data/
-./mysql/mysql_slave/
+mysql/mysql_data/
+mysql/mysql_data_slave/

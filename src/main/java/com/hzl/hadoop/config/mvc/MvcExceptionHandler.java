@@ -22,6 +22,7 @@ public class MvcExceptionHandler {
 	@ResponseBody
 	@ExceptionHandler(value =Exception.class )
 	public Map exceptionHander(Exception e, HttpServletRequest req){
+		e.printStackTrace();
 		log.error("mvc统一异常处理"+e);
 		HashMap map=new HashMap();
 		map.put("code", ExceptionCode.ERROR);

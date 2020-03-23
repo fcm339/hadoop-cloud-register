@@ -40,4 +40,6 @@ public class FileDictory {
 	// 块的复本数
 	private short replication;
 
+	//当前路径 todo 等待周一初始化
+	private String currentPath;
 }

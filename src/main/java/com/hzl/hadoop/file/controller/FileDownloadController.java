@@ -2,6 +2,7 @@ package com.hzl.hadoop.file.controller;
 
 import com.hzl.hadoop.util.ExcelParseToMapUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -42,7 +46,7 @@ public class FileDownloadController {
 		FileSystemResource file = new FileSystemResource(filePath);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Cache-Control", "no-cache,no-store,must-revalidate");
-		headers.add("Content-Disposition", String.format("attachment;filename=\"%s\"", URLEncoder.encode(file.getFilename(), StandardCharsets.UTF_8.name())));
+		headers.add("Content-Disposition", String.format("attachment;filename=\"%s\"", URLEncoder.encode("11.docx", StandardCharsets.UTF_8.name())));
 		headers.add("Pragma", "no-cache");
 		headers.add("Expires", "0");
 		return ResponseEntity.ok().headers(headers).contentLength(file.contentLength())

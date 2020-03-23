@@ -98,6 +98,8 @@ public class HdfsController {
 	 * @param filePath /ss/3.txt   fileName 3.txt(下载文件)
 	 * @param filePath /ss   fileName ss(下载文件夹)
 	 * @return 参考https://blog.csdn.net/VincentlVL/article/details/99221928
+	 *
+	 * todo 待周一解决并完善
 	 * @author hzl 2020-03-20 3:33 PM
 	 */
 	@GetMapping(value = "/download",produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)

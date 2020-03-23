@@ -5,19 +5,18 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
-import com.hzl.hadoop.exception.CommonException;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
+import com.itextpdf.text.pdf.security.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.security.PrivateKey;
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -34,6 +33,11 @@ public class PdfUtil {
 	public static final String FONTS_PATH = "/fonts/simsun.ttf";
 
 	public static final BaseColor water = new BaseColor(224, 224, 224);
+
+	public static final String KEYSTORE = "F:\\ZzCert\\test.p12";
+	public static final char[] PASSWORD = "111111".toCharArray();//keystory密码
+	public static final String SRC = "F:\\test\\src.pdf";
+	public static final String DEST = "F:\\test\\signed_dest.pdf";
 
 	/**
 	 * <p>
@@ -253,7 +257,7 @@ public class PdfUtil {
 
 			for (int i = 1; i <= pageSize; i++) {
 
-				log.info("纸张大小"+i+"页"+reader.getPageSize(i));
+				log.info("纸张大小" + i + "页" + reader.getPageSize(i));
 				// 水印在文本下
 				under = stamp.getOverContent(i);
 				//水印在文本上
@@ -309,7 +313,7 @@ public class PdfUtil {
 
 		// 加二维码
 		if (!StringUtils.isBlank(codeStr)) {
-			addCode(codeStr, stamp,reader);
+			addCode(codeStr, stamp, reader);
 		}
 
 		stamp.close();// 关闭
@@ -323,7 +327,7 @@ public class PdfUtil {
 	 *
 	 * @author hzl 2020/01/02 6:10 PM
 	 */
-	public static void addCode(String codeStr, PdfStamper stamper,PdfReader reader) {
+	public static void addCode(String codeStr, PdfStamper stamper, PdfReader reader) {
 		try {
 			PdfContentByte waterMar;
 
@@ -343,10 +347,10 @@ public class PdfUtil {
 			// 创建水印图片
 			com.itextpdf.text.Image itextimage = Image.getInstance((addQRCode(codeStr)).toByteArray());
 			//A4x595.0F, y842.0F，115，72
-			log.info("第一页纸张大小"+reader.getPageSize(1));
-			Rectangle rectangle=reader.getPageSize(1);
+			log.info("第一页纸张大小" + reader.getPageSize(1));
+			Rectangle rectangle = reader.getPageSize(1);
 			// 水印图片位置
-			itextimage.setAbsolutePosition(rectangle.getWidth()-115, rectangle.getHeight()-72);
+			itextimage.setAbsolutePosition(rectangle.getWidth() - 115, rectangle.getHeight() - 72);
 			// 边框固定
 			itextimage.scaleToFit(60, 60);
 			// 设置旋转弧度
@@ -419,12 +423,12 @@ public class PdfUtil {
 			over.setGState(gs);
 			over.setColorFill(BaseColor.BLACK);
 			ColumnText columnText = new ColumnText(over);
-			Rectangle rectangle=reader.getPageSize(1);
+			Rectangle rectangle = reader.getPageSize(1);
 
-			log.info(rectangle.getLeft()+":"+rectangle.getBottom()+":"+rectangle.getRight()+":"+rectangle.getTop());
+			log.info(rectangle.getLeft() + ":" + rectangle.getBottom() + ":" + rectangle.getRight() + ":" + rectangle.getTop());
 			// llx 和 urx  最小的值决定离左边的距离. lly 和 ury 最大的值决定离下边的距离
 			//595.0F, 842.0F
-			columnText.setSimpleColumn(rectangle.getRight()+5, rectangle.getTop()-92, rectangle.getRight()-195, rectangle.getTop()-92);
+			columnText.setSimpleColumn(rectangle.getRight() + 5, rectangle.getTop() - 92, rectangle.getRight() - 195, rectangle.getTop() - 92);
 			Paragraph elements = new Paragraph(0, new Chunk("合同编号:" + contractNumber));
 			// 设置字体，如果不设置添加的中文将无法显示
 			elements.setFont(font);
@@ -464,4 +468,65 @@ public class PdfUtil {
 	}
 
 
+	/**
+	 * 生成电子签章
+	 * 前端可以发送坐标位置到后端实现，签章插入到指定位置
+	 *
+	 * @param null
+	 * @return
+	 * @author hzl 2020-03-23 9:55 AM
+	 */
+	public static void sign(String src  //需要签章的pdf文件路径
+			, String dest  // 签完章的pdf文件路径
+			, Certificate[] chain //证书链
+			, PrivateKey pk //签名私钥
+			, String digestAlgorithm  //摘要算法名称，例如SHA-1
+			, String provider  // 密钥算法提供者，可以为null
+			, MakeSignature.CryptoStandard subfilter //数字签名格式，itext有2种
+			, String reason  //签名的原因，显示在pdf签名属性中，随便填
+			, String location) throws Exception {
+		//下边的步骤都是固定的，照着写就行了，没啥要解释的
+		// Creating the reader and the stamper，开始pdfreader
+		PdfReader reader = new PdfReader(src);
+		//目标文件输出流
+		FileOutputStream os = new FileOutputStream(dest);
+		//创建签章工具PdfStamper ，最后一个boolean参数
+		//false的话，pdf文件只允许被签名一次，多次签名，最后一次有效
+		//true的话，pdf可以被追加签名，验签工具可以识别出每次签名之后文档是否被修改
+		PdfStamper stamper = PdfStamper.createSignature(reader, os, '\0', null, true);
+		// 获取数字签章属性对象，设定数字签章的属性
+		PdfSignatureAppearance appearance = stamper.getSignatureAppearance();
+		appearance.setReason(reason);
+		appearance.setLocation(location);
+		//设置签名的位置，页码，签名域名称，多次追加签名的时候，签名预名称不能一样
+		//签名的位置，是图章相对于pdf页面的位置坐标，原点为pdf页面左下角
+		//四个参数的分别是，图章左下角x，图章左下角y，图章右上角x，图章右上角y
+		appearance.setVisibleSignature(new Rectangle(200, 200, 300, 300), 1, "sig1");
+		//读取图章图片，这个image是itext包的image
+		Image image = Image.getInstance("F:\\test\\Dummy1.png");
+		appearance.setSignatureGraphic(image);
+		appearance.setCertificationLevel(PdfSignatureAppearance.NOT_CERTIFIED);
+		//设置图章的显示方式，如下选择的是只显示图章（还有其他的模式，可以图章和签名描述一同显示）
+		appearance.setRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC);
+
+		// 这里的itext提供了2个用于签名的接口，可以自己实现，后边着重说这个实现
+		// 摘要算法
+		ExternalDigest digest = new BouncyCastleDigest();
+		// 签名算法
+		ExternalSignature signature = new PrivateKeySignature(pk, digestAlgorithm, null);
+		// 调用itext签名方法完成pdf签章
+		MakeSignature.signDetached(appearance, digest, signature, chain, null, null, null, 0, subfilter);
+
+	}
+
+	/**
+	 * 生成印章图片
+	 *
+	 * @param null
+	 * @author hzl 2020-03-23 10:12 AM
+	 * @return
+	 */
+	public static void  stampImage(){
+
+	}
 }
