@@ -19,6 +19,6 @@ mv hadoop.jar ${jar_name}.jar
 
 nohup java -jar \
 -Xms512m -Xmx1024m \
--Dspring.profiles.active=local \
- ./$jar_name.jar > ../logs/$jar_name.log &
+-Dspring.profiles.active=${branch_name} \
+./${jar_name}.jar > ../logs/${jar_name}.log & \
 tail -f ../logs/$jar_name.log
