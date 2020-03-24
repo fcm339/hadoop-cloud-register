@@ -1,21 +1,28 @@
 package com.hzl.hadoop.hdfs.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.hzl.hadoop.exception.CommonException;
 import com.hzl.hadoop.hdfs.entity.FileDictory;
 import com.hzl.hadoop.hdfs.service.HdfsTemplateService;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import static org.apache.commons.io.FileUtils.openInputStream;
 
 /**
  * description
@@ -23,6 +30,7 @@ import java.util.List;
  *
  * @author hzl 2020/03/10 11:13 AM
  */
+@Slf4j
 @RestController
 @RequestMapping(value = "/hdfs")
 public class HdfsController {
@@ -83,9 +91,18 @@ public class HdfsController {
 	}
 
 
+	/** todo 上传有问题
+	 * 文件上传
+	 *
+	 * @param path 路径/ss/3.txt
+     * @param file 文件流
+	 * @author hzl 2020-03-24 10:55 AM
+	 * @return
+	 */
 	@PostMapping(value = "/upload")
 	public boolean uploadFile(String path, MultipartFile file) {
 		try {
+			log.info("上传文件大小"+file.getSize());
 			return hdfsTemplateService.uploadFile(path, file.getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -94,32 +111,53 @@ public class HdfsController {
 		return false;
 	}
 
-	/**
+	/** todo 下载有问题
 	 * @param filePath /ss/3.txt   fileName 3.txt(下载文件)
 	 * @param filePath /ss   fileName ss(下载文件夹)
 	 * @return 参考https://blog.csdn.net/VincentlVL/article/details/99221928
-	 *
-	 * todo 待周一解决并完善
 	 * @author hzl 2020-03-20 3:33 PM
 	 */
-	@GetMapping(value = "/download",produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	public ResponseEntity<InputStreamResource> downFile(@RequestParam String filePath, @RequestParam String fileName) {
+	@GetMapping(value = "/download")
+	public void downFile(@RequestParam String filePath, @RequestParam String fileName, HttpServletResponse response) {
 		try {
-			InputStream inputStream = hdfsTemplateService.downloadFile(filePath);
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Cache-Control", "no-cache,no-store,must-revalidate");
-			headers.add("Content-Disposition", String.format("attachment;filename=\"%s\"", URLEncoder.encode(fileName, StandardCharsets.UTF_8.name())));
-			headers.add("Pragma", "no-cache");
-			headers.add("Expires", "0");
-			return ResponseEntity.ok().headers(headers)
-					.contentType(MediaType.APPLICATION_OCTET_STREAM)
-					.body(new InputStreamResource(inputStream));
+			try(InputStream inputStream = hdfsTemplateService.downloadFile(filePath)){
+				response.setContentType("application/x-msdownload;charset=utf-8");
+				response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "utf-8"));
+				try(BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(response.getOutputStream())){
+					IOUtils.copy(inputStream, bufferedOutputStream);
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CommonException("文件下载失败");
 		}
-
 	}
 
+	public static String readFileToString(InputStream in) throws IOException {
+		Throwable var3 = null;
+
+		String var4;
+		try {
+			var4 = IOUtils.toString(in, Charsets.toCharset(StandardCharsets.UTF_8));
+		} catch (Throwable var13) {
+			var3 = var13;
+			throw var13;
+		} finally {
+			if (in != null) {
+				if (var3 != null) {
+					try {
+						in.close();
+					} catch (Throwable var12) {
+						var3.addSuppressed(var12);
+					}
+				} else {
+					in.close();
+				}
+			}
+
+		}
+
+		return var4;
+	}
 
 }

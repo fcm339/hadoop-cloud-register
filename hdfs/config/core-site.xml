@@ -25,7 +25,7 @@
     <!-- 指定hadoop临时目录，作用存储Hadoop运行时产生数据，其它目录会基于此路径, 建议设置到一个足够空间的地方 -->
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>file:/usr/local/hadoop/tmp</value>
+        <value>/usr/local/hadoop/tmp</value>
     </property>
     <property>
         <name>fs.hdfs.impl.disable.cache</name>

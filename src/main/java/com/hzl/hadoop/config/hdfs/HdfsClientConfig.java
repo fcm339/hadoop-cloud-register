@@ -44,8 +44,8 @@ public class HdfsClientConfig {
 		//设置文件副本数量
 		conf.set("dfs.replication", "1");
 		conf.set("fs.defaultFS", hdfsConfig.getNameNode());
-		conf.set("dfs.name.dir","/usr/local/hadoop/hdfs/name");
-		conf.set("dfs.data.dir","/usr/local/hadoop/hdfs/data");
+//		conf.set("dfs.name.dir","/usr/local/hadoop/hdfs/name");
+//		conf.set("dfs.data.dir","/usr/local/hadoop/hdfs/data");
 		//禁用FileSystem的缓存，这样在关闭FileSystem对象后，重新获取就不会出现java.io.IOException: Filesystem closed
 		conf.setBoolean("fs.hdfs.impl.disable.cache",true);
 		return conf;

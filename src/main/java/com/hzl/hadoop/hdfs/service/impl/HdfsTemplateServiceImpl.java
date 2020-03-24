@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.hzl.hadoop.hdfs.controller.HdfsController.readFileToString;
 import static com.hzl.hadoop.util.LocalDateFormate.longToLocalDateTime;
 
 /**
@@ -125,12 +126,13 @@ public class HdfsTemplateServiceImpl implements HdfsTemplateService {
 
 		FileSystem fs = hdfsClientConfig.createFileSystem();
 		Path srcPath = new Path(path);
-
+		log.info("文件内容"+content);
 		FSDataOutputStream outputStream = fs.create(srcPath);
 		IOUtils.copyBytes(content, outputStream, FileConstant.bufferSize);
-		IOUtils.closeStream(content);
+//		IOUtils.closeStream(content);
 		IOUtils.closeStream(outputStream);
 		IOUtils.closeStream(fs);
+
 		return true;
 	}
 
@@ -140,9 +142,11 @@ public class HdfsTemplateServiceImpl implements HdfsTemplateService {
 		if (StringUtils.isEmpty(path)) {
 			throw new CommonException("查询参数为空");
 		}
+		log.info("下载地址"+path);
 		FileSystem fs = hdfsClientConfig.createFileSystem();
 		Path srcPath = new Path(path);
 		FSDataInputStream inputStream = fs.open(srcPath);
+		log.info("文字"+readFileToString(inputStream));
 		log.info("文件下载测试"+inputStream.toString());
 		return inputStream;
 	}

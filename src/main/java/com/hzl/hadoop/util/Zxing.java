@@ -46,14 +46,14 @@ public class Zxing {
 
 	public static void executeForQRFile() {
 		// 二维码内容
-		String text = "http://www.nepxion.com";
+		String text = "刻章服务";
 		// 二维码图片导出路径
 		File file = new File("/Users/hzl/Desktop/二维码.jpg");
 
 		// 二维码参数的构造对象，很多参数赋予了默认值，可自行通过set方法更改
 		ZxingEntity entity = new ZxingEntity();
 		entity.setBarcodeFormat(BarcodeFormat.QR_CODE);
-		entity.setLogoFile(new File("/Users/hzl/Desktop/logo.png"));
+		entity.setLogoFile(new File("/Users/hzl/Desktop/公章.png"));
 		entity.setText(text);
 		entity.setOutputFile(file);
 		entity.setWidth(430);

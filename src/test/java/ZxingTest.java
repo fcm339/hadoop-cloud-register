@@ -9,11 +9,11 @@ import org.junit.Test;
 public class ZxingTest {
 
 	@Test
-	public void zkingtest(String[] args) throws Exception {
+	public void zkingtest() throws Exception {
 		Zxing.executeForQRFile();
 		// executeForQRBytes();
 
 		//executeForEANFile();
-		Zxing.executeForEANBytes();
+		//Zxing.executeForEANBytes();
 	}
 }

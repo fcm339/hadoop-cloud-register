@@ -1,0 +1,13 @@
+version: '3'
+services:
+  hadoop:
+    container_name: hadoopnamenode
+    image: java:8
+    user: root
+    ports:
+        - "8888:8888"
+    volumes:
+        - ./target/hadoop.jar:~/
+        - ./logs/:~/
+    command: sh ~/start.sh
+    restart: always

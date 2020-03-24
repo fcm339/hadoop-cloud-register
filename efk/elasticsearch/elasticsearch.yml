@@ -1,4 +1,4 @@
-cluster.name: elasticsearch_cluster
+cluster.name: se_cluster
 node.name: node-master
 node.master: true
 node.data: true

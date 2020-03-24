@@ -168,7 +168,7 @@ public class SealTest {
 		 */
 		SealFont mainFont = SealFont.builder()
 				.bold(true)
-				.fontText("欢乐无敌制图网淘宝店专用章")
+				.fontText("私人电子印章刻章服务")
 				.fontSize(35)
 				.fontSpace(35.0)
 				.build();
@@ -179,7 +179,7 @@ public class SealTest {
 		SealFont viceFont = SealFont.builder()
 				.bold(true)
 				.fontFamily("宋体")
-				.fontText("人事用章")
+				.fontText("无证书认证")
 				.marginSize(5)
 				.fontSpace(30.0)
 				.fontSize(22)
@@ -192,7 +192,7 @@ public class SealTest {
 		SealFont centerFont = SealFont.builder()
 				.bold(true)
 				.fontFamily("宋体")
-				.fontSize(100)
+				.fontSize(120)
 				.fontText("★")
 				.build();
 
@@ -204,7 +204,7 @@ public class SealTest {
 				.bold(true)
 				.fontFamily("宋体")
 				.fontSize(22)
-				.fontText("正版认证")
+				.fontText("不具备法律效应")
 				.marginSize(68)
 				.build();
 
