@@ -1,0 +1,9 @@
+version: '3'
+services:
+  redis:
+    container_name: rocketmq
+    image: rocketmqinc/rocketmq
+    ports:
+     - "9876:9876"
+    volumes:
+       - ./broker.conf:/etc/rocketmq/broker.conf

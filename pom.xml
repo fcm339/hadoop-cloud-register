@@ -177,8 +177,18 @@
         <!--mapreduce开始-->
         <!--mapreduce结束-->
         <!--集成hadoop结束-->
+        <!--支付模块集成-->
+        <!--微信支付-->
 
+        <!--微信支付结束-->
+        <!--支付模块集成结束-->
 
+        <!--消息中间件-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
+        </dependency>
+        <!--消息中间件结束-->
     </dependencies>
 
 
