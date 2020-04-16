@@ -26,6 +26,8 @@ public class CommandLineRunnerUtil implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("CommandLineRunner所有bean加载完成后执行" + Arrays.asList(args));
+		log.info("CommandLineRunner所有bean加载完成后执行" + Arrays.asList(args));
+
 	}
+
 }

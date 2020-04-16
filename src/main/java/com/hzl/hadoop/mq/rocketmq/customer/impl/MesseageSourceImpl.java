@@ -1,9 +1,7 @@
 package com.hzl.hadoop.mq.rocketmq.customer.impl;
 
-import com.hzl.hadoop.mq.rocketmq.config.MesseageSource;
 import com.hzl.hadoop.mq.rocketmq.customer.CustomerService;
 import com.hzl.hadoop.mq.rocketmq.entity.Foo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 
