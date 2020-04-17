@@ -1,6 +1,6 @@
 package com.hzl.hadoop.mq.rocketmq.provider.impl;
 
-import com.hzl.hadoop.mq.rocketmq.config.MesseageSource;
+import com.hzl.hadoop.mq.rocketmq.channel.OutputChannel;
 import com.hzl.hadoop.mq.rocketmq.provider.ProviderService;
 import org.apache.rocketmq.common.message.MessageConst;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Service;
 import org.springframework.util.MimeTypeUtils;
 
 import java.util.stream.Collectors;
@@ -19,15 +20,16 @@ import java.util.stream.Stream;
  *
  * @author hzl 2020/03/25 4:32 PM
  */
+@Service
 public class ProviderServiceImpl implements ProviderService {
 
 	@Autowired
-	private MesseageSource messeageSource;
+	private OutputChannel outputChannel;
 
 
 	@Override
 	public void send(String msg) throws Exception {
-		messeageSource.output1().send(MessageBuilder.withPayload(msg).build());
+		outputChannel.output1().send(MessageBuilder.withPayload(msg).build());
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class ProviderServiceImpl implements ProviderService {
 		Message message = MessageBuilder.createMessage(msg,
 				new MessageHeaders(Stream.of(tag).collect(Collectors
 						.toMap(str -> MessageConst.PROPERTY_TAGS, String::toString))));
-		messeageSource.output1().send(message);
+		outputChannel.output1().send(message);
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class ProviderServiceImpl implements ProviderService {
 				.setHeader(MessageConst.PROPERTY_TAGS, tag)
 				.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
 				.build();
-		messeageSource.output1().send(message);
+		outputChannel.output1().send(message);
 	}
 
 	@Override
@@ -54,6 +56,6 @@ public class ProviderServiceImpl implements ProviderService {
 		builder.setHeader("test", String.valueOf(num));
 		builder.setHeader(RocketMQHeaders.TAGS, "binder");
 		Message message = builder.build();
-		messeageSource.output2().send(message);
+		outputChannel.output2().send(message);
 	}
 }

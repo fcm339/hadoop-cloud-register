@@ -1,14 +1,14 @@
 package com.hzl.hadoop.rpc.impl;
 
 import com.hzl.hadoop.rpc.service.ProviderService;
-import org.apache.dubbo.config.annotation.Service;
+//import org.apache.dubbo.config.annotation.Service;
 
 /**
  * description
  *
  * @author hzl 2020/04/14 11:19 AM
  */
-@Service
+//@Service
 public class ProviderServiceImpl implements ProviderService {
 
 	@Override

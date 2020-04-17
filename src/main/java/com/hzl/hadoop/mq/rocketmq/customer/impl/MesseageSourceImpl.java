@@ -4,12 +4,14 @@ import com.hzl.hadoop.mq.rocketmq.customer.CustomerService;
 import com.hzl.hadoop.mq.rocketmq.entity.Foo;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Service;
 
 /**
  * description
  *
  * @author hzl 2020/03/25 4:26 PM
  */
+@Service
 public class MesseageSourceImpl implements CustomerService {
 
 

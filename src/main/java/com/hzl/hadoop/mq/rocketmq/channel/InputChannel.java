@@ -1,23 +1,14 @@
-package com.hzl.hadoop.mq.rocketmq.config;
+package com.hzl.hadoop.mq.rocketmq.channel;
 
 import org.springframework.cloud.stream.annotation.Input;
-import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 
 /**
  * description
- * @author hzl 2020/03/25 3:33 PM
+ *
+ * @author hzl 2020/04/17 3:04 PM
  */
-public interface MesseageSource {
-	//消息提供者
-	@Output("output1")
-	MessageChannel output1();
-
-	@Output("output2")
-	MessageChannel output2();
-
-	@Output("output3")
-	MessageChannel output3();
+public interface InputChannel {
 
 
 	//消息接收者

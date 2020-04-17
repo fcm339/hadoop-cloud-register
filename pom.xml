@@ -188,26 +188,34 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
         </dependency>
+        <!--不添加该jar，会报错el表达式错误-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.1.1.Final</version>
+        </dependency>
+
+
         <!--消息中间件结束-->
         <!--dubbo,rpc调用-->
 
-        <!-- Spring Boot dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-actuator</artifactId>
-        </dependency>
+        <!--&lt;!&ndash; Spring Boot dependencies &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-actuator</artifactId>-->
+        <!--</dependency>-->
 
-        <!-- Dubbo Spring Cloud Starter -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-dubbo</artifactId>
-        </dependency>
+        <!--&lt;!&ndash; Dubbo Spring Cloud Starter &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-dubbo</artifactId>-->
+        <!--</dependency>-->
 
-        <!-- Spring Cloud Nacos Service Discovery -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
+        <!--&lt;!&ndash; Spring Cloud Nacos Service Discovery &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+        <!--</dependency>-->
         <!--dubbo结束-->
     </dependencies>
 
