@@ -56,6 +56,6 @@ public class ProviderServiceImpl implements ProviderService {
 		builder.setHeader("test", String.valueOf(num));
 		builder.setHeader(RocketMQHeaders.TAGS, "binder");
 		Message message = builder.build();
-		outputChannel.output2().send(message);
+		//outputChannel.output2().send(message);
 	}
 }

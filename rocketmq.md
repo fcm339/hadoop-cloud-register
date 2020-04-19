@@ -42,12 +42,16 @@
     
     
    
-#启动 Startup Name Server 注册中心,其中&的作用是后端运行
+#启动 Startup Name Server 注册中心,其中&的作用是生成子进程后端运行
     sh bin/mqnamesrv &
     
 #启动 Startup Broker
     
     sh bin/mqbroker -n localhost:9876 &
+    
+#手动创建topic
+
+    sh bin/mqadmin updateTopic -n localhost:9876 -c DefaultCluster -t test-topic
     
 # 配置
     

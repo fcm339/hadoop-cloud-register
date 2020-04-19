@@ -11,7 +11,7 @@ spring:
       #rocketmq
       rocketmq:
         binder:
-          name-server: 10.200.254.54:9876
+          name-server: localhost:9876
         bindings:
           input1:
             consumer:

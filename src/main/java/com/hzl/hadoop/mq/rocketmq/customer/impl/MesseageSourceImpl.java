@@ -21,21 +21,21 @@ public class MesseageSourceImpl implements CustomerService {
 		System.out.println("input1 receive: " + receiveMsg);
 	}
 
-	@Override
-	@StreamListener("input2")
-	public void receiveInput2(String receiveMsg) {
-		System.out.println("input2 receive: " + receiveMsg);
-	}
-
-	@Override
-	@StreamListener("input3")
-	public void receiveInput3(@Payload Foo foo) {
-		System.out.println("input3 receive: " + foo);
-	}
-
-	@Override
-	@StreamListener("input4")
-	public void receiveTransactionalMsg(String transactionMsg) {
-		System.out.println("input4 receive transaction msg: " + transactionMsg);
-	}
+//	@Override
+//	@StreamListener("input2")
+//	public void receiveInput2(String receiveMsg) {
+//		System.out.println("input2 receive: " + receiveMsg);
+//	}
+//
+//	@Override
+//	@StreamListener("input3")
+//	public void receiveInput3(@Payload Foo foo) {
+//		System.out.println("input3 receive: " + foo);
+//	}
+//
+//	@Override
+//	@StreamListener("input4")
+//	public void receiveTransactionalMsg(String transactionMsg) {
+//		System.out.println("input4 receive transaction msg: " + transactionMsg);
+//	}
 }

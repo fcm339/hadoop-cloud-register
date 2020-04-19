@@ -15,12 +15,12 @@ public interface InputChannel {
 	@Input("input1")
 	MessageChannel input1();
 
-	@Input("input2")
-	MessageChannel input2();
-
-	@Input("input3")
-	MessageChannel input3();
-
-	@Input("input4")
-	MessageChannel input4();
+//	@Input("input2")
+//	MessageChannel input2();
+//
+//	@Input("input3")
+//	MessageChannel input3();
+//
+//	@Input("input4")
+//	MessageChannel input4();
 }

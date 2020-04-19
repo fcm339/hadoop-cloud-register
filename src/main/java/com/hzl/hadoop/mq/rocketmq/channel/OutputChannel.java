@@ -14,10 +14,10 @@ public interface OutputChannel {
 	@Output("output1")
 	MessageChannel output1();
 
-	@Output("output2")
-	MessageChannel output2();
-
-	@Output("output3")
-	MessageChannel output3();
+//	@Output("output2")
+//	MessageChannel output2();
+//
+//	@Output("output3")
+//	MessageChannel output3();
 
 }
