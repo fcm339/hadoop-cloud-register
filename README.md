@@ -143,4 +143,4 @@
 
 #集成阿里分布式事物
 
-# 增加tomcat配置包括并非线程，增加underdrow替换tomcat方案，
+# 增加tomcat配置包括并发请求线程数量，增加underdrow替换tomcat方案，

@@ -1,5 +1,14 @@
 #文档
     https://github.com/alibaba/spring-cloud-alibaba/wiki/RocketMQ
+    
+    1：rocketmq架构
+    https://blog.csdn.net/u012394095/article/details/80434378
+    
+    2：rocketmq中文文档
+    http://ifeve.com/%E3%80%8Aapache-rocketmq%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97%E3%80%8B%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/
+    
+    3：Springcloud strea介绍
+    https://blog.csdn.net/weixin_38399962/article/details/82192340
 #在启动类添加如下注解
     @EnableBinding({ Source.class, Sink.class })
     
