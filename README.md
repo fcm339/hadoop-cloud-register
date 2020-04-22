@@ -56,7 +56,7 @@
                 集成Redisson实现分布式操作（https://github.com/redisson/redisson）
                 https://gitee.com/ztp/redisson-spring-boot-starter(选用这个jar)
                 第一步：读取配置文件生成Config对象
-            整理redis主从和集群文档
+            整理redis主从和集群文档（抓紧）
     集成kafka，rocketmq
     集成：zookeeper
     集成 spring cache
