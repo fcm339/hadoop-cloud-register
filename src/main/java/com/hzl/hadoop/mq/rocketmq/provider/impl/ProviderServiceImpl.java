@@ -11,6 +11,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeTypeUtils;
 
+import java.lang.ref.SoftReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,6 +26,7 @@ public class ProviderServiceImpl implements ProviderService {
 
 	@Autowired
 	private OutputChannel outputChannel;
+
 
 
 	@Override
@@ -57,5 +59,6 @@ public class ProviderServiceImpl implements ProviderService {
 		builder.setHeader(RocketMQHeaders.TAGS, "binder");
 		Message message = builder.build();
 		//outputChannel.output2().send(message);
+		SoftReference sf = new SoftReference(builder);
 	}
 }
