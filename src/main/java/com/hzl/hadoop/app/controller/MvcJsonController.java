@@ -6,6 +6,7 @@ import com.hzl.hadoop.app.service.MybatisService;
 import com.hzl.hadoop.app.service.RedisService;
 import com.hzl.hadoop.app.vo.PaymentVO;
 import com.hzl.hadoop.config.mybatis.DataSource;
+import com.hzl.hadoop.websocket.service.WebSocket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,6 +34,9 @@ public class MvcJsonController {
 
     @Autowired
 	RedisService redisService;
+
+	@Autowired
+	private WebSocket webSocket;
 
 	@GetMapping(value = "/jsontest")
 	public ResponseEntity<PaymentVO> jsonTest() {
@@ -94,5 +98,11 @@ public class MvcJsonController {
 			log.info("结果"+page);
 		}
 
+	}
+
+	@GetMapping(value = "/sendwebsocket")
+	public void weblogic(){
+
+		webSocket.sendMessage("front:测试websocket消息");
 	}
 }
