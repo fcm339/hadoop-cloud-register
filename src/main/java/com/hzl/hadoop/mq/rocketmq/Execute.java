@@ -22,7 +22,7 @@ public class Execute implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		log.info("开始执行rocketmq消息");
-		providerService.send("output1发来的消息");
+		//providerService.send("output1发来的消息");
 	}
 
 }

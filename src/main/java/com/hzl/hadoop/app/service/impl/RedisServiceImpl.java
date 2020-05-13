@@ -3,10 +3,12 @@ package com.hzl.hadoop.app.service.impl;
 import com.hzl.hadoop.app.dataobject.ContractDO;
 import com.hzl.hadoop.app.mapper.Contractmapper;
 import com.hzl.hadoop.app.service.RedisService;
+import com.hzl.hadoop.app.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -26,6 +28,8 @@ public class RedisServiceImpl implements RedisService {
 
 	@Autowired
 	private Contractmapper contractmapper;
+	@Autowired
+	private TestService testService;
 
 	//	@Autowired
 //	private RedisUtils redisUtils;
@@ -69,4 +73,18 @@ public class RedisServiceImpl implements RedisService {
 		contractmapper.updateDate1(localDate);
 		return 0;
 	}
+
+	@Override
+	@Async("taskExecutor")
+	public Boolean threadTest(int i) {
+		//log.info("开始启动多线程"+i);
+
+		//testService.update(i);
+
+		//log.info("开始启动多线程结束"+i);
+		return false;
+	}
+
+
+
 }

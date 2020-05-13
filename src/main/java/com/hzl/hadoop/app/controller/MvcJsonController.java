@@ -6,6 +6,7 @@ import com.hzl.hadoop.app.service.MybatisService;
 import com.hzl.hadoop.app.service.RedisService;
 import com.hzl.hadoop.app.vo.PaymentVO;
 import com.hzl.hadoop.config.mybatis.DataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ import java.util.Date;
  *
  * @author hzl 2020/01/03 10:24 PM
  */
+@Slf4j
 @RestController
 public class MvcJsonController {
     @Autowired
@@ -81,5 +83,16 @@ public class MvcJsonController {
 	public void update(@RequestParam Date localDate){
 
 		redisService.update(localDate);
+	}
+
+	@GetMapping(value = "/thread")
+	public void thread(){
+		int page=0;
+		for(int i=0;i<=1000;i++){
+			redisService.threadTest(i);
+			int tem=page++;
+			log.info("结果"+page);
+		}
+
 	}
 }

@@ -18,4 +18,7 @@ public interface RedisService {
 
 	int update(Date localDate);
 
+	Boolean threadTest(int i);
+
+
 }

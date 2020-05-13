@@ -93,7 +93,7 @@
 
 集成gitlib ci/cd,自动构建docker镜像，k8部署，参考资料：https://gitee.com/itmuch/docker-book（已经下载到本地）
 
-spring开发多线程
+spring开发多线程 ，异步线程Async使用后，事务注解仍然有效
 
 ----大数据相关（后期开发一个客服系统，先将基础框架搭建完善，悲伤的百度搜索引擎）
 

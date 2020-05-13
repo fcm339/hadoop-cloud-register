@@ -24,4 +24,6 @@ public interface Contractmapper extends BaseMapperUtil<ContractDO> {
 
 	int updateDate1(@Param("localDate") Date localDate);
 
+	int insertTest(@Param("i") int i);
+
 }

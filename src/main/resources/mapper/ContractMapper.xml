@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hzl.hadoop.app.mapper.Contractmapper">
+    <insert id="insertTest">
+        insert into test VALUES (#{i})
+    </insert>
     <update id="update">
         UPDATE hcbm_contract set contract_name='测试' where id=950
     </update>

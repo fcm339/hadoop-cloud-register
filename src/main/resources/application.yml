@@ -6,29 +6,29 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-    stream:
-      #消息中间键
-      #rocketmq
-      rocketmq:
-        binder:
-          name-server: localhost:9876
-        bindings:
-          input1:
-            consumer:
-            #Consumer 是否同步消费消息模式。
-              orderly: true
-          output1:
-            producer:
-              group: binder-group
-              sync: true
-      bindings:
-        input1:
-          destination: test-topic
-          content-type: text/plain
-          group: test-group1
-        output1:
-          destination: test-topic
-          content-type: application/json
+#    stream:
+#      #消息中间键
+#      #rocketmq
+#      rocketmq:
+#        binder:
+#          name-server: localhost:9876
+#        bindings:
+#          input1:
+#            consumer:
+#            #Consumer 是否同步消费消息模式。
+#              orderly: true
+#          output1:
+#            producer:
+#              group: binder-group
+#              sync: true
+#      bindings:
+#        input1:
+#          destination: test-topic
+#          content-type: text/plain
+#          group: test-group1
+#        output1:
+#          destination: test-topic
+#          content-type: application/json
 
   freemarker:
       # 禁用模板缓存
@@ -66,7 +66,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     master:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/database?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai}
+          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/sys?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai}
           username: ${SPRING_DATASOURCE_USERNAME:root}
           password: ${SPRING_DATASOURCE_PASSWORD:root}
           initial-size: 5  # 初始化大小
