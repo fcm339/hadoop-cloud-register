@@ -11,7 +11,7 @@
 <script>
     var websocket = null;
     if('WebSocket' in window) {
-        websocket = new WebSocket('ws://localhost:8888/webSocket/front');
+        websocket = new WebSocket('ws://10.64.227.67:8830/webSocket/front');
     }else {
         alert('该浏览器不支持websocket!');
     }

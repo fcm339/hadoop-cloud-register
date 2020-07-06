@@ -26,10 +26,11 @@
     执行存储过程实例（待开发)，
     批处理sql开发包括插入和更新(待开发)
     mybaits拦截器开发（待开发）
+    mybatis开发执行sql字符串（待开发）
     mybatis存储日期类型自动将时间缩短，更新2019-09-01会变成2019-08-31（已经修复）\
     String类型转换成Date时区显示有问题（bug）方法：localStringToDate
         
-集成条形码，模版引擎组件 https://github.com/Nepxion/Zxing(完成)
+集成条形码二维码，模版引擎组件 https://github.com/Nepxion/Zxing(完成)
 
 多语言功能开发
     
@@ -40,7 +41,7 @@
     
     
 集成easyexcel,文件位置com.hzl.hadoop.file.excel.ExcelDone，demo待完善
-
+    支持多语言，支持指定字端导出
 
 增加io流操作工具类(后期实际运用中完善)
 

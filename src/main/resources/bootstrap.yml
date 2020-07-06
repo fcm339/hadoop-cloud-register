@@ -1,3 +1,17 @@
+spring:
+  application:
+    name: hzl-register
+  cloud:
+    #注册中心
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+#禁止eureka作为注册中心
+eureka:
+  client:
+    enabled: false
+#服务端口号
 server:
   port: 8888
 

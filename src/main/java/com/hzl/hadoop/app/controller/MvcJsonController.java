@@ -1,5 +1,6 @@
 package com.hzl.hadoop.app.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.hzl.hadoop.app.dataobject.ContractDO;
 import com.hzl.hadoop.app.service.MybatisService;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 /**
  * description
@@ -83,6 +85,14 @@ public class MvcJsonController {
 		return new ResponseEntity<ContractDO>(redisService.selectRedis(), HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/updateRedis")
+	public ResponseEntity<List<Long>> updateRedis() {
+
+		List<Long> returnResult=redisService.selectRedisListLong();
+		System.out.println("返回结果"+ returnResult);
+		return new ResponseEntity<>(returnResult, HttpStatus.OK);
+	}
+
 	@PutMapping(value = "/update")
 	public void update(@RequestParam Date localDate){
 
@@ -104,5 +114,16 @@ public class MvcJsonController {
 	public void weblogic(){
 
 		webSocket.sendMessage("front:测试websocket消息");
+	}
+
+	@GetMapping(value = "/api/public/test")
+	public void interceptorPublic(){
+		System.out.println("springmvc拦截器不拦截该方法");
+	}
+
+
+	@GetMapping(value = "/api/test")
+	public void interceptorPrivate(){
+		System.out.println("springmvc拦截器拦截该方法");
 	}
 }

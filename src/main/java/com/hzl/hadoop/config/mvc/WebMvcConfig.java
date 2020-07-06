@@ -40,6 +40,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	 */
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
+		//配置拦截器，并配置拦截规则
+		registry.addInterceptor(new MvcHandlerInterceptor()).addPathPatterns("/api/**").excludePathPatterns("/api/public/**");
 	}
 
 	/**

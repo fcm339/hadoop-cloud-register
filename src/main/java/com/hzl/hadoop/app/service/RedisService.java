@@ -4,6 +4,7 @@ import com.hzl.hadoop.app.dataobject.ContractDO;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 /**
  * description
@@ -20,5 +21,6 @@ public interface RedisService {
 
 	Boolean threadTest(int i);
 
+	List<Long> selectRedisListLong();
 
 }

@@ -1,6 +1,7 @@
 package com.hzl.hadoop.rpc.impl;
 
 import com.hzl.hadoop.rpc.service.ProviderService;
+import org.springframework.stereotype.Service;
 //import org.apache.dubbo.config.annotation.Service;
 
 /**
@@ -8,7 +9,7 @@ import com.hzl.hadoop.rpc.service.ProviderService;
  *
  * @author hzl 2020/04/14 11:19 AM
  */
-//@Service
+@Service
 public class ProviderServiceImpl implements ProviderService {
 
 	@Override

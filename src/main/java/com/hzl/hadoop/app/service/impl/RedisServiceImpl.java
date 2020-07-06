@@ -5,9 +5,11 @@ import com.hzl.hadoop.app.mapper.Contractmapper;
 import com.hzl.hadoop.app.service.RedisService;
 import com.hzl.hadoop.app.service.TestService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -69,22 +71,42 @@ public class RedisServiceImpl implements RedisService {
 	}
 
 	@Override
+	@Async("taskExecutor")
 	public int update(Date localDate) {
-		contractmapper.updateDate1(localDate);
+		log.info("当前时间"+localDate);
 		return 0;
 	}
 
 	@Override
-	@Async("taskExecutor")
 	public Boolean threadTest(int i) {
 		//log.info("开始启动多线程"+i);
 
 		//testService.update(i);
-
+		this.update(new Date());
 		//log.info("开始启动多线程结束"+i);
 		return false;
 	}
 
+	@Override
+	public List<Long> selectRedisListLong() {
+		List<Long> results= new ArrayList<>();
+		results.add(1L);
+		results.add(2L);
+		String key="redis:teset";
+		Long s=10005L;
+		//设置键的序列号为string
+		redisTemplate.delete(key);
+		redisTemplate.opsForList().rightPushAll(key.concat(s.toString()), results.toArray());
+		System.out.println("测试"+results.toArray());
+		System.out.println(redisTemplate.opsForList().range(key.concat(s.toString()), 0,-1));
 
+		return redisTemplate.opsForList().range(key.concat(s.toString()), 0,-1);
+	}
+
+ public static void main(String args[]){
+		Long s=10005L;
+		String k="CSll";
+		System.out.println(k.concat(String.valueOf(s)));
+ }
 
 }
