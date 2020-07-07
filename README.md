@@ -42,6 +42,8 @@
     
 集成easyexcel,文件位置com.hzl.hadoop.file.excel.ExcelDone，demo待完善
     支持多语言，支持指定字端导出
+    
+增加设计模式样例:com.hzl.hadoop.design
 
 增加io流操作工具类(后期实际运用中完善)
 

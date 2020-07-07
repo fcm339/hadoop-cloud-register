@@ -10,5 +10,4 @@ import com.hzl.hadoop.app.dataobject.ContractDO;
 public interface MybatisService {
 	ContractDO select();
 
-//	ContractDO selectSlave();
 }

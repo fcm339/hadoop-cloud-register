@@ -36,4 +36,11 @@ public class PaymentVO {
 
 	//private BigDecimal money;
 
+
+	public PaymentVO(String barcodeImg) {
+		this.barcodeImg = barcodeImg;
+	}
+
+
+
 }
