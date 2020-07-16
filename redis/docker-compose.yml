@@ -1,7 +1,7 @@
 version: '3'
 services:
   redis:
-    container_name: redis
-    image: redis:4.0.2
+    container_name: redis-master
+    image: redis:6.0.5
     ports:
      - "6379:6379"

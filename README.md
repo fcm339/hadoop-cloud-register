@@ -16,7 +16,7 @@
     mybatis:完成
     druid:完成
     mybatis工具包：https://github.com/abel533/Mapper（完成(封装了jpa）
-    多数据源：完成 数据源注解@DataSource必须在mapper注入前执行，事务回滚待测试完成
+    多数据源：完成 数据源注解@DataSource必须在mapper注入前执行，事务回滚测试完成
     读写分离：参考：https://www.cnblogs.com/cjsblog/p/9712457.html，https://mp.weixin.qq.com/s/uivql_NMhWSnjknL9o5M3A（完成）
         通过hadoop.openMulti配置来开启和关闭多数据，如果不配置默认开启单数据源
     执行sql脚本：groovy或者后期根据mybatis开发一个，或者不开发

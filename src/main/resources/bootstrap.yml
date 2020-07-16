@@ -1,3 +1,7 @@
+#服务端口号
+server:
+  port: 8888
+
 spring:
   application:
     name: hzl-register
@@ -11,9 +15,7 @@ spring:
 eureka:
   client:
     enabled: false
-#服务端口号
-server:
-  port: 8888
+
 
 management:
   port: 8889
@@ -23,7 +25,7 @@ management:
         include: '*'
 
 hadoop:
-  openMulti: false #是否开启多数据源
+  openMulti: true #是否开启多数据源
   hdfs:
     name-node: "hdfs://localhost:9000" #hdfs的nameNode节点ip
     user-name: "root" #linux启动hdf是的用户名

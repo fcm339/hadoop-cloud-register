@@ -16,9 +16,6 @@
 
 
     <properties>
-        <!--<alibaba.nacos.config>2.1.1.RELEASE</alibaba.nacos.config>-->
-        <!--<alibaba.nacos.discory>2.1.1.RELEASE</alibaba.nacos.discory>-->
-        <!--<lombok>1.18.10</lombok>-->
         <itextpdf>5.5.13.1</itextpdf>
         <google.zxing>3.3.3</google.zxing>
         <httpclient>4.5.9</httpclient>
@@ -31,6 +28,7 @@
         <commons-compress>1.19</commons-compress>
         <activiti>7.1.0.M6</activiti>
         <hadoop-client>3.2.1</hadoop-client>
+        <hzl.mybatis.plug>0.0.1-SNAPSHOT</hzl.mybatis.plug>
     </properties>
 
 
@@ -42,10 +40,9 @@
         <!--<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
         <!--</dependency>-->
         <!--实现服务的注册与发现-->
-        <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-nacos-discovery -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
         <dependency>
@@ -102,14 +99,19 @@
             <artifactId>poi-ooxml</artifactId>
             <version>${poi-ooxml}</version>
         </dependency>
-        <!--druid连接池-->
-        <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
+        <!--&lt;!&ndash;druid连接池&ndash;&gt;-->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba</groupId>-->
+            <!--<artifactId>druid-spring-boot-starter</artifactId>-->
+            <!--<version>${druid}</version>-->
+        <!--</dependency>-->
+        <!--集成自定义多数据源插件-->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid}</version>
+            <groupId>com.hzl.cloud</groupId>
+            <artifactId>mybatis-starter</artifactId>
+            <version>${hzl.mybatis.plug}</version>
         </dependency>
-
         <!--阿里开源的excel工具-->
         <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
         <dependency>
@@ -200,22 +202,16 @@
         <!--dubbo,rpc调用-->
 
         <!-- Spring Boot dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-actuator</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-actuator</artifactId>-->
+        <!--</dependency>-->
 
         <!-- Dubbo Spring Cloud Starter -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-dubbo</artifactId>
-        </dependency>
-
-        <!-- Spring Cloud Nacos Service Discovery -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-dubbo</artifactId>-->
+        <!--</dependency>-->
         <!--dubbo结束-->
 
 
