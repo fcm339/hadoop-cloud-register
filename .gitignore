@@ -43,3 +43,7 @@ Thumbs.db
 #docker
 mysql/mysql_data/
 mysql/mysql_data_slave/
+
+#other
+mysql/mysql_data/
+efk/elasticsearch/data
