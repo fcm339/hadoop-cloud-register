@@ -5,6 +5,11 @@
 
 集成mvc完成，WebMvcConfigurationSupport完成，json处理完成，日期格式处理完成
 
+mvc拦截器，记录所有外部请求，拦截功能已经实现，记录所有请求功能待开发
+com.hzl.hadoop.config.mvc.MvcHandlerInterceptor
+主动调用其他系统的接口，需有手动记录到请求记录表
+
+
 集成webflux 待开发
 
 
@@ -87,7 +92,9 @@
 
 限制访问流量服务器和应用都需要
 
-开发websocket
+开发websocket（完成）
+
+增加json处理工具类（完成-后期根据项目实际情况完善）
 
 文件功能file服务，开发上传文件接口，开发http请求下载文件的功能(完成，HttpFileDownloadTest)
      
@@ -97,7 +104,11 @@
 
 集成gitlib ci/cd,自动构建docker镜像，k8部署，参考资料：https://gitee.com/itmuch/docker-book（已经下载到本地）
 
-spring开发多线程 ，异步线程Async使用后，事务注解仍然有效
+spring开发多线程 ，异步线程Async使用后，事务注解仍然有效（完成）
+
+springboot应用监控-包括发布成功后发送邮件，服务停止后发送邮件
+
+算法工具类：com.hzl.hadoop.util.AlgorithmUtils
 
 ----大数据相关（后期开发一个客服系统，先将基础框架搭建完善，悲伤的百度搜索引擎）
 
