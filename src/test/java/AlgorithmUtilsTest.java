@@ -16,7 +16,7 @@ public class AlgorithmUtilsTest {
 		int[] array = {9, 1, 7, 8, 3};
 		int[] result;
 		//调用冒泡排序
-		result = AlgorithmUtils.bubbling(array);
-		System.out.println("冒泡排序结果" + Arrays.toString(result));
+		result = AlgorithmUtils.selectionSort(array);
+		System.out.println("选择排序结果" + Arrays.toString(result));
 	}
 }

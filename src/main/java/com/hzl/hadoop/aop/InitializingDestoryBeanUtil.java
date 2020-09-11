@@ -6,6 +6,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -24,10 +25,13 @@ import javax.annotation.PreDestroy;
  * 初始化执行顺序	@PostConstruct>InitializingBean
  * 销毁执行顺序 @PreDestroy>DisposableBean
  *
+ * @Lazy 可以将Bean对象的创建延迟到第一次使用Bean的时候
+ *
  * @author hzl 2020/01/13 4:30 PM
  */
 @Component
 @Slf4j
+@Lazy(value = true)
 public class InitializingDestoryBeanUtil implements InitializingBean, DisposableBean, BeanFactoryAware {
 
 	/**
