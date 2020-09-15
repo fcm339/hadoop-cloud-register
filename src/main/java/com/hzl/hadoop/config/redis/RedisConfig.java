@@ -2,19 +2,14 @@ package com.hzl.hadoop.config.redis;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
-import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import com.hzl.hadoop.constant.DataConstant;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -34,10 +29,6 @@ import org.springframework.lang.Nullable;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 
 /**
@@ -46,7 +37,7 @@ import java.util.Date;
  * 2：StringRedisTemplate继承了RedisTemplate
  * 3：配置redis的序列化策略，这里我们配置json的序列化，不然每个类都需要实现Serializable
  * 参考：https://blog.csdn.net/sz85850597/article/details/89301331
- *
+ *https://blog.csdn.net/zzhongcy/article/details/102584028?utm_medium=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase&depth_1-utm_source=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase
  * @author hzl 2020/01/17 10:57 AM
  * @EnableCaching开启springboot的@cache注解
  */
@@ -106,7 +97,9 @@ public class RedisConfig extends CachingConfigurerSupport {
 	public ObjectMapper objectMapper() {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-		objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+		//过期objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+		objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,
+				ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
 		//日期格式化
 //		JavaTimeModule javaTimeModule = new JavaTimeModule();
 //		javaTimeModule.addSerializer(Date.class, new DateSerializer());

@@ -71,14 +71,14 @@ public class PdfUtilTest {
 
 		ByteArrayOutputStream tempOutputStream = new ByteArrayOutputStream();
 
-		String url = "http://ekp.ysservice.com.cn/km/review/km_review_main/kmReviewMain.do?method=view&fdId=1724b5cf536d47960806be94874813a4";
-		String content = "SRWY2020000210";
+		String url = "http://ekpapp.ysservice.com.cn/km/review/km_review_main/kmReviewMain.do?method=view&fdId=1741fd0ae140a978173dff441a5b5f2e";
+		String content = "SRDJ2020002352";
 		String water = "上海永升物业";
 
 		try {
-			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/滨海隽城物业服务协议（廖丽）.pdf");
+			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/紫燕管理服务.pdf");
 			//FileInputStream fileInputStream =new FileInputStream(new File("/Users/hzl/Desktop/pdf.pdf"));
-			outputStream=new FileOutputStream("/Users/hzl/Desktop/滨海隽城物业服务协议（廖丽）1.pdf");
+			outputStream=new FileOutputStream("/Users/hzl/Desktop/紫燕管理服务1.pdf");
 			addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);
 			outputStream.write(tempOutputStream.toByteArray());
 			tempOutputStream.flush();
