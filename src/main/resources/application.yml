@@ -67,6 +67,8 @@ spring:
         max-idle: 8
         #连接池中最新空闲连接
         min-idle: 0
+    password: hzl
+    timeout: 10000ms
 
   #mysql连接
   datasource:
