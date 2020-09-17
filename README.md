@@ -112,6 +112,9 @@ springboot应用监控-包括发布成功后发送邮件，服务停止后发送
 
 ----大数据相关（后期开发一个客服系统，先将基础框架搭建完善，悲伤的百度搜索引擎）
 
+新增谷歌文本对比工具类：
+https://github.com/google/diff-match-patch
+
 1：集成 Elasticsearch（docker安装）
 
      中文分词软件：https://github.com/ysc/word（分析文本关键字，问答系统中文分析）

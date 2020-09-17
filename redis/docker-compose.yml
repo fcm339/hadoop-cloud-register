@@ -7,7 +7,29 @@ services:
      - "6379:6379"
     restart: always
     volumes:
-    - ./data:/data
-    - ./redis.conf:/usr/local/etc/redis/redis.conf
-    command:
-      redis-server /usr/local/etc/redis/redis.conf
+      - ./data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  redis1:
+      container_name: redis-slave1
+      image: redis:latest
+      ports:
+       - "6380:6379"
+      restart: always
+      volumes:
+        - ./data1:/data
+        - ./redis.conf:/usr/local/etc/redis/redis.conf
+      command: redis-server /usr/local/etc/redis/redis.conf
+
+
+  redis2:
+      container_name: redis-slave2
+      image: redis:latest
+      ports:
+       - "6381:6379"
+      restart: always
+      volumes:
+        - ./data2:/data
+        - ./redis.conf:/usr/local/etc/redis/redis.conf
+      command: redis-server /usr/local/etc/redis/redis.conf

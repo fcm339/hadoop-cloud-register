@@ -23,11 +23,20 @@
     清楚缓存:
     flushall
     
-    主从：
+#主从：
     从执行如下明令：
-    SLAVEOF host port（更换同步的主服务器，原本就没有关联主服务器的话相当于陪住主节点，该命令适合redis运行中使用）
+     SLAVEOF host port（更换同步的主服务器，原本就没有关联主服务器的话相当于陪住主节点，该命令适合redis运行中使用）
     
-    SLAVEOF NO ONE （对一个从属服务器执行该命令 将使得这个从属服务器关闭复制功能，并从从属服务器转变回主服务器，
+     SLAVEOF NO ONE （对一个从属服务器执行该命令 将使得这个从属服务器关闭复制功能，并从从属服务器转变回主服务器，
     原来同步所得的数据集不会被丢弃）
     
-    
+ #集群
+ https://www.jianshu.com/p/73b9fafd4f5f
+ https://www.cnblogs.com/L-Test/p/11626124.html
+ https://blog.csdn.net/SEUSUNJM/article/details/86533973
+ https://blog.csdn.net/GX_1_11_real/article/details/84537720
+ #哨兵
+ 
+ 
+ docker日志管理：
+ https://blog.csdn.net/yjk13703623757/article/details/80283729?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.add_param_isCf&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.add_param_isCf
