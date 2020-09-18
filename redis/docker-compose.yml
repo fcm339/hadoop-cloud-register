@@ -9,6 +9,7 @@ services:
     volumes:
       - ./data:/data
       - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - ./log:/usr/local/etc/logs
     command: redis-server /usr/local/etc/redis/redis.conf
 
   redis1:
@@ -19,8 +20,9 @@ services:
       restart: always
       volumes:
         - ./data1:/data
-        - ./redis.conf:/usr/local/etc/redis/redis.conf
-      command: redis-server /usr/local/etc/redis/redis.conf
+        - ./redis-slave1.conf:/usr/local/etc/redis/redis-slave1.conf
+        - ./log1:/usr/local/etc/logs
+      command: redis-server /usr/local/etc/redis/redis-slave1.conf
 
 
   redis2:
@@ -31,5 +33,6 @@ services:
       restart: always
       volumes:
         - ./data2:/data
-        - ./redis.conf:/usr/local/etc/redis/redis.conf
-      command: redis-server /usr/local/etc/redis/redis.conf
+        - ./redis-slave2.conf:/usr/local/etc/redis/redis-slave2.conf
+        - ./log2:/usr/local/etc/logs
+      command: redis-server /usr/local/etc/redis/redis-slave2.conf
