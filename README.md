@@ -114,7 +114,7 @@ springboot应用监控-包括发布成功后发送邮件，服务停止后发送
 
 新增谷歌文本对比工具类：
 https://github.com/google/diff-match-patch
-
+位置：com.hzl.hadoop.util.textCompare.TextCompare
 1：集成 Elasticsearch（docker安装）
 
      中文分词软件：https://github.com/ysc/word（分析文本关键字，问答系统中文分析）

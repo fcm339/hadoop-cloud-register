@@ -47,4 +47,4 @@ mysql/mysql_data_slave/
 #other
 mysql/mysql_data/
 efk/elasticsearch/data
-.rdb
+*.rdb
