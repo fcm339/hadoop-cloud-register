@@ -350,6 +350,78 @@ public class HttpUtils {
 
 	}
 
+	/**
+	 * 发送get请求的工具方法（现主要用来接收集合类型的返回数据）
+	 *
+	 * @param url         请求地址
+	 * @param param       body 参数
+	 * @param headerParam header 参数
+	 * @param charset   编码默认utf-8 参数
+	 * @return 响应body
+	 */
+	public static String sendGet(String url,String charset, Map<String, ?> param,Map<String, String> headerParam) throws HttpResponseException {
+		log.info("========  开始发送GET请求 ========");
+		BufferedReader in = null;
+		String result = "";
+		Integer status = null;
+		try {
+			URL realUrl = new URL(getUrl(url, param));
+			HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setConnectTimeout(DEFAULT_CONNECTION_TIME_OUT);
+			connection.setReadTimeout(DEFAULT_READ_TIME_OUT);
+			connection.setRequestProperty("accept", "*/*");
+			connection.setRequestProperty("connection", "Keep-Alive");
+			connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+
+			// 添加头部参数
+			if (Objects.nonNull(headerParam) && !headerParam.isEmpty()) {
+				for (String key : headerParam.keySet()) {
+					connection.setRequestProperty(key, headerParam.get(key));
+				}
+			}
+			connection.connect();
+			status = connection.getResponseCode();
+			Map<String, List<String>> map = connection.getHeaderFields();
+			map.forEach((key, values) -> {
+				log.info(key + ":" + values.toString());
+			});
+
+			String line;
+			try {
+				for (in = new BufferedReader(new InputStreamReader(connection.getInputStream(), charset)); (line =
+						in.readLine()) != null; result = result + line) {
+				}
+			} catch (IOException e) {
+				for (in = new BufferedReader(new InputStreamReader(connection.getErrorStream(), charset)); (line =
+						in.readLine()) != null; result = result + line) {
+
+				}
+			}
+
+			log.info("======== 返回信息 ======== ：" + result);
+
+		} catch (Exception var18) {
+			throw new HttpResponseException(
+					Optional.ofNullable(status).orElse(HttpStatus.INTERNAL_SERVER_ERROR.value()), result,
+					"请求失败");
+		} finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+			} catch (Exception e) {
+				log.error("http 请求失败，流关闭异常", e);
+			}
+		}
+		if (Objects.nonNull(status) && status >= 200 && status < 300) {
+			return result;
+		}
+		//
+		throw new HttpResponseException(Optional.ofNullable(status).orElse(HttpStatus.REQUEST_TIMEOUT.value()), result,
+				"请求失败");
+
+	}
 
 	/**
 	 * 拼接 get 请求的 url

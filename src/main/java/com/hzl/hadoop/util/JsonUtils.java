@@ -3,6 +3,8 @@ package com.hzl.hadoop.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.Map;
+
 /**
  * description
  * json处理工具类
@@ -55,5 +57,19 @@ public class JsonUtils {
 		String cloneObject=objectToString(object);
 		return jsonStringToObeject(cloneObject);
 	}
+
+	/**
+	 * map转化为json
+	 *
+	 * @param map 需要转化的map对象
+	 * @author hzl 2020-10-31 2:35 PM
+	 * @return
+	 */
+
+	public static JSONObject mapToJson(Map map){
+		JSONObject jsonObject = (JSONObject) JSONObject.toJSON(map);
+		return jsonObject;
+	}
+
 
 }

@@ -120,4 +120,7 @@
     
     从VC10的开始处选择指定数量行，生成虚拟表 VT11，并返回调用者。
     
-    
+ 
+#权限设置允许所有ip访问：gp为数据库名称，hzl是用户明称，123456是密码
+grant all privileges on gp.* to hzl@’%’ identified by ‘123456’;
+flush privileges;
