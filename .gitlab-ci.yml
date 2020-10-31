@@ -1,0 +1,114 @@
+#image: registry.cn-hangzhou.aliyuncs.com/choerodon-tools/cibase:0.5.0
+#
+#stages:
+#  - maven-build
+#  - docker-build
+#  - maven-build-uat
+#  - docker-build-uat
+#  - maven-build-production
+#  - docker-build-production
+#
+#
+#maven-build:
+#  stage: maven-build
+#  script:
+#    - mvn package -U
+#  after_script:
+#    - mkdir -p /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME
+#    - cp target/app.jar /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME
+#  only:
+#    - /^release-.*$/
+#  except:
+#    - master
+#    - /^v.*$/
+#
+#
+#docker-build:
+#  stage: docker-build
+#  script:
+#    - cp /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME/* src/main
+#    - project_name=$CI_PROJECT_NAME
+#    - group_name=$GROUP_NAME
+#    - address_url=$REGISTRY_ADDRESS
+#    - image_tag=$CI_COMMIT_REF_NAME-$(date +%Y%m%d-%H%M%S)
+#    - build_name=$address_url/$group_name/$project_name:$image_tag
+#    - docker build -t $build_name src/main
+#    - docker login -u $REGISTRY_USER -p $REGISTRY_PWD $address_url
+#    - docker push $build_name
+#    - rm -rf /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME
+#    - docker rmi $build_name
+#  only:
+#    - /^release-.*$/
+#  except:
+#    - master
+#    - /^v.*$/
+#
+#
+#
+#
+#
+#
+#maven-build-uat:
+#  stage: maven-build-uat
+#  script:
+#    - mvn clean package -U -DskipTests=true
+#  after_script:
+#    - mkdir -p /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME
+#    - cp target/app.jar /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME
+#  only:
+#    - uat-1.0.0
+#  except:
+#    - master
+#
+#
+#docker-build-uat:
+#  stage: docker-build-uat
+#  script:
+#    - cp /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME/app.jar src/main/docker
+#    - project_name=$CI_PROJECT_NAME
+#    - address_url=$REGISTRY_ADDRESS
+#    - image_tag=$CI_COMMIT_REF_NAME-$(date +%Y%m%d-%H%M%S)
+#    - build_name=$address_url/uat/$project_name:$image_tag
+#    - docker build -t $build_name src/main/docker
+#    - docker login -u $REGISTRY_USER -p $REGISTRY_PWD $address_url
+#    - docker push $build_name
+#    - rm -rf /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME
+#    - docker rmi $build_name
+#  only:
+#    - uat-1.0.0
+#  except:
+#    - master
+#
+#
+#
+#
+#maven-build-production:
+#  stage: maven-build-production
+#  script:
+#    - mvn clean package -U -DskipTests=true
+#  after_script:
+#    - mkdir -p /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME
+#    - cp target/app.jar /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME
+#  only:
+#    - master
+#  except:
+#    - uat-1.0.0
+#
+#
+#docker-build-production:
+#  stage: docker-build-production
+#  script:
+#    - cp /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME/app.jar src/main/docker
+#    - project_name=$CI_PROJECT_NAME
+#    - address_url=$REGISTRY_ADDRESS
+#    - image_tag=$CI_COMMIT_REF_NAME-$(date +%Y%m%d-%H%M%S)
+#    - build_name=$address_url/prod/$project_name:$image_tag
+#    - docker build -t $build_name src/main/docker
+#    - docker login -u $REGISTRY_USER -p $REGISTRY_PWD $address_url
+#    - docker push $build_name
+#    - rm -rf /runner/gitlab-runner/.m2/$CI_PROJECT_NAME-$CI_PROJECT_ID-$CI_COMMIT_REF_NAME
+#    - docker rmi $build_name
+#  only:
+#    - master
+#  except:
+#    - uat-1.0.0

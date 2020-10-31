@@ -29,6 +29,7 @@
         <activiti>7.1.0.M6</activiti>
         <hadoop-client>3.2.1</hadoop-client>
         <hzl.mybatis.plug>0.0.1-SNAPSHOT</hzl.mybatis.plug>
+        <hutool>5.4.2</hutool>
     </properties>
 
 
@@ -227,7 +228,13 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.4.2</version>
+            <version>${hutool}</version>
+        </dependency>
+
+        <!--集成定时器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
 
     </dependencies>

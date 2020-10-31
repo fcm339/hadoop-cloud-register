@@ -1,4 +1,5 @@
 import com.hzl.hadoop.util.PdfUtil;
+import com.hzl.hadoop.util.textCompare.diff_match_patch;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.*;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,7 @@ import org.springframework.core.io.FileSystemResource;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import static com.hzl.hadoop.util.PdfUtil.addPdfTextMark;
@@ -71,14 +73,14 @@ public class PdfUtilTest {
 
 		ByteArrayOutputStream tempOutputStream = new ByteArrayOutputStream();
 
-		String url = "http://ekpapp.ysservice.com.cn/km/review/km_review_main/kmReviewMain.do?method=view&fdId=1741fd0ae140a978173dff441a5b5f2e";
-		String content = "SRDJ2020002352";
+		String url = "http://ekpapp.ysservice.com.cn/km/review/km_review_main/kmReviewMain.do?method=view&fdId=17338879f9e9254e33fd69249f9a710e";
+		String content = "SRDC2020000531";
 		String water = "上海永升物业";
 
 		try {
-			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/紫燕管理服务.pdf");
+			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/1-售场物业服务合同--旭辉版本.pdf");
 			//FileInputStream fileInputStream =new FileInputStream(new File("/Users/hzl/Desktop/pdf.pdf"));
-			outputStream=new FileOutputStream("/Users/hzl/Desktop/紫燕管理服务1.pdf");
+			outputStream=new FileOutputStream("/Users/hzl/Desktop/1-售场物业服务合同--旭辉版本1.pdf");
 			addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);
 			outputStream.write(tempOutputStream.toByteArray());
 			tempOutputStream.flush();
@@ -193,9 +195,8 @@ public class PdfUtilTest {
 	 */
 	@Test
 	public void getPdfFileStr() throws IOException {
-		File tempInputStream = new File("/Users/hzl/Desktop/1.pdf");
-
-		FileInputStream fileInputStream = new FileInputStream(tempInputStream);
+		File source = new File("/Users/hzl/Desktop/SSCPS202009009.pdf");
+		FileInputStream fileInputStream = new FileInputStream(source);
 
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		byte[] buffers = new byte[1024*4];
@@ -206,5 +207,51 @@ public class PdfUtilTest {
 		log.info(PdfUtil.getPdfFileStr(output.toByteArray()));
 		output.flush();
 		output.close();
+	}
+
+
+	/**
+	 * <p>
+	 * 获取pdf文字内容测试
+	 * </p>
+	 *
+	 * @author hzl 2020/01/10 2:43 PM
+	 */
+	public String getPdfFileStrP(File source) throws IOException {
+		FileInputStream fileInputStream = new FileInputStream(source);
+
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		byte[] buffers = new byte[1024*4];
+		int n = 0;
+		while (-1 != (n = fileInputStream.read(buffers))) {
+			output.write(buffers, 0, n);
+		}
+		log.info(PdfUtil.getPdfFileStr(output.toByteArray()));
+		String text=PdfUtil.getPdfFileStr(output.toByteArray());
+		output.flush();
+		output.close();
+		return text;
+	}
+
+	/**
+	 * <p>
+	 * 获取pdf文字内容测试
+	 * </p>
+	 *
+	 * @author hzl 2020/01/10 2:43 PM
+	 */
+	@Test
+	public void getPdfFileStrAndCompare() throws IOException {
+		File source = new File("/Users/hzl/Desktop/11.pdf");
+		File target = new File("/Users/hzl/Desktop/22.pdf");
+		String sourceText=getPdfFileStrP(source);
+		String targetText=getPdfFileStrP(target);
+
+		diff_match_patch dmp = new diff_match_patch();
+		//参数text2相对text1的变动
+		LinkedList<diff_match_patch.Diff> diff = dmp.diff_main(sourceText,targetText,true);
+		dmp.diff_cleanupSemantic(diff);
+		System.out.println(diff);
+
 	}
 }

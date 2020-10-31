@@ -2,7 +2,7 @@ version: '3'
 services:
   redis:
     container_name: redis-master
-    image: redis:latest
+    image: redis:6.0.8
     ports:
       - "6379:6379"
     restart: always
@@ -14,7 +14,7 @@ services:
 
   redis1:
       container_name: redis-slave1
-      image: redis:latest
+      image: redis:6.0.8
       ports:
         - "6380:6379"
       restart: always
@@ -27,7 +27,7 @@ services:
 
   redis2:
       container_name: redis-slave2
-      image: redis:latest
+      image: redis:6.0.8
       ports:
         - "6381:6379"
       restart: always

@@ -469,10 +469,35 @@ public class PdfUtil {
 
 
 	/**
+	 * <p>
+	 * 获取pdf指定页面文字内容,部分特殊的pdf无法识别，例如扫描件
+	 * </p>
+	 *
+	 * @author hzl 2020/01/10 2:41 PM
+	 */
+	public static String getPdfFileStr(byte[] bytes,int page) {
+		// 存放读取出的文档内容
+		String content = "";
+		try {
+			// 读取pdf所使用的输出流
+			PdfReader reader = new PdfReader(bytes);
+			// 获得页数
+			int PageNum = reader.getNumberOfPages();
+			content+=PdfTextExtractor.getTextFromPage(reader, page);
+		} catch (IOException e) {
+			log.info("错误：" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return content;
+
+	}
+
+	/**
 	 * 生成电子签章
 	 * 前端可以发送坐标位置到后端实现，签章插入到指定位置
 	 *
-	 * @param null
+	 * @param
 	 * @return
 	 * @author hzl 2020-03-23 9:55 AM
 	 */
@@ -522,7 +547,7 @@ public class PdfUtil {
 	/**
 	 * 生成印章图片
 	 *
-	 * @param null
+	 * @param
 	 * @author hzl 2020-03-23 10:12 AM
 	 * @return
 	 */
