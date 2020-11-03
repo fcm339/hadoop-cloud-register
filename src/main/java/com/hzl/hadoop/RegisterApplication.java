@@ -3,6 +3,7 @@ package com.hzl.hadoop;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  *
  * @author hzl 2019/12/27 3:44 PM
  */
-
+@EnableScheduling
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableWebMvc
