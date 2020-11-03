@@ -18,7 +18,7 @@ import java.util.Map;
 public class Convert {
 
 	//===============================================================================
-	//参考：https://www.csdn.net/gather_20/MtTagg1sNDM0NDUtYmxvZwO0O0OO0O0O.html
+	//参考：https://blog.csdn.net/cxu123321/article/details/104239214
 	//  https://hq.sinajs.cn/rn=1604120110291&list=sh600887,sh600887_i,sh163035,bk_new_sphy
 	// http://hq.sinajs.cn/list=sh600887
 	//由于股票交易以一百股为基本单位，所以在使用时成交的股票数，通常需要除以一百；

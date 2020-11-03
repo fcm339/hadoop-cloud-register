@@ -32,9 +32,9 @@ public class JsonUtils {
 	 * @author hzl 2020/08/06 12:58 PM
 	 */
 
-	public static Object jsonStringToObeject(String json){
+	public static Object jsonStringToObeject(String json,Class className){
 		JSONObject jsonObejct = JSONObject.parseObject(json);
-		return JSON.toJavaObject(jsonObejct, Object.class);
+		return JSON.toJavaObject(jsonObejct, className);
 	}
 
 	/**
@@ -53,9 +53,9 @@ public class JsonUtils {
 	 * @author hzl 2020-08-19 2:20 PM
 	 * @return
 	 */
-	public static Object cloneObject(Object object){
+	public static Object cloneObject(Object object,Class className){
 		String cloneObject=objectToString(object);
-		return jsonStringToObeject(cloneObject);
+		return jsonStringToObeject(cloneObject,className);
 	}
 
 	/**

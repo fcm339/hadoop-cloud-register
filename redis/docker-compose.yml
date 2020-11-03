@@ -12,29 +12,29 @@ services:
       - ./log:/usr/local/etc/logs
     command: redis-server /usr/local/etc/redis/redis.conf
 
-  redis1:
-      container_name: redis-slave1
-      image: redis:6.0.8
-      ports:
-        - "6380:6379"
-      restart: always
-      volumes:
-        - ./data1:/data
-        - ./redis-slave1.conf:/usr/local/etc/redis/redis-slave1.conf
-        - ./log1:/usr/local/etc/logs
-      command: redis-server /usr/local/etc/redis/redis-slave1.conf
-
-
-  redis2:
-      container_name: redis-slave2
-      image: redis:6.0.8
-      ports:
-        - "6381:6379"
-      restart: always
-      volumes:
-        - ./data2:/data
-        - ./redis-slave2.conf:/usr/local/etc/redis/redis-slave2.conf
-        - ./log2:/usr/local/etc/logs
-      command: redis-server /usr/local/etc/redis/redis-slave2.conf
-
-
+#  redis1:
+#      container_name: redis-slave1
+#      image: redis:6.0.8
+#      ports:
+#        - "6380:6379"
+#      restart: always
+#      volumes:
+#        - ./data1:/data
+#        - ./redis-slave1.conf:/usr/local/etc/redis/redis-slave1.conf
+#        - ./log1:/usr/local/etc/logs
+#      command: redis-server /usr/local/etc/redis/redis-slave1.conf
+#
+#
+#  redis2:
+#      container_name: redis-slave2
+#      image: redis:6.0.8
+#      ports:
+#        - "6381:6379"
+#      restart: always
+#      volumes:
+#        - ./data2:/data
+#        - ./redis-slave2.conf:/usr/local/etc/redis/redis-slave2.conf
+#        - ./log2:/usr/local/etc/logs
+#      command: redis-server /usr/local/etc/redis/redis-slave2.conf
+#
+#

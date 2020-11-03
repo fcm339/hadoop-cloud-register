@@ -9,4 +9,10 @@ public interface GpUrlConstant {
 	String YL_URL="http://hq.sinajs.cn/list=sh600887";
 
 	String MD_URL="http://hq.sinajs.cn/list=sz000333";
+	//获取成交额，时时价格
+	String GP_BASE_URL="http://hq.sinajs.cn/list=";
+	//伊利
+	String GP_CODE_YL="sh600887";
+	//中兴
+	String GP_CODE_ZX="sz000063";
 }
