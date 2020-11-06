@@ -24,5 +24,12 @@ ALTER TABLE `gp_yl` ADD yesterday_end_price  decimal(20,2) NOT NULL DEFAULT 0 CO
 
 ALTER TABLE `gp_yl` ADD gp_name  VARCHAR(24) NOT NULL DEFAULT "" COMMENT '股票名称' AFTER id;
 
+ALTER TABLE `gp_yl` ADD auction  decimal(20,2) NOT NULL DEFAULT 0 COMMENT '竞卖价，即卖一报价' AFTER number;
+
+ALTER TABLE `gp_yl` ADD bidding_price  decimal(20,2) NOT NULL DEFAULT 0 COMMENT '竞买价，即买一报价' AFTER number;
+
+ALTER TABLE `gp_yl` ADD gp_code  VARCHAR(24) NOT NULL DEFAULT "" COMMENT '股票名称' AFTER gp_name;
+
+
 -- TRUNCATE gp_yl;
 -- SHOW CREATE TABLE gp_yl;

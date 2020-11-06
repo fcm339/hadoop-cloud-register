@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzl.hadoop.gp.mapper.GpVolumeMapper">
+    <select id="queryVolume" resultType="com.hzl.hadoop.gp.vo.VolumeVO">
+        SELECT
+            gz.id,
+            gz.turnover,
+            gz.number/10000,
+            gz.created_date,
+            gz.current_price
+        FROM
+            gp_zx gz
+        WHERE
+            gz.id IN (
+            select max( gz.id )
+             FROM gp_zx gz
+             <where>
+                 <if test="gpCode!=null and gpCode!=''">
+                     and gz.gp_code=#{gpCode}
+                 </if>
+             </where>
+            GROUP BY DATE_FORMAT( gz.created_date, '%Y-%m-%d' )
+             )
+    </select>
+</mapper>

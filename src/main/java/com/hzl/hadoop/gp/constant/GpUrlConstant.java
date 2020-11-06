@@ -15,4 +15,12 @@ public interface GpUrlConstant {
 	String GP_CODE_YL="sh600887";
 	//中兴
 	String GP_CODE_ZX="sz000063";
+	//海尔
+	String GP_CODE_HE="sh600690";
+
+	//竞价开始时间
+	String BADDING_START="2020-11-04 09:15:00";
+
+	//竞价结束时间
+	String BADDING_END="2020-11-04 09:25:00";
 }

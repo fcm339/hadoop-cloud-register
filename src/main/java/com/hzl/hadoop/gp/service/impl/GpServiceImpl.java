@@ -4,6 +4,7 @@ import com.hzl.hadoop.gp.constant.GpUrlConstant;
 import com.hzl.hadoop.gp.repository.GpRepository;
 import com.hzl.hadoop.gp.service.GpService;
 import com.hzl.hadoop.gp.vo.GpVO;
+import com.hzl.hadoop.gp.vo.VolumeVO;
 import com.hzl.hadoop.gp.vo.YlVO;
 import com.hzl.hadoop.gp.vo.ZXVO;
 import com.hzl.hadoop.gp.yili.Convert;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,27 +37,11 @@ public class GpServiceImpl implements GpService {
 		Convert convert = new Convert();
 		//通过url获取转化后的数据
 		Map<String, String> date = convert.getGpInfo(GpUrlConstant.GP_BASE_URL.concat(code), null);
-		//准备对象参数
-		String gpName = date.get("股票名字");
-		BigDecimal currentPrice = new BigDecimal(date.get("当前价格"));
-		BigDecimal initPrice = new BigDecimal(date.get("今日开盘价"));
-		BigDecimal maxPrice = new BigDecimal(date.get("今日最高价"));
-		BigDecimal minPirce = new BigDecimal(date.get("今日最低价"));
-		BigDecimal turnover = new BigDecimal(date.get("成交金额/元"));
-		BigDecimal yesterdayEndPrice = new BigDecimal(date.get("昨日收盘价"));
-		Long number = Long.valueOf(date.get("成交的股票数"));
-		BigDecimal num = new BigDecimal("100000000");
 		//生成对象
-		GpVO gpVO = GpVO.builder().gpName(gpName)
-				.currentPrice(currentPrice)
-				.initPrice(initPrice)
-				.maxPrice(maxPrice)
-				.minPirce(minPirce)
-				.turnover(turnover.divide(num))
-				.number(number / 100)
-				.createdDate(LocalDateTime.now())
-				.yesterdayEndPrice(yesterdayEndPrice)
-				.build();
+		GpVO gpVO = new GpVO();
+		//初始化对象参数
+		gpVO.init(date);
+		gpVO.setGpCode(code);
 
 		if (GpUrlConstant.GP_CODE_YL.equals(code)) {
 			//伊利股票,利用对象克隆
@@ -68,6 +54,11 @@ public class GpServiceImpl implements GpService {
 
 		return gpVO;
 
+	}
+
+	@Override
+	public List<VolumeVO> queryVolume(VolumeVO volumeVO) {
+		return gpRepository.queryVolume(volumeVO);
 	}
 
 

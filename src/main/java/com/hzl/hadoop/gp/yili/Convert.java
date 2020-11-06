@@ -40,9 +40,9 @@ public class Convert {
 	//截取字符串
 	private String[] subString(String data) {
 		String first[] = data.split("\"", -1);
-		log.info("第一次截取" + first[1]);
+		//log.info("第一次截取" + first[1]);
 		String dataArry[] = first[1].split(",");
-		log.info("第二次截取" + Arrays.toString(dataArry));
+		//log.info("第二次截取" + Arrays.toString(dataArry));
 
 
 		return dataArry;

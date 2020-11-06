@@ -49,6 +49,7 @@ public class LocalDateFormate {
 	/**
 	 * <p>
 	 * 将字符串的LocalDateTime类型日期，转换成LocalDateTime类型
+	 * localDateTime格式：2020-11-04 23:00:00
 	 * </p>
 	 *
 	 * @author hzl 2020/01/03 5:17 PM

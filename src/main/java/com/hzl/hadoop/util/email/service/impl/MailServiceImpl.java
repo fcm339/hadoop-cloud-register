@@ -49,7 +49,7 @@ public class MailServiceImpl implements MailService {
 	public Boolean sendSimpleMail(String subject, String text) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		//发件人邮箱
-		mailMessage.setFrom("zhongliang.huang@hand-china.com");
+		mailMessage.setFrom("hzlvip1994@163.com");
 		//收件人邮箱
 		mailMessage.setTo("1620516418@qq.com");
 //		//抄送人
@@ -79,13 +79,14 @@ public class MailServiceImpl implements MailService {
 		//是否发送的邮件是富文本（附件，图片，html等）
 		MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
 		//发件人邮箱
-		messageHelper.setFrom("*");
+		messageHelper.setFrom("hzlvip1994@163.com");
 		//收件人邮箱
-		messageHelper.setTo("*");
-
+		messageHelper.setTo("1620516418@qq.com");
+		//网易邮箱需要抄送自己
+		//messageHelper.setCc("hzlvip1994@163.com");
 		messageHelper.setSubject(subject);
 		messageHelper.setText(text, true);//重点，默认为false，显示原始html代码，无效果
-
+		log.info("开始发送邮件---------------------------");
 		if (attachmentMap != null) {
 			attachmentMap.entrySet().stream().forEach(entrySet -> {
 				try {

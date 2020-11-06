@@ -39,9 +39,9 @@ spring:
       template-loader-path: classpath:/templates/
   #邮件配置信息，后期可保存到数据库
   mail:
-    host: hwhzsmtp.qiye.163.com
-    username:
-    password:
+    host: smtp.163.com
+    username: hzlvip1994@163.com
+    password: MLYFWTNYZGPZUUDW
     properties:
       mail:
         smtp:

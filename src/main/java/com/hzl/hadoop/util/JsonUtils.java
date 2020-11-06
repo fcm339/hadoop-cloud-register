@@ -1,6 +1,7 @@
 package com.hzl.hadoop.util;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.Map;
@@ -56,6 +57,18 @@ public class JsonUtils {
 	public static Object cloneObject(Object object,Class className){
 		String cloneObject=objectToString(object);
 		return jsonStringToObeject(cloneObject,className);
+	}
+	/**
+	 *
+	 * 集合对象克隆
+	 * @param object 集合
+	 * @param className 转化的类型
+	 * @author hzl 2020-11-05 12:34 PM
+	 * @return
+	 */
+	public static Object cloneObjectList(Object object,Class className){
+		String cloneObject =objectToString(object);
+		return JSONObject.parseArray(cloneObject,className);
 	}
 
 	/**

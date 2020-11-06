@@ -12,6 +12,6 @@ import java.util.Map;
  */
 public interface FreemarkerService {
 
-	String getFreemarkerHtml(String path, Map<String,Object> value) throws IOException, TemplateException;
+	String getFreemarkerHtml(String path, Map<String, Object> value) throws IOException, TemplateException;
 
 }

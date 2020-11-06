@@ -39,9 +39,13 @@
 
 # 大盘数据爬取
 
+#最低价，最高价走势图
 
 #url
     获取伊利
     http://localhost:8888/gp/yl/insert/sh600887
     获取中兴
     http://localhost:8888/gp/yl/insert/sz000063
+    
+    
+#为了方便开发--中兴表gp_zx后期存储所有股票数据

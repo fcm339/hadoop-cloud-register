@@ -2,7 +2,6 @@ package com.hzl.hadoop.gp.controller;
 
 import com.hzl.hadoop.gp.service.GpService;
 import com.hzl.hadoop.gp.vo.GpVO;
-import com.hzl.hadoop.gp.vo.YlVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +23,7 @@ public class GpController {
 
 	public GpController(GpService gpService) {
 		this.gpService = gpService;
+
 	}
 
 	/**
@@ -37,5 +37,8 @@ public class GpController {
 	public ResponseEntity<GpVO> insert(@PathVariable String code) {
 		return new ResponseEntity<>(gpService.insert(code), HttpStatus.OK);
 	}
+
+
+
 
 }

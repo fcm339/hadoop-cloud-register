@@ -43,4 +43,11 @@ public class YlVO {
 	private LocalDateTime createdDate;
 	//昨日收盘价
 	private BigDecimal yesterdayEndPrice;
+	//竞卖价，即卖一报价
+	private BigDecimal auction;
+	//竞买价，即买一报价
+	private BigDecimal biddingPrice;
+
+	//股票编号
+	private String gpCode;
 }

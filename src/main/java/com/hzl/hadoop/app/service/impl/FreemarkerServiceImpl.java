@@ -33,10 +33,10 @@ public class FreemarkerServiceImpl implements FreemarkerService {
 	 * @author hzl 2020/01/07 1:00 PM
 	 */
 	@Override
-	public String getFreemarkerHtml(String path, Map<String,Object> value) throws IOException, TemplateException {
-		log.info("参数对象" + value.toString());
+	public String getFreemarkerHtml(String path, Map<String, Object> value) throws IOException, TemplateException {
 		//通过指定模板名获取FreeMarker模板实例
 		Template tpl = freemarkerConfig.getTemplate(path);
 		return FreeMarkerTemplateUtils.processTemplateIntoString(tpl, value);
 	}
+
 }
