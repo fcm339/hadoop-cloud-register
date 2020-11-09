@@ -1,6 +1,8 @@
 package com.hzl.hadoop.gp.service;
 
+import com.hzl.hadoop.gp.vo.EndPriceVO;
 import com.hzl.hadoop.gp.vo.GpVO;
+import com.hzl.hadoop.gp.vo.MaxMinHtmlVO;
 import com.hzl.hadoop.gp.vo.VolumeVO;
 
 import java.util.List;
@@ -25,5 +27,5 @@ public interface GpService {
 	 * @return
 	 * @author hzl 2020-11-04 9:45 AM
 	 */
-	List<VolumeVO> queryVolume(VolumeVO volumeVO);
+	MaxMinHtmlVO queryVolume(VolumeVO volumeVO);
 }

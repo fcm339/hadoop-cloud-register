@@ -5,16 +5,10 @@ import com.hzl.hadoop.gp.service.GpService;
 import com.hzl.hadoop.gp.vo.MaxMinHtmlVO;
 import com.hzl.hadoop.gp.vo.VolumeVO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 /**
  * description
@@ -57,9 +51,13 @@ public class GpMaxMinController {
 	 * @author hzl 2020/01/08 12:41 PM
 	 */
 	@GetMapping(value = "/gp/yl/query/volume/{code}")
-	public ResponseEntity<List<VolumeVO>> queryVolume(@PathVariable String code,VolumeVO volumeVO) {
-		log.info("请求参数"+volumeVO.toString());
+	public String queryVolume(@PathVariable String code, VolumeVO volumeVO, Model model) {
+		log.info("请求参数" + volumeVO.toString());
 		volumeVO.setGpCode(code);
-		return new ResponseEntity<>(gpService.queryVolume(volumeVO), HttpStatus.OK);
+		MaxMinHtmlVO maxMinHtmlVO = gpService.queryVolume(volumeVO);
+		log.info("解雇"+maxMinHtmlVO.toString());
+		model.addAttribute(maxMinHtmlVO);
+
+		return "endPrice";
 	}
 }

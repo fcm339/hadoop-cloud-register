@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns="http://www.w3.org/TR/REC-html40">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>价格波动图</title>
-    <script src="https://gw.alipayobjects.com/os/lib/antv/g2plot/0.11.3/dist/g2plot.js"></script>
     <meta http-equiv=Content-Type content="text/html; charset=utf-8">
     <meta name=ProgId content=Word.Document>
     <meta name=Generator content="Microsoft Word 14">
@@ -138,54 +133,7 @@
             page: Section0;
         }</style>
 </head>
-<body>
-<div id="app"></div>
-<script>
-    const container = document.getElementById('app');
-    const data = ${maxMinHtmlVO.data};
-    const config = {
-        "title": {
-            "visible": true,
-            "text": "价格波动图"
-        },
-        "description": {
-            "visible": true,
-            "text": "未来不可预测"
-        },
-        "legend": {
-            "position": "top-center",
-            "flipPage": false
-        },
-        "yAxis": {
-            "line": {
-                "visible": true
-            },
-            "tickLine": {
-                "visible": true
-            }
-        },
-        "point": {
-            "visible": true
-        },
-        "forceFit": false,
-        "xField": "x",
-        "yField": "y",
-        "seriesField": "series",
-        "width": 1080,
-        "height": 554,
-        "color": [
-            "#e8684a",
-            "#5AD8A6",
-            "#5D7092"
-        ]
-    }
-    const plot = new g2plot.Line(container, {
-        data,
-        ...config,
-    });
-    plot.render();
-</script>
-
+<body style="tab-interval:21pt;text-justify-trim:punctuation;"><!--StartFragment-->
 
 <!--StartFragment-->
 <div class="Section0" style="layout-grid:15.6000pt;">
@@ -390,6 +338,5 @@
     <p class=MsoNormal><span
             style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:宋体;mso-bidi-font-family:'Times New Roman';font-size:10.5000pt;mso-font-kerning:1.0000pt;"><o:p>&nbsp;</o:p></span>
     </p>
-</div>
-</body>
+</div><!--EndFragment--></body>
 </html>

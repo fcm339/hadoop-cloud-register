@@ -10,6 +10,10 @@ public interface DataConstant {
 
 	// ---------------------------------------------------常规模式---------------------------------------------------------------
 	/**
+	 * yy-MM-dd
+	 */
+	String DATESIM = "yy-MM-dd";
+	/**
 	 * yyyy-MM-dd
 	 */
 	String DATE = "yyyy-MM-dd";

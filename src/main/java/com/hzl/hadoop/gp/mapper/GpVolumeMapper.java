@@ -15,4 +15,8 @@ import java.util.List;
 public interface GpVolumeMapper extends BaseMapperUtil<VolumeVO> {
 
 	List<VolumeVO> queryVolume(VolumeVO volumeVO);
+
+	List<VolumeVO> queryVolumeYl(VolumeVO volumeVO);
+
+
 }

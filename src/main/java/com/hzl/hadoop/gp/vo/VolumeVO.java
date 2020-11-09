@@ -21,11 +21,12 @@ public class VolumeVO {
 	//股票编号
 	private String gpCode;
 	//日期
-	private LocalDate date;
+	private String date;
 	//成交额
 	private BigDecimal turnover;
 	//成交量
 	private Long number;
 	//收盘价
-	private Long currentPrice;
+	private BigDecimal currentPrice;
+
 }

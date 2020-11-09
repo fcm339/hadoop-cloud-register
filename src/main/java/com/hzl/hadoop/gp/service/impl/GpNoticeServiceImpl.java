@@ -87,7 +87,7 @@ public class GpNoticeServiceImpl implements GpNoticeService {
 	public MaxMinHtmlVO volatilityPrice(String gpCode) {
 		List<GpVO> gpVOMax = gpRepository.selectMaxPriceVolatility(gpCode);
 		List<GpVO> gpVOMin = gpRepository.selectMinPriceVolatility(gpCode);
-		List<GpVO> gpVOCurrent = gpRepository.selectCurrentPriceAll(gpCode);
+		//List<GpVO> gpVOCurrent = gpRepository.selectCurrentPriceAll(gpCode);
 
 		//获取当前股票价格
 		Convert convert = new Convert();

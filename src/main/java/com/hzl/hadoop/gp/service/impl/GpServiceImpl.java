@@ -1,20 +1,21 @@
 package com.hzl.hadoop.gp.service.impl;
 
+import com.hzl.hadoop.constant.DataConstant;
 import com.hzl.hadoop.gp.constant.GpUrlConstant;
 import com.hzl.hadoop.gp.repository.GpRepository;
 import com.hzl.hadoop.gp.service.GpService;
-import com.hzl.hadoop.gp.vo.GpVO;
-import com.hzl.hadoop.gp.vo.VolumeVO;
-import com.hzl.hadoop.gp.vo.YlVO;
-import com.hzl.hadoop.gp.vo.ZXVO;
+import com.hzl.hadoop.gp.vo.*;
 import com.hzl.hadoop.gp.yili.Convert;
 import com.hzl.hadoop.util.JsonUtils;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * description
@@ -23,6 +24,7 @@ import java.util.Map;
  */
 @Service
 public class GpServiceImpl implements GpService {
+	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DataConstant.DATESIM);
 
 	GpRepository gpRepository;
 
@@ -50,6 +52,8 @@ public class GpServiceImpl implements GpService {
 		} else if (GpUrlConstant.GP_CODE_ZX.equals(code)) {
 			//中兴股票,利用对象克隆
 			gpRepository.insert((ZXVO) JsonUtils.cloneObject(gpVO, ZXVO.class));
+		} else {
+			gpRepository.insert((ZXVO) JsonUtils.cloneObject(gpVO, ZXVO.class));
 		}
 
 		return gpVO;
@@ -57,8 +61,18 @@ public class GpServiceImpl implements GpService {
 	}
 
 	@Override
-	public List<VolumeVO> queryVolume(VolumeVO volumeVO) {
-		return gpRepository.queryVolume(volumeVO);
+	public MaxMinHtmlVO queryVolume(VolumeVO volumeVO) {
+		List<VolumeVO> volumeVOS = gpRepository.queryVolume(volumeVO);
+		List<EndPriceVO> endPrice = volumeVOS.stream().map(a -> EndPriceVO.builder().series("收盘价/元(需除10)").x(a.getDate()).y(a.getCurrentPrice().doubleValue()*10).build()).collect(Collectors.toList());
+		List<EndPriceVO> number = volumeVOS.stream().map(a -> EndPriceVO.builder().series("成交额/万手").x(a.getDate()).y(Double.valueOf(a.getNumber())).build()).collect(Collectors.toList());
+		List<EndPriceVO> turnover = volumeVOS.stream().map(a -> EndPriceVO.builder().series("成交额/亿元").x(a.getDate()).y(a.getTurnover().doubleValue()).build()).collect(Collectors.toList());
+		List<EndPriceVO> all = new ArrayList<>();
+		all.addAll(endPrice);
+		all.addAll(number);
+		all.addAll(turnover);
+		all.sort(Comparator.comparing(EndPriceVO::getX));
+		MaxMinHtmlVO maxMinHtmlVO = MaxMinHtmlVO.builder().data(JsonUtils.objectToString(all)).build();
+		return maxMinHtmlVO;
 	}
 
 

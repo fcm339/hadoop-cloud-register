@@ -47,15 +47,18 @@ public class GpBasicInfoJob {
 	 * @author hzl 2020-11-03 2:27 PM
 	 * @}eturn
 	 */
-//	@Scheduled(fixedDelay = 30 * 1000)
-//	public void getBasicInfoYl() {
-//		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
-//		gpService.insert(GpUrlConstant.GP_CODE_YL);
-//
-//		log.info("定时器获取伊利时时基础数据----------------------------------------------------" + Thread.currentThread());
-//		gpService.insert(GpUrlConstant.GP_CODE_ZX);
-//
-//	}
+	@Scheduled(fixedDelay = 30 * 1000)
+	public void getBasicInfoYl() {
+		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_YL);
+
+		log.info("定时器获取伊利时时基础数据----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_ZX);
+
+		log.info("定时器获取海尔时时基础数据----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_HE);
+
+	}
 
 
 	/**

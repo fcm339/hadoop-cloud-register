@@ -6,6 +6,7 @@ import com.hzl.hadoop.gp.vo.YlVO;
 import com.hzl.hadoop.gp.vo.ZXVO;
 import org.apache.commons.collections4.map.LinkedMap;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 
@@ -27,7 +28,7 @@ public interface GpZxMapper extends BaseMapperUtil<ZXVO> {
 	 * @return
 	 * @author hzl 2020-11-04 9:45 AM
 	 */
-	List<ZXVO> selectMaxPriceVolatility();
+	List<ZXVO> selectMaxPriceVolatility(@Param("gpCode")String gpCode);
 
 	/**
 	 * 获取今日最小价格波动
@@ -35,7 +36,7 @@ public interface GpZxMapper extends BaseMapperUtil<ZXVO> {
 	 * @return
 	 * @author hzl 2020-11-04 9:45 AM
 	 */
-	List<ZXVO> selectMinPriceVolatility();
+	List<ZXVO> selectMinPriceVolatility(@Param("gpCode")String gpCode);
 
 	List<LinkedHashMap<String,Object>> executeSql(String sql);
 

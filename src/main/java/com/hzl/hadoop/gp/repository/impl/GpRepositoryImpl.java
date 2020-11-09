@@ -58,7 +58,9 @@ public class GpRepositoryImpl implements GpRepository {
 		if (GpUrlConstant.GP_CODE_YL.equals(gpCode)) {
 			gpVOS = (List<GpVO>) JsonUtils.cloneObjectList(gpYlMapper.selectMaxPriceVolatility(), GpVO.class);
 		} else if (GpUrlConstant.GP_CODE_ZX.equals(gpCode)) {
-			gpVOS = (List<GpVO>) JsonUtils.cloneObjectList(gpZxMapper.selectMaxPriceVolatility(), GpVO.class);
+			gpVOS = (List<GpVO>) JsonUtils.cloneObjectList(gpZxMapper.selectMaxPriceVolatility(gpCode), GpVO.class);
+		}else{
+			gpVOS = (List<GpVO>) JsonUtils.cloneObjectList(gpZxMapper.selectMaxPriceVolatility(gpCode), GpVO.class);
 		}
 
 		return gpVOS;
@@ -70,8 +72,10 @@ public class GpRepositoryImpl implements GpRepository {
 		if (GpUrlConstant.GP_CODE_YL.equals(gpCode)) {
 			gpVOS = (List<GpVO>) JsonUtils.cloneObjectList((gpYlMapper.selectMinPriceVolatility()), GpVO.class);
 		} else if (GpUrlConstant.GP_CODE_ZX.equals(gpCode)) {
-			gpVOS = (List<GpVO>) JsonUtils.cloneObjectList((gpZxMapper.selectMinPriceVolatility()), GpVO.class);
+			gpVOS = (List<GpVO>) JsonUtils.cloneObjectList((gpZxMapper.selectMinPriceVolatility(gpCode)), GpVO.class);
 
+		}else{
+			gpVOS = (List<GpVO>) JsonUtils.cloneObjectList((gpZxMapper.selectMinPriceVolatility(gpCode)), GpVO.class);
 		}
 		return gpVOS;
 	}
@@ -91,6 +95,9 @@ public class GpRepositoryImpl implements GpRepository {
 
 	@Override
 	public List<VolumeVO> queryVolume(VolumeVO volumeVO) {
+		if(GpUrlConstant.GP_CODE_YL.equals(volumeVO.getGpCode())){
+			return gpVolumeMapper.queryVolumeYl(volumeVO);
+		}
 		return gpVolumeMapper.queryVolume(volumeVO);
 	}
 
