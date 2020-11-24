@@ -5,9 +5,10 @@ services:
     container_name: filebeat
     volumes:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
-      #需要收集日志的目录多语言-zhangye.xlsx多语言-zhangye.xlsx
-      - /root/hcbm/logs:/var/log/test911/
+      #需要收集日志的目录
+      - /Users/hzl/Desktop/hadoopcloud/hadoop-cloud-register/logs:/var/log/test911/
        # 把logs和data共享出来
       - ${PWD}/logs:/usr/share/filebeat/logs
       - ${PWD}/data:/usr/share/filebeat/data
     restart: always
+    user: root

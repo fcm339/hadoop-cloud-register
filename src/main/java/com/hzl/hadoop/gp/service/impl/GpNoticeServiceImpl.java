@@ -149,9 +149,8 @@ public class GpNoticeServiceImpl implements GpNoticeService {
 	public void volatilityPriceSendMail(String gpCode) {
 		MaxMinHtmlVO maxMinHtmlVO = volatilityPrice(gpCode);
 		//     后面暂时处理，当当前价格低于开盘价的1%的时候发送邮件提醒
-		if (maxMinHtmlVO.getCurrentPrice().subtract(maxMinHtmlVO.getInitPrice()).divide(maxMinHtmlVO.getInitPrice(), 5, BigDecimal.ROUND_DOWN).compareTo(new BigDecimal(0.01)) <= 0) {
+		if ((maxMinHtmlVO.getCurrentPrice().subtract(maxMinHtmlVO.getYesterdayEndPrice())).divide(maxMinHtmlVO.getYesterdayEndPrice(), 5, BigDecimal.ROUND_DOWN).longValue()<-0.1) {
 			try {
-				log.info("转化参数" + maxMinHtmlVO.toString());
 				mailService.sendHtmlMail(maxMinHtmlVO.getGpName() + "当前价格低于开盘价超过1%", getFreemarkerMailText(maxMinHtmlVO), null);
 			} catch (MessagingException e) {
 				e.printStackTrace();
@@ -160,7 +159,7 @@ public class GpNoticeServiceImpl implements GpNoticeService {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}else if (maxMinHtmlVO.getCurrentPrice().subtract(maxMinHtmlVO.getInitPrice()).divide(maxMinHtmlVO.getInitPrice(), 5, BigDecimal.ROUND_DOWN).compareTo(new BigDecimal(0.01)) > 0) {
+		}else if ((maxMinHtmlVO.getCurrentPrice().subtract(maxMinHtmlVO.getYesterdayEndPrice())).divide(maxMinHtmlVO.getYesterdayEndPrice(), 5, BigDecimal.ROUND_DOWN).longValue() > 0.1) {
 			try {
 				log.info("转化参数" + maxMinHtmlVO.toString());
 				mailService.sendHtmlMail(maxMinHtmlVO.getGpName() + "当前价格高于开盘价多于1%", getFreemarkerMailText(maxMinHtmlVO), null);

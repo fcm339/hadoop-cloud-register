@@ -4,7 +4,7 @@ services:
     container_name: logstash
     image: logstash:7.6.0
     volumes:
-      - /etc/localtime:/etc/localtime
+      #- /etc/localtime:/etc/localtime
       - ./config/:/usr/share/logstash/config/
       - ./pipeline/:/usr/share/logstash/pipeline/
       - ${PWD}/logs:/user/share/logs

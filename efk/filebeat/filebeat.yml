@@ -29,7 +29,7 @@ filebeat.inputs:
   enabled: true
   tags: ["change"]
   fields:
-    index: 'change'
+    index: 'platform'
   paths:
   - /var/log/test911/log_error.log
 

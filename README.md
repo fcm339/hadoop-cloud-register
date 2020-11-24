@@ -31,7 +31,7 @@ com.hzl.hadoop.config.mvc.MvcHandlerInterceptor
     执行存储过程实例（待开发)，
     批处理sql开发包括插入和更新(待开发)
     mybaits拦截器开发（待开发）
-    mybatis开发执行sql字符串（待开发）
+    mybatis开发执行sql字符串 完成（com.hzl.hadoop.app.controller.ExcelExportController）
     mybatis存储日期类型自动将时间缩短，更新2019-09-01会变成2019-08-31（已经修复）\
     String类型转换成Date时区显示有问题（bug）方法：localStringToDate
         
@@ -47,6 +47,7 @@ com.hzl.hadoop.config.mvc.MvcHandlerInterceptor
     
 集成easyexcel,文件位置com.hzl.hadoop.file.excel.ExcelDone，demo待完善
     支持多语言，支持指定字端导出
+    导出任意sql查询的结果：com.hzl.hadoop.app.controller.ExcelExportController
     
 增加设计模式样例:com.hzl.hadoop.design
 

@@ -10,6 +10,7 @@ import java.lang.reflect.Proxy;
  * description
  * 动态代理类：jdk代理或者叫接口代理，
  * 测试用例：ProxyTest
+ * 注意：代理对象不需要实现接口,但是目标对象一定要实现接口,否则不能用动态代理
  * @author hzl 2020/07/07 4:42 PM
  */
 @Slf4j

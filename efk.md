@@ -26,7 +26,7 @@ docker build --pull -t fluent:local .
     
 #导出镜像
 docker save elasticsearch:7.6.0>elasticsearch.tar
-scp -r elasticsearch.tar root@localhost:/root/efk
+scp -r elasticsearch.tar CFSAdmin@10.246.194.37:/home/CFSAdmin
 docker load <elasticsearch.tar
 
 
@@ -36,7 +36,7 @@ docker load <filebeat.tar
 
 
 docker save kibana:7.6.0>kibana.tar
-scp -r kibana.tar root@localhost:/root/efk
+scp -r kibana.tar CFSAdmin@10.246.194.69:/home/CFSAdmin
 docker load <kibana.tar
 
 docker save logstash:7.6.0>logstash.tar
@@ -64,3 +64,4 @@ docker pull docker.elastic.co/beats/filebeat:7.6.0
 #访问elasticsearch-head
 http://localhost:9100/?base_uri=http://localhost:9200&auth_user=1&auth_password=1
 
+#注意如果启动失败，基本都是对应的映射文件权限不足

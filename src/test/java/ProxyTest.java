@@ -1,10 +1,7 @@
 import com.hzl.hadoop.design.proxy.ProxyFactory;
-import com.hzl.hadoop.design.proxy.TargetObject;
-import com.hzl.hadoop.design.proxy.TargetObjectService;
+import com.hzl.hadoop.design.service.impl.TargetObjectServiceImpl;
+import com.hzl.hadoop.design.service.TargetObjectService;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * description
@@ -13,14 +10,19 @@ import java.util.Map;
  */
 public class ProxyTest {
 
-
+	/**
+	 * 动态代理测试方法
+	 *
+	 * @author hzl 2020-11-24 3:13 PM
+	 * @return
+	 */
 	@Test
 	public void proxyTest() throws Exception {
-		TargetObjectService targetObjectService = new TargetObject();
+		TargetObjectService targetObjectService = new TargetObjectServiceImpl();
 		// 给目标对象，创建代理对象
 		TargetObjectService proxy= (TargetObjectService) new ProxyFactory(targetObjectService).getProxyInstance();
 		// 执行方法  代理对象
-		int i=proxy.test1();
+		int i=proxy.proxyTest();
 		System.out.println(i);
 	}
 

@@ -47,18 +47,18 @@ public class GpBasicInfoJob {
 	 * @author hzl 2020-11-03 2:27 PM
 	 * @}eturn
 	 */
-	@Scheduled(fixedDelay = 30 * 1000)
-	public void getBasicInfoYl() {
-		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
-		gpService.insert(GpUrlConstant.GP_CODE_YL);
-
-		log.info("定时器获取伊利时时基础数据----------------------------------------------------" + Thread.currentThread());
-		gpService.insert(GpUrlConstant.GP_CODE_ZX);
-
-		log.info("定时器获取海尔时时基础数据----------------------------------------------------" + Thread.currentThread());
-		gpService.insert(GpUrlConstant.GP_CODE_HE);
-
-	}
+//	@Scheduled(fixedDelay = 30 * 1000)
+//	public void getBasicInfoYl() {
+//		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
+//		gpService.insert(GpUrlConstant.GP_CODE_YL);
+//
+//		log.info("定时器获取伊利时时基础数据----------------------------------------------------" + Thread.currentThread());
+//		gpService.insert(GpUrlConstant.GP_CODE_ZX);
+//
+//		log.info("定时器获取海尔时时基础数据----------------------------------------------------" + Thread.currentThread());
+//		gpService.insert(GpUrlConstant.GP_CODE_HE);
+//
+//	}
 
 
 	/**
@@ -70,15 +70,15 @@ public class GpBasicInfoJob {
 	 * @author hzl 2020-11-03 2:27 PM
 	 * @}eturn
 	 */
-	@Scheduled(cron = "0 15-25 9 * * ?")
-	public void getBaddingNoticeZX() {
-		log.info("中兴竞价提醒开始----------------------------------------------------" + Thread.currentThread());
-		gpNoticeService.bidding(GpUrlConstant.GP_CODE_ZX);
-		log.info("伊利竞价提醒开始----------------------------------------------------" + Thread.currentThread());
-		gpNoticeService.bidding(GpUrlConstant.GP_CODE_YL);
-		log.info("海尔竞价提醒开始----------------------------------------------------" + Thread.currentThread());
-		gpNoticeService.bidding(GpUrlConstant.GP_CODE_HE);
-	}
+//	@Scheduled(cron = "0 15-25 9 * * ?")
+//	public void getBaddingNoticeZX() {
+//		log.info("中兴竞价提醒开始----------------------------------------------------" + Thread.currentThread());
+//		gpNoticeService.bidding(GpUrlConstant.GP_CODE_ZX);
+//		log.info("伊利竞价提醒开始----------------------------------------------------" + Thread.currentThread());
+//		gpNoticeService.bidding(GpUrlConstant.GP_CODE_YL);
+//		log.info("海尔竞价提醒开始----------------------------------------------------" + Thread.currentThread());
+//		gpNoticeService.bidding(GpUrlConstant.GP_CODE_HE);
+//	}
 
 
 	/**
@@ -95,6 +95,6 @@ public class GpBasicInfoJob {
 //		gpNoticeService.volatilityPriceSendMail(GpUrlConstant.GP_CODE_YL);
 //
 //		log.info("中兴高低价波动提醒----------------------------------------------------" + Thread.currentThread());
-//		gpNoticeService.volatilityPriceSendMail(GpUrlConstant.GP_CODE_ZX);
+//		gpNoticeService.volatilityPriceSendMail(GpUrlConstant.GP_CODE_HE);
 //	}
 }
