@@ -156,7 +156,7 @@ mybatis:
 logging:
   level:
     #root: debug 所有目录的日志等级都为debug
-    org.hzero: debug #指定目录下的日志，等级为debug
+    com.hzl: debug #指定目录下的日志，等级为debug
   config: 'classpath:logback-spring.xml'
 
 pagehelper:
