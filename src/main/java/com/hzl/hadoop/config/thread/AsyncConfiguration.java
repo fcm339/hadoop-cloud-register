@@ -15,7 +15,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * description
- *
+ * 需要多线程的方法上需要加上@Async("taskExecutor") 参考：com.hzl.hadoop.app.service.impl.RedisServiceImpl
+ * 注意：被注解@Async("taskExecutor")修饰的方法需要放到spring上下午
  * @author hzl 2020/05/07 7:56 PM
  */
 @Configuration

@@ -2,21 +2,21 @@ package com.hzl.hadoop.util;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.converters.bigdecimal.BigDecimalNumberConverter;
-import com.alibaba.excel.converters.date.DateNumberConverter;
 import com.alibaba.excel.converters.date.DateStringConverter;
 import com.alibaba.excel.converters.integer.IntegerNumberConverter;
 import com.alibaba.excel.converters.longconverter.LongNumberConverter;
-import com.hzl.hadoop.file.excel.convert.biginteger.BigIntegerBooleanConverter;
 import com.hzl.hadoop.file.excel.convert.biginteger.BigIntegerNumberConverter;
-import com.hzl.hadoop.file.excel.convert.biginteger.BigIntegerStringConverter;
 import com.hzl.hadoop.file.excel.convert.localdatetime.LocalDateTimeConverter;
+import com.hzl.hadoop.file.excel.convert.localdatetime.SqlDateStringConverter;
 import com.hzl.hadoop.file.excel.convert.localdatetime.TimeStampStringConverter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * description
@@ -27,9 +27,9 @@ import java.util.*;
 public class EasyExcelUtils {
 	/**
 	 * @param response
-	 * @param list 显示的字段名,excel的列头
-	 * @param list                数据内容
-	 * @param fileName            导出的文件名
+	 * @param list     显示的字段名,excel的列头
+	 * @param list     数据内容
+	 * @param fileName 导出的文件名
 	 * @throws IOException
 	 */
 	public static void downloadFailedUsingJson(HttpServletResponse response,
@@ -44,16 +44,15 @@ public class EasyExcelUtils {
 		// 这里需要设置不关闭流
 		EasyExcel.write(response.getOutputStream()).registerConverter(new IntegerNumberConverter())
 				.registerConverter(new BigDecimalNumberConverter())
-				.registerConverter(new DateNumberConverter())
+				.registerConverter(new DateStringConverter())
 				.registerConverter(new LongNumberConverter())
 				.registerConverter(new BigIntegerNumberConverter())
-				.registerConverter(new BigIntegerBooleanConverter())
-				.registerConverter(new BigIntegerStringConverter())
 				.registerConverter(new LocalDateTimeConverter())
-				.registerConverter(new DateStringConverter())
 				.registerConverter(new TimeStampStringConverter())
-				//.head(head(list))
-				.autoCloseStream(Boolean.FALSE).sheet("模板")
+				.registerConverter(new SqlDateStringConverter())
+				.autoCloseStream(Boolean.TRUE)
+				.head(head(list))
+				.sheet("模板")
 				.doWrite(dataList(list));
 
 	}
@@ -65,12 +64,15 @@ public class EasyExcelUtils {
 	 * @return
 	 */
 	private static List<List<String>> head(List<LinkedHashMap<String, Object>> listLayoutFieldList) {
-		log.info("keys结果1"+listLayoutFieldList.get(0).keySet());
-		String keys[]= listLayoutFieldList.get(0).keySet().toArray(new String[0]);
-
+		log.info("keys结果1" + listLayoutFieldList.get(0).keySet());
+		String keys[] = listLayoutFieldList.get(0).keySet().toArray(new String[0]);
 		List<List<String>> list = new ArrayList<List<String>>();
-		list.add(Arrays.asList(keys));
-		log.info("keys结果2"+list.toString());
+		listLayoutFieldList.get(0).keySet().forEach(a -> {
+			List<String> title = new ArrayList<>();
+			title.add(a);
+			list.add(title);
+		});
+		log.info("keys结果2" + list.toString());
 		return list;
 	}
 
@@ -81,10 +83,7 @@ public class EasyExcelUtils {
 	 * @return
 	 */
 	private static List<List<Object>> dataList(List<LinkedHashMap<String, Object>> list) {
-		String keys[]= list.get(0).keySet().toArray(new String[0]);
-
 		List<List<Object>> excellist = new ArrayList<List<Object>>();
-		excellist.add(Arrays.asList(keys));
 		for (LinkedHashMap<String, Object> map : list) {
 			List<Object> data = new ArrayList<Object>();
 			for (String e : map.keySet()) {
@@ -95,7 +94,6 @@ public class EasyExcelUtils {
 			}
 			excellist.add(data);
 		}
-		log.info("查询"+excellist.toString());
 		return excellist;
 	}
 

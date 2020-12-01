@@ -5,6 +5,7 @@ import com.alibaba.excel.enums.CellDataTypeEnum;
 import com.alibaba.excel.metadata.CellData;
 import com.alibaba.excel.metadata.GlobalConfiguration;
 import com.alibaba.excel.metadata.property.ExcelContentProperty;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
  * @author: Chuang Yan
  * @time: 2019/12/9 21:16
  */
+@Slf4j
 public class TimeStampStringConverter implements Converter<Timestamp> {
 
 	@Override
