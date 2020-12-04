@@ -19,6 +19,7 @@ services:
 #        - ./config/core-site.xml:/usr/local/hadoop/etc/hadoop/hdfs-site.xml
 #        - ./config/core-site.xml:/usr/local/hadoop/etc/hadoop/mapred-site.xml
     restart: always
+    network_mode: "host"
 #
 #  hadoop1:
 #    container_name: hadoopdatanode1

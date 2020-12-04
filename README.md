@@ -142,9 +142,4 @@ https://github.com/google/diff-match-patch
 
 #java性能监控,压力测试jmeter 
 
-#回归底层数据结构和算法，暂停大数据的开发
-
-
-#集成阿里分布式事物
-
 # 增加tomcat配置包括并发请求线程数量，增加underdrow替换tomcat方案，

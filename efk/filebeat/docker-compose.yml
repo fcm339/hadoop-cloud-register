@@ -12,3 +12,4 @@ services:
       - ${PWD}/data:/usr/share/filebeat/data
     restart: always
     user: root
+    network_mode: "host"

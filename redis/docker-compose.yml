@@ -11,7 +11,8 @@ services:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
       - ./log:/usr/local/etc/logs
     command: redis-server /usr/local/etc/redis/redis.conf
-
+    #使用宿主机网络环境
+    network_mode: "host"
 #  redis1:
 #      container_name: redis-slave1
 #      image: redis:6.0.8

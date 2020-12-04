@@ -14,4 +14,4 @@ services:
     environment:
           LS_JAVA_OPTS: "-Xmx512m -Xms512m"
     restart: always
-
+    network_mode: "host"
