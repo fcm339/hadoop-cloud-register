@@ -6,7 +6,6 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.hzl.hadoop.constant.DataConstant;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -16,8 +15,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.alibaba.fastjson.JSON.DEFFAULT_DATE_FORMAT;
 
 /**
  * description
@@ -53,6 +50,11 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	 */
 	@Override
 	protected void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+				.allowedOrigins("*")
+				.allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
+				.maxAge(3600)
+				.allowCredentials(true);
 	}
 
 	/**
