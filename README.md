@@ -145,3 +145,5 @@ https://github.com/google/diff-match-patch
 # 增加tomcat配置包括并发请求线程数量，增加underdrow替换tomcat方案，
 
 -----产品简介性
+
+--- 添加网络设备，蓝牙设备获取
