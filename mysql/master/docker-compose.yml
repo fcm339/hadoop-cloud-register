@@ -15,6 +15,10 @@ services:
     - ../mysql_db.cnf:/etc/mysql/conf.d/mysql_db.cnf
     #- /etc/localtime:/etc/localtime #将宿主机的时区映射到mysql容器，linux上可用
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "50m"
     #使用宿主机网络
     #network_mode: "host"
 #如果使用mysql7则myql_db.cnf使用的sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION

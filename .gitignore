@@ -46,6 +46,7 @@ mysql/mysql_data_slave/
 
 #other
 mysql/mysql_data/
+mysql/mysql_data_slave/
 efk/elasticsearch/data
 efk/elasticsearch/log
 efk/filebeat/data

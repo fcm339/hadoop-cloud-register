@@ -53,6 +53,8 @@ com.hzl.hadoop.config.mvc.MvcHandlerInterceptor
 
 增加io流操作工具类(后期实际运用中完善)
 
+docker-compose日志大小日志（完成:参考mysql/master/docker-compose.yml）https://www.west.cn/docs/51325.html
+
 集成分布式事务和分布式锁，缓存：(数据库相关完成后需要开始了)
     
     参考： 
