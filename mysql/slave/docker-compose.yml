@@ -7,12 +7,12 @@ services:
     - "3306:3306"
     environment:
       MYSQL_USER: hzl
-      MYSQL_PASSWORD: test
-      MYSQL_DATABASE: database
+      MYSQL_PASSWORD: 123456
+      #MYSQL_DATABASE: order
       MYSQL_ROOT_PASSWORD: root
     volumes:
-    - ./mysql_data_slave:/var/lib/mysql
-    - ./mysql_db_slave.cnf:/etc/mysql/conf.d/mysql_db.cnf
+    - ../mysql_data_slave:/var/lib/mysql
+    - ../mysql_db_slave.cnf:/etc/mysql/conf.d/mysql_db.cnf
     #- /etc/localtime:/etc/localtime #将宿主机的时区映射到mysql容器,linux上可用
-    restart: always
+    #restart: always
     network_mode: "host"

@@ -3,6 +3,7 @@ services:
   elasticsearch:
     image: elasticsearch:7.6.0
     container_name: elasticsearch
+    #user: root
     ports:
       - "9200:9200"
       - "9300:9300"

@@ -3,3 +3,15 @@ lower_case_table_names=1
 character_set_server=utf8
 max_connections=50000
 sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+#主从配置
+server-id=1
+#开启二进制日志
+log-bin=mysql-bin
+
+# 不同步哪些数据库
+binlog-ignore-db = gp
+binlog-ignore-db = performance_schema
+binlog-ignore-db = information_schema
+
+# 只同步哪些数据库，除此之外，其他不同步
+binlog-do-db = orders

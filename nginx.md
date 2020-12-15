@@ -1,5 +1,11 @@
 #nginx配置https
-        
+           server { 
+                    listen 80;
+                    server_name cfsapi.ecolab.com.cn;    
+                    client_max_body_size 50M;
+                    return 301 http://$server_name$request_uri;
+              }
+                
             server
             {
                 listen 443 ssl;

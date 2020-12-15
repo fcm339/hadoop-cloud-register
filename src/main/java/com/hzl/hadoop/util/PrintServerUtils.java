@@ -92,6 +92,6 @@ public class PrintServerUtils {
 
 	//获取同网络段下的设备信息
 	public static void main(String[] args) {
-		new PrintServerUtils().getNetMachine(null);
+		new PrintServerUtils().print();
 	}
 }
