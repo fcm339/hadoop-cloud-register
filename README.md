@@ -55,6 +55,8 @@ com.hzl.hadoop.config.mvc.MvcHandlerInterceptor
 
 docker-compose日志大小日志（完成:参考mysql/master/docker-compose.yml）https://www.west.cn/docs/51325.html
 
+添加spring事务式例（待开发）
+
 集成分布式事务和分布式锁，缓存：(数据库相关完成后需要开始了)
     
     参考： 
