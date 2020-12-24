@@ -115,6 +115,8 @@ springboot应用监控-包括发布成功后发送邮件，服务停止后发送
 
 算法工具类：com.hzl.hadoop.util.AlgorithmUtils
 
+根据redis开发在线登陆人数
+
 
 新增谷歌文本对比工具类：
 https://github.com/google/diff-match-patch

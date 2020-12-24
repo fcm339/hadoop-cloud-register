@@ -151,6 +151,7 @@ mybatis:
   configuration: # 数据库下划线转驼峰配置
     mapUnderscoreToCamelCase: true
     cache-enabled: false #关闭二级缓存
+    call-setters-on-nulls: true #查询空值也进行set，解决查询结果映射hashmap，空值不显示问题
 
 #日志springboot默认日志logback，默认等级为info
 logging:
