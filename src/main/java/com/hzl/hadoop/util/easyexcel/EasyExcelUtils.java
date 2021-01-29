@@ -1,4 +1,4 @@
-package com.hzl.hadoop.util;
+package com.hzl.hadoop.util.easyexcel;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.converters.bigdecimal.BigDecimalNumberConverter;

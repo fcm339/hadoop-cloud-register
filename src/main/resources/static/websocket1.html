@@ -21,7 +21,7 @@ Welcome<br/><input id="text" type="text"/>
     var websocket = null;
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
-        websocket = new WebSocket('ws://10.64.227.67:8830/webSocket/1');
+        websocket = new WebSocket('ws://139.217.231.12:8080/hmsg/websocket?access_token=bearer 44414656-bf0b-4c5d-8412-197ce8c659d6');
     }
     else {
         alert('当前浏览器 Not support websocket')
@@ -66,6 +66,7 @@ Welcome<br/><input id="text" type="text"/>
     function send() {
         var message = document.getElementById('text').value;
         websocket.send(message);
+        websocket.onmessage
     }
 </script>
 

@@ -12,6 +12,7 @@ import java.util.List;
  * @author hzl 2020/11/16 3:06 PM
  */
 public interface ExcuteSqlService {
+
 	//查看当前用户的sql
 	List<ExcuteSqlDO> selectSql(ExcuteSqlDO excuteSqlDO);
 

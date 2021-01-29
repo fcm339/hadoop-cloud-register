@@ -25,7 +25,7 @@ management:
         include: '*'
 
 hadoop:
-  openMulti: true #是否开启多数据源
+  openMulti: false #是否开启多数据源
   hdfs:
     name-node: "hdfs://localhost:9000" #hdfs的nameNode节点ip
     user-name: "root" #linux启动hdf是的用户名

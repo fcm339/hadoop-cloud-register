@@ -5,7 +5,7 @@ import com.hzl.hadoop.app.dataobject.ExcuteSqlOauthDO;
 import com.hzl.hadoop.app.mapper.ExcuteSqlMapper;
 import com.hzl.hadoop.app.mapper.ExcuteSqlOauthMapper;
 import com.hzl.hadoop.app.service.ExcuteSqlService;
-import com.hzl.hadoop.util.EasyExcelUtils;
+import com.hzl.hadoop.util.easyexcel.EasyExcelUtils;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;

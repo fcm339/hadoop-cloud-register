@@ -5,6 +5,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 /**
  * description
@@ -25,4 +26,20 @@ public class EndPriceVO {
 
 	//价格
 	private Double y;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof EndPriceVO)) return false;
+		EndPriceVO that = (EndPriceVO) o;
+		return Objects.equals(getSeries(), that.getSeries()) &&
+				Objects.equals(getX(), that.getX()) &&
+				Objects.equals(getY(), that.getY());
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(getSeries(), getX(), getY());
+	}
 }
