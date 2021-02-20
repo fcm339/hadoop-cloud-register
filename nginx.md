@@ -67,3 +67,30 @@
             
 
 
+    http {
+        include       mime.types;
+        default_type  application/octet-stream;
+        sendfile        on;
+        keepalive_timeout  65;
+        server {
+            listen       80;
+            server_name  cfsfollowup.ecolab.com.cn;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header REMOTE-HOST $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-NginX-Proxy true;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade  $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            add_header Access-Control-Allow-Origin "http://localhost:2233";
+            client_max_body_size 50M;
+
+            location / {
+                proxy_pass  http://10.246.193.68:9000;
+            }
+            error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+                root   html;
+            }
+        }

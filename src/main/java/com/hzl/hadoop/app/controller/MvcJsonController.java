@@ -13,14 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * description
@@ -102,10 +105,28 @@ public class MvcJsonController {
 	@GetMapping(value = "/thread")
 	public void thread(){
 		int page=0;
+		List<Future<Boolean>> futureList = new ArrayList<>();
+
 		for(int i=0;i<=1000;i++){
-			redisService.threadTest(i);
+			AsyncResult<Boolean> result= redisService.threadTest(i);
+			futureList.add(result);
 			int tem=page++;
 			log.info("结果"+page);
+		}
+		//等待循环中的业务操作完成，因为线程是异步的，如果此时直接结束方法，其实业务还在后台处理中
+		while (true) {
+			if (null != futureList) {
+				boolean isAllDone = true;
+				for (Future future : futureList) {
+					if (null == future || !future.isDone()) {
+						isAllDone = false;
+					}
+				}
+				if (isAllDone) {
+					log.info("结束循环结束");
+					break;
+				}
+			}
 		}
 
 	}
