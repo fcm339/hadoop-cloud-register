@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * 默认密码：nacos/nacos
  * druid的管理界面http://localhost:8888/druid/login.html
  * 账号密码：admin,admin
- *
+ * @EnableDiscoveryClient去掉后不使用注册中心
  * @author hzl 2019/12/27 3:44 PM
  */
 @EnableScheduling

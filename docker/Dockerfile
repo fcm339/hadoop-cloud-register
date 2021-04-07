@@ -9,4 +9,4 @@ RUN bash -c 'touch /register.jar'
 EXPOSE 8888
 
 ENTRYPOINT ["sh","/start.sh"]
-#运行 docker build -t register:0.0.01 .
+#运行 docker build --pull -t registry.cn-hangzhou.aliyuncs.com/hzl-hadoop/hzl:register:0.0.01 .
