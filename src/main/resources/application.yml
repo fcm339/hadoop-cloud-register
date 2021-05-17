@@ -75,9 +75,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     master:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3307/orders?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
-          username: ${SPRING_DATASOURCE_USERNAME:root}
-          password: ${SPRING_DATASOURCE_PASSWORD:root}
+          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://rm-uf6pbp6h2285c40n9to.mysql.rds.aliyuncs.com:3307/orders?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+          username: ${SPRING_DATASOURCE_USERNAME:hzl}
+          password: ${SPRING_DATASOURCE_PASSWORD:Hzl1qaz2wsx}
           initial-size: 5  # 初始化大小
           min-idle: 5  # 最小
           max-active: 100  # 最大
