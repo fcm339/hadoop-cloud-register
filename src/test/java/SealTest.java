@@ -147,7 +147,7 @@ public class SealTest {
 		SealFont font = SealFont.builder()
 				.fontSize(120)
 				.bold(true)
-				.fontText("李白印章")
+				.fontText("张晔印章")
 				.build();
 
 		SealUtil.buildAndStorePersonSeal(300, 16, font, "印章", "/Users/hzl/Desktop/私章.png");
@@ -249,7 +249,7 @@ public class SealTest {
 		SealFont font = SealFont.builder()
 				.fontSize(120)
 				.bold(true)
-				.fontText("李白印章")
+				.fontText("张晔印章")
 				.build();
 
 		SealUtil.buildAndStorePersonSeal(300, 16, font, "印章", "/Users/hzl/Desktop/私章.png");
