@@ -17,6 +17,12 @@ public interface GpUrlConstant {
 	String GP_CODE_ZX="sz000063";
 	//海尔
 	String GP_CODE_HE="sh600690";
+	//光明
+	String GP_CODE_GM="sh600597";
+	//格力
+	String GP_CODE_GL="sz000651";
+	//美的
+	String GP_CODE_MD="sz000333";
 
 	//竞价开始时间
 	String BADDING_START="2020-11-04 09:15:00";

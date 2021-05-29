@@ -1,11 +1,13 @@
 package com.hzl.hadoop.gp.job;
 
+import com.hzl.hadoop.gp.constant.GpUrlConstant;
 import com.hzl.hadoop.gp.service.GpNoticeService;
 import com.hzl.hadoop.gp.service.GpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 
@@ -45,18 +47,20 @@ public class GpBasicInfoJob {
 	 * @author hzl 2020-11-03 2:27 PM
 	 * @}eturn
 	 */
-//	@Scheduled(fixedDelay = 30 * 1000)
-//	public void getBasicInfoYl() {
-//		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
-//		gpService.insert(GpUrlConstant.GP_CODE_YL);
-//
-//		log.info("定时器获取伊利时时基础数据----------------------------------------------------" + Thread.currentThread());
-//		gpService.insert(GpUrlConstant.GP_CODE_ZX);
-//
-//		log.info("定时器获取海尔时时基础数据----------------------------------------------------" + Thread.currentThread());
-//		gpService.insert(GpUrlConstant.GP_CODE_HE);
-//
-//	}
+	@Scheduled(fixedDelay = 30 * 1000)
+	public void getBasicInfoYl() {
+		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_MD);
+		gpService.insert(GpUrlConstant.GP_CODE_GM);
+		gpService.insert(GpUrlConstant.GP_CODE_GL);
+
+		log.info("定时器获取伊利时时基础数据----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_YL);
+
+		log.info("定时器获取海尔时时基础数据----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_HE);
+
+	}
 
 
 	/**

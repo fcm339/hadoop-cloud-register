@@ -17,11 +17,18 @@ public class DocUtilsTest {
 	 */
 	@Test
 	public void getWordText() {
-		File file = new File("/Users/hzl/Desktop/Ecolab_MD060_员工管理优化_V1.1.docx");
+		File file = new File("/Users/hzl/Desktop/23333.doc");
 		try {
-			System.out.println(DocUtils.doc2String(file));
+			System.out.println(DocUtils.wordToString(file));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
+//	@Test
+//	public void getWordTableText() throws Exception {
+//		DocUtils.testReadByDoc();
+//	}
+
+
 }

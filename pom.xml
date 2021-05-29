@@ -20,8 +20,9 @@
         <google.zxing>3.3.3</google.zxing>
         <httpclient>4.5.9</httpclient>
         <freemarker>2.2.2.RELEASE</freemarker>
-        <apache.poi>4.1.1</apache.poi>
-        <poi-ooxml>4.1.1</poi-ooxml>
+        <apache.poi>5.0.0</apache.poi>
+        <poi-ooxml>5.0.0</poi-ooxml>
+        <poi-scratchpad>5.0.0</poi-scratchpad>
         <druid>1.1.21</druid>
         <easyexcel>2.1.6</easyexcel>
         <ant>1.10.7</ant>
@@ -94,11 +95,17 @@
             <artifactId>poi</artifactId>
             <version>${apache.poi}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml主要用于操作docx -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi-ooxml}</version>
+        </dependency>
+        <!--用于操作doc-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>${poi-scratchpad}</version>
         </dependency>
         <!--&lt;!&ndash;druid连接池&ndash;&gt;-->
         <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter &ndash;&gt;-->

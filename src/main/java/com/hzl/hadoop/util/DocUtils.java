@@ -1,5 +1,7 @@
 package com.hzl.hadoop.util;
 
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.ooxml.POIXMLProperties;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.*;
@@ -14,21 +16,23 @@ import java.util.List;
  * description
  * 读取word文字内容
  * 参考：https://www.cnblogs.com/estellez/p/4091429.html
- *
+ *  https://blog.csdn.net/qq_43644023/article/details/99828015
  * @author hzl 2020/10/31 10:51 AM
  */
 public class DocUtils {
+	//
+
 
 	/**
-	 * 读取doc文件内容
-	 *
+	 * 读取docx文件内容
 	 * @return 返回文件内容
 	 * @throws IOException
 	 */
-	public static String doc2String(FileInputStream fs) throws IOException {
+	public static String docxString(FileInputStream fs) throws IOException {
 		StringBuilder result = new StringBuilder();
-		try (XWPFDocument doc = new XWPFDocument(fs)) {
-			XWPFWordExtractor extractor = new XWPFWordExtractor(doc);
+
+		try (XWPFDocument docx = new XWPFDocument(fs)) {
+			XWPFWordExtractor extractor = new XWPFWordExtractor(docx);
 			result.append(extractor.getText());
 			POIXMLProperties.CoreProperties coreProps = extractor.getCoreProperties();
 			//获取文件基础信息
@@ -36,16 +40,31 @@ public class DocUtils {
 		}
 		return result.toString();
 	}
+	/**
+	 * 读取doc文件内容
+	 * @return 返回文件内容
+	 * @throws IOException
+	 */
+	public static String docString(FileInputStream fs) throws IOException {
+		StringBuilder result = new StringBuilder();
+
+		try (HWPFDocument doc = new HWPFDocument(fs)) {
+
+			//WordExtractor extractor = new WordExtractor(doc);
+			result.append(doc.getText());
+		}
+		return result.toString();
+	}
 
 	/**
 	 * 通过XWPFDocument对内容进行访问。对于XWPF文档而言，用这种方式进行读操作更佳。
-	 * 未测试
+	 * 目前只能解析docx
 	 *
 	 * @throws Exception
 	 */
-	public void testReadByDoc() throws Exception {
+	public static void testReadByDocx() throws Exception {
 
-		InputStream is = new FileInputStream("D:\\table.docx");
+		InputStream is = new FileInputStream("/Users/hzl/Desktop/HAP中台技术经理实践指导_AMS1_v1.0.docx");
 		XWPFDocument doc = new XWPFDocument(is);
 		List<XWPFParagraph> paras = doc.getParagraphs();
 		for (XWPFParagraph para : paras) {
@@ -72,8 +91,15 @@ public class DocUtils {
 		}
 	}
 
-	public static String doc2String(File file) throws IOException {
-		return doc2String(new FileInputStream(file));
+
+
+	public static String wordToString(File file) throws IOException {
+		if(file.getName().toUpperCase().endsWith("DOC")){
+			return docString(new FileInputStream(file));
+		}else{
+			return docxString(new FileInputStream(file));
+		}
+
 	}
 
 
@@ -89,4 +115,15 @@ public class DocUtils {
 		System.out.println(coreProps.getTitle());   //标题
 	}
 
+	/**
+	 * 指定内容自动加批注，暂时没有任何意义。
+	 *
+	 * @param null
+	 * @author hzl 2021-05-26 3:04 PM
+	 * @return
+	 */
+
+	public void addAnnotation(){
+
+	}
 }

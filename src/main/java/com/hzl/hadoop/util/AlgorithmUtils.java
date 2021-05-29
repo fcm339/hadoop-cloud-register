@@ -1,8 +1,12 @@
 package com.hzl.hadoop.util;
 
 import com.hzl.hadoop.exception.CommonException;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * description
@@ -105,4 +109,54 @@ public class AlgorithmUtils {
 	public void stack(){
 
 	}
+
+	//
+	//已经知道父类，查询所有子类，包括子类的子类
+	//方法1
+	public Set<Long> handsb(List<Long> categoryIds){
+		Set<Long> ids=new HashSet<>();
+		Set<Long> idf=new HashSet<>();
+
+		ids.addAll(categoryIds);
+		idf.addAll(categoryIds);
+
+		do{
+			Set<Long> idc=new HashSet<>();
+
+			idf.forEach(a->{
+				Set<Long> sonIds=new HashSet<>();
+
+				//根据categoryIds查询子类,如果子类为空就结束,暂时用new HashSet<>()，后期替换成查询语句
+				idc.addAll(sonIds);
+			});
+			if(CollectionUtils.isEmpty(idc)){
+				idf=null;
+			}else{
+				idf=idc;
+				ids.addAll(idc);
+			}
+
+		}while (!CollectionUtils.isEmpty(idf));
+
+		return ids;
+	}
+
+	//方法2
+	//所有子类集合
+	static Set<Long> allSon=new HashSet<>();
+
+	public Set<Long> getAllSon(Set<Long> categoryIds){
+		categoryIds.forEach(parentId->{
+			//根据categoryIds查询子类,如果子类为空就结束,暂时用new HashSet<>()，后期替换成查询语句
+			Set<Long> sonIds=new HashSet<>();
+			if(CollectionUtils.isEmpty(sonIds)){
+				return;
+			}else{
+				getAllSon(sonIds);
+				allSon.addAll(sonIds);
+			}
+		});
+		return allSon;
+	}
+	//方法2结束
 }

@@ -10,8 +10,8 @@ RUN bash -c 'touch /register.jar'
 #EXPOSE 8888
 #容器启动时第一个运行的命令
 ENTRYPOINT exec java -jar -Xms512m -Xmx1024m -Dspring.profiles.active=local /register.jar
-#运行 docker build --pull -t registry.cn-hangzhou.aliyuncs.com/hzl-hadoop/hzl:register-0.0.01 .
+#运行 docker build --pull -t registry.cn-hangzhou.aliyuncs.com/hzl-hadoop/hzl:register-0.0.02 .
 #docker login -u 17602153276 -p 1qaz2wsx registry.cn-hangzhou.aliyuncs.com
-#docker push registry.cn-hangzhou.aliyuncs.com/hzl-hadoop/hzl:register-0.0.01
-#docker pull registry.cn-hangzhou.aliyuncs.com/hzl-hadoop/hzl:register-0.0.01
-#docker run -d -p 8888:8888 registry.cn-hangzhou.aliyuncs.com/hzl-hadoop/hzl:register-0.0.01
+#docker push registry.cn-hangzhou.aliyuncs.com/hzl-hadoop/hzl:register-0.0.02
+#docker pull registry.cn-hangzhou.aliyuncs.com/hzl-hadoop/hzl:register-0.0.02
+#docker run -d -p 8888:8888 registry.cn-hangzhou.aliyuncs.com/hzl-hadoop/hzl:register-0.0.02
