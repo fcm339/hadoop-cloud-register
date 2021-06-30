@@ -3,7 +3,6 @@ import com.hzl.hadoop.util.IoUtils;
 import org.junit.Test;
 import org.springframework.core.io.FileSystemResource;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -18,9 +17,9 @@ public class AESUtilTest {
 	@Test
 	public void encryptFile() throws IOException {
 		FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/ss.pdf");
-		byte[] output= IoUtils.inputStreamTOByteArray(tempInputStream.getInputStream());
-		String reslul=AESUtil.encryptFile(output,"test");
-		FileOutputStream fileOutputStream=new FileOutputStream("/Users/hzl/Desktop/2.pdf");
+		byte[] output = IoUtils.inputStreamTOByteArray(tempInputStream.getInputStream());
+		String reslul = AESUtil.encryptFile(output, "test");
+		FileOutputStream fileOutputStream = new FileOutputStream("/Users/hzl/Desktop/2.pdf");
 		fileOutputStream.write(reslul.getBytes("utf-8"));
 	}
 
@@ -28,9 +27,9 @@ public class AESUtilTest {
 	@Test
 	public void decryptFile() throws IOException {
 		FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/2.pdf");
-		byte[] output= IoUtils.inputStreamTOByteArray(tempInputStream.getInputStream());
+		byte[] output = IoUtils.inputStreamTOByteArray(tempInputStream.getInputStream());
 
-		FileOutputStream fileOutputStream=new FileOutputStream("/Users/hzl/Desktop/3.pdf");
+		FileOutputStream fileOutputStream = new FileOutputStream("/Users/hzl/Desktop/3.pdf");
 		fileOutputStream.write(AESUtil.decryptFile(output, "test"));
 
 	}

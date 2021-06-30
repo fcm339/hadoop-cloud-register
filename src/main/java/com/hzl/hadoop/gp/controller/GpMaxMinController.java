@@ -55,7 +55,7 @@ public class GpMaxMinController {
 		log.info("请求参数" + volumeVO.toString());
 		volumeVO.setGpCode(code);
 		MaxMinHtmlVO maxMinHtmlVO = gpService.queryVolume(volumeVO);
-		log.info("解雇"+maxMinHtmlVO.toString());
+		log.info("结果"+maxMinHtmlVO.toString());
 		model.addAttribute(maxMinHtmlVO);
 
 		return "endPrice";

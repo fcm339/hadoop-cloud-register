@@ -12,7 +12,7 @@ import static com.hzl.hadoop.util.IoUtils.testRead;
 public class FileTest {
 
 	@Test
-	public void fileContentRead(){
+	public void fileContentRead() {
 		try {
 			testRead();
 		} catch (IOException e) {

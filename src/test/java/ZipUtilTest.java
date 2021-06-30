@@ -12,7 +12,7 @@ public class ZipUtilTest {
 	@Test
 	public void zip() {
 		try {
-			ZipUtil.zip("/Users/hzl/Downloads/活动策划服务合同补充协议.pdf","/Users/hzl/Downloads/tt.zip");
+			ZipUtil.zip("/Users/hzl/Downloads/活动策划服务合同补充协议.pdf", "/Users/hzl/Downloads/tt.zip");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -21,27 +21,27 @@ public class ZipUtilTest {
 
 	@Test
 	public void unzip() throws Exception {
-		ZipUtil.unZip("/Users/hzl/Downloads/tt.zip","/Users/hzl/Downloads");
+		ZipUtil.unZip("/Users/hzl/Downloads/tt.zip", "/Users/hzl/Downloads");
 
 	}
 
 	@Test
 	public void tar() throws Exception {
-		String[] filesPathArray=new String[1];
-		filesPathArray[0]="/Users/hzl/Downloads/活动策划服务合同补充协议.pdf";
-		ZipUtil.tarCompression(filesPathArray,"/Users/hzl/Downloads/tt.tar");
+		String[] filesPathArray = new String[1];
+		filesPathArray[0] = "/Users/hzl/Downloads/活动策划服务合同补充协议.pdf";
+		ZipUtil.tarCompression(filesPathArray, "/Users/hzl/Downloads/tt.tar");
 	}
 
 
 	@Test
 	public void untar() throws Exception {
-		ZipUtil.tarDecompression("/Users/hzl/Downloads/tt.tar","/Users/hzl/Downloads/");
+		ZipUtil.tarDecompression("/Users/hzl/Downloads/tt.tar", "/Users/hzl/Downloads/");
 	}
 
 	@Test
 	public void gzip() throws Exception {
-		String filesPathArray="/Users/hzl/Downloads/活动策划服务合同补充协议.pdf";
-		ZipUtil.gzipCompression(filesPathArray,"/Users/hzl/Downloads/tt.gz");
+		String filesPathArray = "/Users/hzl/Downloads/活动策划服务合同补充协议.pdf";
+		ZipUtil.gzipCompression(filesPathArray, "/Users/hzl/Downloads/tt.gz");
 	}
 
 	/**
@@ -53,9 +53,8 @@ public class ZipUtilTest {
 	 */
 	@Test
 	public void upgzip() throws Exception {
-		ZipUtil.gzipDecompression("/Users/hzl/Downloads/tt.gz","/Users/hzl/Downloads/");
+		ZipUtil.gzipDecompression("/Users/hzl/Downloads/tt.gz", "/Users/hzl/Downloads/");
 	}
-
 
 
 }

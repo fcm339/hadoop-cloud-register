@@ -9,6 +9,7 @@ import com.hzl.hadoop.gp.yili.Convert;
 import com.hzl.hadoop.util.JsonUtils;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -66,14 +67,26 @@ public class GpServiceImpl implements GpService {
 		List<EndPriceVO> endPrice = volumeVOS.stream().map(a -> EndPriceVO.builder().series("收盘价/元(需除10)").x(a.getDate()).y(a.getCurrentPrice().doubleValue()*10).build()).collect(Collectors.toList());
 		List<EndPriceVO> number = volumeVOS.stream().map(a -> EndPriceVO.builder().series("成交额/万手").x(a.getDate()).y(Double.valueOf(a.getNumber())).build()).collect(Collectors.toList());
 		List<EndPriceVO> turnover = volumeVOS.stream().map(a -> EndPriceVO.builder().series("成交额/亿元").x(a.getDate()).y(a.getTurnover().doubleValue()).build()).collect(Collectors.toList());
+		List<EndPriceVO> forecast = volumeVOS.stream().map(a -> EndPriceVO.builder().series("预估价格/元(需除10)").x(a.getDate()).y(((a.getTurnover().doubleValue()*100*10)/a.getNumber())).build()).collect(Collectors.toList());
+		List<EndPriceVO> forecastPercent = volumeVOS.stream().map(a -> EndPriceVO.builder().series("(预估价格-收盘价格)/收盘价格").x(a.getDate()).y(((((a.getTurnover().doubleValue()*100)/a.getNumber())-a.getCurrentPrice().doubleValue())/(a.getCurrentPrice().doubleValue()*100))*1000000).build()).collect(Collectors.toList());
+		//根据成交额和
+
+
 		List<EndPriceVO> all = new ArrayList<>();
 		all.addAll(endPrice);
 		all.addAll(number);
 		all.addAll(turnover);
+		all.addAll(forecast);
+		all.addAll(forecastPercent);
 		all.sort(Comparator.comparing(EndPriceVO::getX));
 		MaxMinHtmlVO maxMinHtmlVO = MaxMinHtmlVO.builder().data(JsonUtils.objectToString(all)).build();
 		return maxMinHtmlVO;
 	}
 
+//	public static void main(String args[]){
+//		BigDecimal bg = new BigDecimal(2.562);
+//		double f1 = bg.setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+//		System.out.println(f1);
+//	}
 
 }

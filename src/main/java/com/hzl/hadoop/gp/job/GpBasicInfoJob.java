@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * description
  * 参考：https://blog.csdn.net/czx2018/article/details/83501945
- *
+ *https://www.cnblogs.com/loong-hon/p/10143322.html
  * @author hzl 2020/11/03 2:14 PM
  */
 @Slf4j
@@ -42,12 +42,12 @@ public class GpBasicInfoJob {
 
 	/**
 	 * fixedDelay 上传方法执行完成后开始计算
-	 * 30秒执行一次
-	 *
+	 * 30秒执行一次@Scheduled(fixedDelay = 30 * 1000)
+	 *0 0/1 9,11 ? * MON-FR,周一到周五，9点到11
 	 * @author hzl 2020-11-03 2:27 PM
 	 * @}eturn
 	 */
-	@Scheduled(fixedDelay = 30 * 1000)
+	@Scheduled(cron = "0 0/1 9-11 ? * MON-FRI")
 	public void getBasicInfoYl() {
 		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
 		gpService.insert(GpUrlConstant.GP_CODE_MD);
@@ -62,6 +62,36 @@ public class GpBasicInfoJob {
 
 	}
 
+	@Scheduled(cron = "0 0/1 13-15 ? * MON-FRI")
+	public void getBasicInfoYlT() {
+		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_MD);
+		gpService.insert(GpUrlConstant.GP_CODE_GM);
+		gpService.insert(GpUrlConstant.GP_CODE_GL);
+
+		log.info("定时器获取伊利时时基础数据----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_YL);
+
+		log.info("定时器获取海尔时时基础数据----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_HE);
+
+	}
+
+
+	@Scheduled(cron = "0 1 15 ? * MON-FRI")
+	public void getBasicInfoYlTL() {
+		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_MD);
+		gpService.insert(GpUrlConstant.GP_CODE_GM);
+		gpService.insert(GpUrlConstant.GP_CODE_GL);
+
+		log.info("定时器获取伊利时时基础数据----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_YL);
+
+		log.info("定时器获取海尔时时基础数据----------------------------------------------------" + Thread.currentThread());
+		gpService.insert(GpUrlConstant.GP_CODE_HE);
+
+	}
 
 	/**
 	 * fixedDelay 上传方法执行完成后开始计算
