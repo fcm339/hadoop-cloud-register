@@ -31,6 +31,7 @@
         <hadoop-client>3.2.1</hadoop-client>
         <hzl.mybatis.plug>0.0.1-SNAPSHOT</hzl.mybatis.plug>
         <hutool>5.4.2</hutool>
+        <commons-lang3>3.2.1</commons-lang3>
     </properties>
 
 
@@ -247,7 +248,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-            <version>3.2.1</version>
+            <version>${commons-lang3}</version>
         </dependency>
 
 
@@ -264,6 +265,11 @@
         <!--</dependency>-->
 
         <!--添加springsecurity结束-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
     </dependencies>
 
 

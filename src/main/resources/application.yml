@@ -188,4 +188,6 @@ pagehelper:
 ---
 
 spring:
-  profiles: local  # 本地开发
+  config:
+    activate:
+      on-profile: local # 本地开发

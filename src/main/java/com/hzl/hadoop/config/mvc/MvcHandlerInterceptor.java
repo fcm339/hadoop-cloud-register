@@ -2,7 +2,7 @@ package com.hzl.hadoop.config.mvc;
 
 import com.hzl.hadoop.exception.CommonException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

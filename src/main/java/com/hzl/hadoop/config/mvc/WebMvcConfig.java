@@ -44,6 +44,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	/**
 	 * <p>
 	 * 配置跨域路径映射
+	 * https://blog.csdn.net/nlcexiyue/article/details/111273691
 	 * </p>
 	 *
 	 * @author hzl 2020/01/03 11:34 AM
@@ -51,7 +52,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	@Override
 	protected void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-				.allowedOrigins("*")
+				.allowedOriginPatterns("*")
 				.allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
 				.maxAge(3600)
 				.allowCredentials(true);
