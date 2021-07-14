@@ -123,6 +123,7 @@ spring:
           reset-enable: true
           login-username: admin
           login-password: admin
+          allow:  #为空运行所有链接访问
       db-type: mysql
 
 
