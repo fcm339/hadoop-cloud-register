@@ -11,21 +11,25 @@ import java.util.LinkedList;
  *
  * @author hzl 2021/06/21 1:29 PM
  */
-public class MianshiTest {
+public  class MianshiTest {
 
 	LinkedList linkedList=new LinkedList();
+	public MianshiTest(LinkedList linkedList) {
+		this.linkedList = linkedList;
+	}
 
+	public MianshiTest() {
+
+	}
 	public static void main(){
 		HashMap<String,Integer> hashMap =new HashMap();
 
 		hashMap.put("1",1);
 	}
 
-	public MianshiTest(LinkedList linkedList) {
-		this.linkedList = linkedList;
-	}
 
-	public MianshiTest(LinkedList linkedList) {
 
+	public static void mrt(){
+		SonTest.parent();
 	}
 }
