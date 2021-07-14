@@ -74,8 +74,10 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     master:
+          # 合并多个DruidDataSource的监控数据
+          use-global-data-source-stat: false
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://rm-uf6pbp6h2285c40n9.mysql.rds.aliyuncs.com:3306/gp?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://rm-uf6pbp6h2285c40n9to.mysql.rds.aliyuncs.com:3306/gp?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
           username: ${SPRING_DATASOURCE_USERNAME:hzl}
           password: ${SPRING_DATASOURCE_PASSWORD:Hzl1qaz2wsx}
           initial-size: 5  # 初始化大小
@@ -94,8 +96,11 @@ spring:
           maxOpenPreparedStatements: 20
         # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
           connectionProperties: 'druid.stat.slowSqlMillis=5000;druid.stat.logSlowSql=true;config.decrypt=false'
-
+          connection-error-retry-attempts: 3 #连接失败后尝试的次数
+          break-after-acquire-failure: true
     slave1:
+        # 合并多个DruidDataSource的监控数据
+          use-global-data-source-stat: false
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/users?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
           username: ${SPRING_DATASOURCE_USERNAME:root}
@@ -116,11 +121,10 @@ spring:
           maxOpenPreparedStatements: 20
            # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
           connectionProperties: 'druid.stat.slowSqlMillis=5000;druid.stat.logSlowSql=true;config.decrypt=false'
-
+          connection-error-retry-attempts: 3 #连接失败后尝试的次数
+          break-after-acquire-failure: true
 #后期这部分可以改造成java类配置
     druid:
-     # 合并多个DruidDataSource的监控数据
-      use-global-data-source-stat: false
       #WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
       web-stat-filter:
           enabled: true #是否启用StatFilter默认值true
@@ -135,6 +139,7 @@ spring:
           reset-enable: true
           login-username: admin
           login-password: admin
+          allow:  #为空运行所有链接访问
       db-type: mysql
 
   jpa:
