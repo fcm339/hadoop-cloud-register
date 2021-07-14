@@ -1,7 +1,13 @@
 #服务端口号
 server:
   port: 8888
+
+hadoop:
+  openMulti: true #是否开启多数据源
+
 spring:
+  application:
+    name: hzl-register
   freemarker:
       # 禁用模板缓存
       cache: false
@@ -52,6 +58,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     master:
+          # 合并多个DruidDataSource的监控数据
+          use-global-data-source-stat: false
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: ${SPRING_DATASOURCE_URL:jdbc:mysql://rm-uf6pbp6h2285c40n9to.mysql.rds.aliyuncs.com:3306/gp?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
           username: ${SPRING_DATASOURCE_USERNAME:hzl}
@@ -72,8 +80,11 @@ spring:
           maxOpenPreparedStatements: 20
         # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
           connectionProperties: 'druid.stat.slowSqlMillis=5000;druid.stat.logSlowSql=true;config.decrypt=false'
-
+          connection-error-retry-attempts: 3 #连接失败后尝试的次数
+          break-after-acquire-failure: true
     slave1:
+        # 合并多个DruidDataSource的监控数据
+          use-global-data-source-stat: false
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/users?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
           username: ${SPRING_DATASOURCE_USERNAME:root}
@@ -94,11 +105,10 @@ spring:
           maxOpenPreparedStatements: 20
            # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
           connectionProperties: 'druid.stat.slowSqlMillis=5000;druid.stat.logSlowSql=true;config.decrypt=false'
-
+          connection-error-retry-attempts: 3 #连接失败后尝试的次数
+          break-after-acquire-failure: true
 #后期这部分可以改造成java类配置
     druid:
-     # 合并多个DruidDataSource的监控数据
-      use-global-data-source-stat: false
       #WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
       web-stat-filter:
           enabled: true #是否启用StatFilter默认值true
@@ -114,6 +124,7 @@ spring:
           login-username: admin
           login-password: admin
       db-type: mysql
+
 
   jpa:
     show-sql: true
