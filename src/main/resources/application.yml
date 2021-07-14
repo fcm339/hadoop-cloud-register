@@ -1,3 +1,6 @@
+#服务端口号
+server:
+  port: 8888
 spring:
   freemarker:
       # 禁用模板缓存

@@ -2,6 +2,15 @@
 server:
   port: 8888
 
+spring:
+  application:
+    name: hzl-register
+
+#禁止eureka作为注册中心
+eureka:
+  client:
+    enabled: false
+
 
 management:
   port: 8889
