@@ -1,29 +1,4 @@
 spring:
-  cloud:
-    stream:
-      #消息中间键
-      #rocketmq
-      rocketmq:
-        binder:
-          name-server: localhost:9876
-        bindings:
-          input1:
-            consumer:
-            #Consumer 是否同步消费消息模式。
-              orderly: true
-          output1:
-            producer:
-              group: binder-group
-              sync: true
-      bindings:
-        input1:
-          destination: test-topic
-          content-type: text/plain
-          group: test-group1
-        output1:
-          destination: test-topic
-          content-type: application/json
-
   freemarker:
       # 禁用模板缓存
       cache: false
@@ -50,7 +25,7 @@ spring:
             enable: true
             required: true
   cache:
-    type: redis #设置cache的类型,none是禁用cache缓存
+    type: none #设置cache的类型可以是redis,none是禁用cache缓存
   redis:
     host: localhost
     port: 6379
@@ -75,7 +50,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     master:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://rm-uf6pbp6h2285c40n9.mysql.rds.aliyuncs.com:3306/gp?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+          url: ${SPRING_DATASOURCE_URL:jdbc:mysql://rm-uf6pbp6h2285c40n9to.mysql.rds.aliyuncs.com:3306/gp?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
           username: ${SPRING_DATASOURCE_USERNAME:hzl}
           password: ${SPRING_DATASOURCE_PASSWORD:Hzl1qaz2wsx}
           initial-size: 5  # 初始化大小
@@ -140,10 +115,6 @@ spring:
   jpa:
     show-sql: true
 
-#是否开启服务间负载
-ribbon:
-  nacos:
-    enabled: false
 
 # 包扫描或者在启动类上添加@MapperScan或者在每个mapper接口上添加@Mapper注解
 mybatis:
@@ -188,4 +159,6 @@ pagehelper:
 ---
 
 spring:
-  profiles: local  # 本地开发
+  config:
+    activate:
+      on-profile: local # 本地开发

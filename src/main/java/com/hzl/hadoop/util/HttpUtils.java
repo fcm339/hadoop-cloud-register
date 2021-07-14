@@ -7,7 +7,7 @@ import com.hzl.hadoop.exception.CommonException;
 import com.sun.corba.se.impl.encoding.OSFCodeSetRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
@@ -356,10 +356,10 @@ public class HttpUtils {
 	 * @param url         请求地址
 	 * @param param       body 参数
 	 * @param headerParam header 参数
-	 * @param charset   编码默认utf-8 参数
+	 * @param charset     编码默认utf-8 参数
 	 * @return 响应body
 	 */
-	public static String sendGet(String url,String charset, Map<String, ?> param,Map<String, String> headerParam) throws HttpResponseException {
+	public static String sendGet(String url, String charset, Map<String, ?> param, Map<String, String> headerParam) throws HttpResponseException {
 		log.info("========  开始发送GET请求 ========");
 		BufferedReader in = null;
 		String result = "";
