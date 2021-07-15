@@ -1,10 +1,12 @@
 package com.hzl.hadoop.app.controller;
 
+import cn.hutool.extra.pinyin.PinyinUtil;
 import com.hzl.cloud.config.mybatis.DataSource;
 import com.hzl.hadoop.app.dataobject.ContractDO;
 import com.hzl.hadoop.app.service.MybatisService;
 import com.hzl.hadoop.app.service.RedisService;
 import com.hzl.hadoop.app.vo.PaymentVO;
+import com.hzl.hadoop.app.vo.Pinyin;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,13 +47,29 @@ public class MvcJsonController {
 	 * <p>
 	 * master数据库读取
 	 * </p>
-	 *
+	 *http://localhost:8888/query/pinyin?zw=李白
 	 * @author hzl 2020/01/08 12:41 PM
 	 */
 	@GetMapping(value = "/query")
 	public ResponseEntity<ContractDO> qeuery() {
+		String pinyin = PinyinUtil.getPinyin("你好", " ");
 
 		return new ResponseEntity<ContractDO>(mybatisService.select(), HttpStatus.OK);
+	}
+
+	/**
+	 * <p>
+	 * master数据库读取
+	 * </p>
+	 *
+	 * @author hzl 2020/01/08 12:41 PM
+	 */
+	@GetMapping(value = "/query/pinyin")
+	public ResponseEntity<String> qeueryPinyin(@RequestParam String zw) {
+
+		String pinyin = PinyinUtil.getPinyin(zw, " ");
+
+		return new ResponseEntity<String>(pinyin, HttpStatus.OK);
 	}
 
 	/**
