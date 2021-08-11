@@ -32,7 +32,7 @@ import javax.annotation.PreDestroy;
 @Component
 @Slf4j
 @Lazy(value = true)
-public class InitializingDestoryBeanUtil implements InitializingBean, DisposableBean, BeanFactoryAware {
+public class InitializingDestoryBeanUtil implements InitializingBean, DisposableBean {
 
 	/**
 	 * <p>
@@ -46,10 +46,6 @@ public class InitializingDestoryBeanUtil implements InitializingBean, Disposable
 		log.info("通过InitializingBean实现在bean初始化完成后执行");
 	}
 
-	@Override
-	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-		log.info("初始化BeanFactoryAware");
-	}
 
 	/**
 	 * <p>
