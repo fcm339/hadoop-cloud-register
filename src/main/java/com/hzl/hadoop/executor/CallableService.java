@@ -12,11 +12,11 @@ import java.util.concurrent.Callable;
 
  * @author hzl 2021/08/27 5:28 PM
  */
-public class CallableService implements Callable {
+public class CallableService implements Callable<Boolean> {
 
 	@Override
-	public Object call() throws Exception {
+	public Boolean call() throws Exception {
 
-		return null;
+		return true;
 	}
 }

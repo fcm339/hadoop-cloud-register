@@ -14,7 +14,7 @@ import java.util.concurrent.*;
 public class ExecutorUtil {
 	
 	public static  void main(String args[]){
-		fixExecutor(5,100);
+		customExecutor(100);
 	}
 	/**
 	 * 固定线程数的线程池，
@@ -77,19 +77,74 @@ public class ExecutorUtil {
 				 ,new ThreadFactoryService()
 				 ,new RejectHandler()){
 			 @Override protected void beforeExecute(Thread t, Runnable r) {
-				 System.out.println("beforeExecute is called");
+				 System.out.println("任务执行前"+t.getName());
 			 }
 			 @Override protected void afterExecute(Runnable r, Throwable t) {
-				 System.out.println("afterExecute is called");
+				 System.out.println("任务执行后"+Thread.currentThread().getName());
 			 }
 			 @Override protected void terminated() {
-				 System.out.println("terminated is called");
+				 System.out.println("线程结束后");
 			 }
 		 };
 		return executor;
 	}
 
+	/**
+	 * 重写executor
+	 *
+	 * @param null
+	 * @author hzl 2021-08-30 5:12 PM
+	 * @return
+	 */
+	private static ThreadPoolExecutor executor(int corePoolSize,int maximumPoolsize,int keepAliveTime,TimeUnit unit,ArrayBlockingQueue<Runnable> arrayBlockingQueue){
+		ThreadPoolExecutor executor = new ThreadPoolExecutor(10
+				,10,60L
+				, TimeUnit.SECONDS
+				,new ArrayBlockingQueue(10)
+				,new ThreadFactoryService()
+				,new RejectHandler()){
+			@Override protected void beforeExecute(Thread t, Runnable r) {
+				System.out.println("任务执行前"+t.getName());
+			}
+			@Override protected void afterExecute(Runnable r, Throwable t) {
+				System.out.println("任务执行后"+Thread.currentThread().getName());
+			}
+			@Override protected void terminated() {
+				System.out.println("线程结束后");
+			}
+		};
+		return executor;
+	}
 
+
+	/**
+	 * 使用自定义线程池完成多线程操作
+	 *
+	 * @param executeNum 执行次数
+	 * @author hzl 2021-08-30 3:12 PM
+	 * @return
+	 */
+
+	public static void customExecutor(int executeNum){
+		ExecutorService executor = ExecutorUtil.executor();
+
+		for(int i=0;i<executeNum;i++){
+			int finalI = i;
+			Future<Long> future=executor.submit(()->{
+				System.out.println("线程:"+finalI +Thread.currentThread().getName());
+				return System.currentTimeMillis();
+			});
+//			try {
+//				System.out.println(future.get());
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			} catch (ExecutionException e) {
+//				e.printStackTrace();
+//			}
+		}
+
+		executor.shutdown();
+	}
 
 	
 	/**
