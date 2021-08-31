@@ -1,4 +1,7 @@
-package com.hzl.hadoop.executor;
+package com.hzl.hadoop.executor.threadservice;
+
+import com.hzl.hadoop.exception.CommonException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.Callable;
 
@@ -12,11 +15,26 @@ import java.util.concurrent.Callable;
 
  * @author hzl 2021/08/27 5:28 PM
  */
+@Slf4j
 public class CallableService implements Callable<Boolean> {
+
+	private int num;
+
+	public CallableService(int num) {
+		this.num = num;
+	}
+	public CallableService() {
+
+	}
+
 
 	@Override
 	public Boolean call() throws Exception {
-
+		log.info("执行次数"+num +Thread.currentThread().getName());
+		if(num==3){
+			//用于测试submit后，Future不调用get无法捕获异常
+			throw new CommonException("异常");
+		}
 		return true;
 	}
 }
