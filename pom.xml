@@ -211,6 +211,11 @@
         </dependency>
         <!--拼音库结束-->
         <!--添加springsecurity结束-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>2.5.0</version>
+        </dependency>
     </dependencies>
 
 

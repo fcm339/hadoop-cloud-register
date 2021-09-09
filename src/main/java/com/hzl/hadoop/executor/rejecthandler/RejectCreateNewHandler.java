@@ -17,7 +17,6 @@ public class RejectCreateNewHandler implements RejectedExecutionHandler {
 	/**
 	 * 自定义拒绝策略的目的是，有界阻塞队列情况下，被拒绝的线程依然执行，而不是像默认的一样报错，或者不执行
 	 * 只要资源充足，就创建新线程，去执行被拒绝的线程
-	 * @param null
 	 * @author hzl 2021-08-30 8:16 PM
 	 * @return
 	 */

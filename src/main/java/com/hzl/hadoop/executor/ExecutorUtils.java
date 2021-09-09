@@ -20,12 +20,12 @@ import java.util.concurrent.*;
 @Slf4j
 public class ExecutorUtils {
 
-	public static void main(String args[]) {
-		customExecutor(100);
-		//singleThreadExecutor(100,false);
-		//cacheThreadExecutor(100,true);
-		//scheduleThreadExecutor();
-	}
+//	public static void main(String args[]) {
+//		customExecutor(100);
+//		//singleThreadExecutor(100,false);
+//		//cacheThreadExecutor(100,true);
+//		//scheduleThreadExecutor();
+//	}
 
 	/**
 	 * 固定线程数的线程池，
@@ -214,7 +214,6 @@ public class ExecutorUtils {
 	/**
 	 * 重写executor
 	 *
-	 * @param null
 	 * @return
 	 * @author hzl 2021-08-30 5:12 PM
 	 */
