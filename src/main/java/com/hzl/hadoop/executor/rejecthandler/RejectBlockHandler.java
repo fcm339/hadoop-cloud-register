@@ -24,7 +24,6 @@ public class RejectBlockHandler implements RejectedExecutionHandler {
 	/**
 	 * 自定义拒绝策略的目的是，有界阻塞队列情况下，被拒绝的线程依然执行，而不是像默认的一样报错，或者不执行
 	 * 对于有界阻塞队列使用put操作，也就是当队列满了以后阻塞插入，等有多余空间了在停止阻塞，并插入数据到队列
-	 * @param null
 	 * @author hzl 2021-08-30 8:16 PM
 	 * @return 
 	 */
