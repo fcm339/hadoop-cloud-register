@@ -1,5 +1,6 @@
 package com.hzl.hadoop.security.dataobject;
 
+import com.hzl.hadoop.constant.BaseDO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Table(name = "sys_user")
-public class SysUser {
+public class SysUser extends BaseDO {
 
 	@Id
 	@Column(name = "id")
@@ -29,16 +30,16 @@ public class SysUser {
 	private String name;
 
 	private String password;
-
-	private LocalDateTime creationDate;
-
-	private Long createdBy;
-
-	private LocalDateTime lastUpdateDate;
-
-	private Long lastUpdatedBy;
-
-	private Long objectVersionNumber;
+//
+//	private LocalDateTime creationDate;
+//
+//	private Long createdBy;
+//
+//	private LocalDateTime lastUpdateDate;
+//
+//	private Long lastUpdatedBy;
+//
+//	private Long objectVersionNumber;
 
 
 }

@@ -1,5 +1,6 @@
 package com.hzl.hadoop.security.service.impl;
 
+import com.hzl.hadoop.exception.CommonException;
 import com.hzl.hadoop.security.dataobject.SysUser;
 import com.hzl.hadoop.security.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		System.out.println("密码对比"+flag);
 
 		if (!flag) {
-			throw new BadCredentialsException("密码不正确");
+			throw new CommonException("密码不正确");
 		}
 		Collection<? extends GrantedAuthority> authorities = userInfo.getAuthorities();
 		// 构建返回的用户登录成功的token

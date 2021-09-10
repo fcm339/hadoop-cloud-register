@@ -1,5 +1,6 @@
 package com.hzl.hadoop.security.vo;
 
+import com.hzl.hadoop.constant.BaseDO;
 import lombok.*;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
@@ -22,7 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class SysUserVO {
+public class SysUserVO extends BaseDO {
 
 	private Long id;
 
@@ -40,13 +41,14 @@ public class SysUserVO {
 
 	private Long objectVersionNumber;
 
-	public void init(){
-		this.setCreatedBy(1L);
-		this.setCreationDate(LocalDateTime.now());
-		this.setLastUpdateDate(LocalDateTime.now());
-		this.setLastUpdatedBy(1L);
-		this.setObjectVersionNumber(1L);
-	}
+//	@Override
+//	public void init(){
+//		this.setCreatedBy(1L);
+//		this.setCreationDate(LocalDateTime.now());
+//		this.setLastUpdateDate(LocalDateTime.now());
+//		this.setLastUpdatedBy(1L);
+//		this.setObjectVersionNumber(1L);
+//	}
 
 
 

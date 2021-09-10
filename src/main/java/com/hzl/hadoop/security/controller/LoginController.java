@@ -64,8 +64,36 @@ public class LoginController {
 	 *
 	 * @author hzl 2020/01/08 12:41 PM
 	 */
-	@PostMapping(value = "/loginout")
-	public ResponseEntity<Boolean> loginout(@RequestBody SysUserVO sysUserVO) {
+	@GetMapping(value = "/loginOut")
+	public String loginout(@RequestBody SysUserVO sysUserVO) {
+
+		return "loginout";
+	}
+
+	/**
+	 * <p>
+	 * 获取当前登陆人信息
+	 * </p>
+	 *
+	 * @author hzl 2020/01/08 12:41 PM
+	 */
+	@PostMapping(value = "/userinfo")
+	public ResponseEntity<Boolean> getCurrentUserInfo(@RequestBody SysUserVO sysUserVO) {
+
+		return new ResponseEntity(myUserDetailsService.register(sysUserVO), HttpStatus.OK);
+	}
+
+
+
+	/**
+	 * <p>
+	 * 获取token
+	 * </p>
+	 *
+	 * @author hzl 2020/01/08 12:41 PM
+	 */
+	@PostMapping(value = "/token")
+	public ResponseEntity<Boolean> getToken(@RequestBody SysUserVO sysUserVO) {
 
 		return new ResponseEntity(myUserDetailsService.register(sysUserVO), HttpStatus.OK);
 	}
