@@ -38,7 +38,6 @@ public class LoginController {
 	 */
 	@GetMapping(value = "/loginPage")
 	public String getMinMaxInfo() {
-
 		return "login_page";
 	}
 
