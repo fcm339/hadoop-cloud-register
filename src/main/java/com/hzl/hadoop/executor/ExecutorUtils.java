@@ -20,12 +20,12 @@ import java.util.concurrent.*;
 @Slf4j
 public class ExecutorUtils {
 
-//	public static void main(String args[]) {
-//		customExecutor(100);
+	public static void main(String args[]) {
+		customExecutor(100);
 //		//singleThreadExecutor(100,false);
 //		//cacheThreadExecutor(100,true);
 //		//scheduleThreadExecutor();
-//	}
+	}
 
 	/**
 	 * 固定线程数的线程池，
@@ -186,7 +186,9 @@ public class ExecutorUtils {
 	 * @author hzl 2021-08-27 5:34 PM
 	 */
 
-	private static ThreadPoolExecutor executor() {
+	//设置成单例全局唯一，后面使用SingleExecutor提供的对象
+	@Deprecated
+	public static ThreadPoolExecutor executor() {
 		ThreadPoolExecutor executor = new ThreadPoolExecutor(5
 				, 10, 60L
 				, TimeUnit.SECONDS
