@@ -26,9 +26,9 @@ public class CompletableFutureUtils {
 		List<CompletableFuture> completableFutures=new ArrayList<>();
 
 		//定义一个Runnable对象
-		for(int i=0;i<4;i++){
+		for(int i=0;i<900;i++){
 			//使用自定义线程池
-			SupplyAsyncService supplyAsyncService = new SupplyAsyncService(i);
+			SupplyAsyncService supplyAsyncService = new SupplyAsyncService();
 
 			CompletableFuture completableFuture = CompletableFuture.supplyAsync(supplyAsyncService,SingleExecutor.getInstance());
 
@@ -100,7 +100,7 @@ public class CompletableFutureUtils {
 		}
 
 		//thenCombine 会把 两个 CompletionStage 的任务都执行完成后，把两个任务的结果一块交给 thenCombine 来处理。
-		for(int i=0;i<completableFutures.size();i++){
+		/*for(int i=0;i<completableFutures.size();i++){
 			CompletableFuture<String> result=completableFutures.get(0).thenCombine(completableFutures.get(i), new BiFunction() {
 				@Override
 				public Object apply(Object o, Object o2) {
@@ -114,7 +114,10 @@ public class CompletableFutureUtils {
 			} catch (ExecutionException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
+		//等待所有线程完成后执行
+		CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).join();
+		System.out.println(1111);
 
 		//关闭线程池
 		SingleExecutor.getInstance().shutdown();
