@@ -1,5 +1,6 @@
 package com.hzl.hadoop.executor.rejecthandler;
 
+import com.hzl.hadoop.exception.CommonException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.RejectedExecutionHandler;
@@ -32,22 +33,23 @@ public class RejectBlockHandler implements RejectedExecutionHandler {
 		log.info("有线程被拒绝");
 		//1第一种策略只要资源充足，就创建新线程，去执行被拒绝的线程
 		//缺点：线程若是无限制的创建，可能会导致内存占用过多而产生OOM，并且会造成cpu过度切换。
-		/*try {
+		try {
 			final Thread t = new Thread(r, "临时任务线程");
 			t.start();
 		}catch (Throwable e){
 			throw new CommonException("自定义线程策略只要资源足够就创建新的线程执行----线程创建失败");
-		}*/
+		}
 		//第二种：或者什么也不执行，把执行失败的查询出来重新执行一遍
 
 		//第三种：对于有界阻塞队列使用put操作，也就是当队列满了以后阻塞插入，等有多余空间了在停止阻塞，并插入数据到队列参考：https://blog.csdn.net/yamadeee/article/details/100181893
-		try {
+		/*try {
 			log.info("有线程被拒绝将被拒绝的线程通过put阻塞方式插入，阻塞队列");
+			//这种方式有问题，线程池一直处于运行状态
 			executor.getQueue().put(r);
 			log.info("有线程被拒绝将被拒绝的线程通过put阻塞方式插入，阻塞队列---插入完成");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 
