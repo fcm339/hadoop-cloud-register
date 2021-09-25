@@ -48,13 +48,13 @@ public class GpServiceImpl implements GpService {
 
 		if (GpUrlConstant.GP_CODE_YL.equals(code)) {
 			//伊利股票,利用对象克隆
-			gpRepository.insert((YlVO) JsonUtils.cloneObject(gpVO, YlVO.class));
+			gpRepository.insert(JsonUtils.cloneObject(gpVO, YlVO.class));
 
 		} else if (GpUrlConstant.GP_CODE_ZX.equals(code)) {
 			//中兴股票,利用对象克隆
-			gpRepository.insert((ZXVO) JsonUtils.cloneObject(gpVO, ZXVO.class));
+			gpRepository.insert(JsonUtils.cloneObject(gpVO, ZXVO.class));
 		} else {
-			gpRepository.insert((ZXVO) JsonUtils.cloneObject(gpVO, ZXVO.class));
+			gpRepository.insert(JsonUtils.cloneObject(gpVO, ZXVO.class));
 		}
 
 		return gpVO;
