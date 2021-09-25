@@ -47,6 +47,12 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <!--开启springmvc-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!--pdf操作-->
         <dependency>
             <groupId>com.itextpdf</groupId>
