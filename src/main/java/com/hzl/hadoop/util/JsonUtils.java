@@ -3,12 +3,15 @@ package com.hzl.hadoop.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.poi.ss.formula.functions.T;
 
+import java.util.List;
 import java.util.Map;
 
 /**
  * description
  * json处理工具类
+ * 改成泛型方法,增加可读性和安全性，避免强制转换
  * @author hzl 2020/08/06 12:53 PM
  */
 public class JsonUtils {
@@ -33,7 +36,7 @@ public class JsonUtils {
 	 * @author hzl 2020/08/06 12:58 PM
 	 */
 
-	public static Object jsonStringToObeject(String json,Class className){
+	public static <T> T jsonStringToObeject(String json,Class<T> className){
 		JSONObject jsonObejct = JSONObject.parseObject(json);
 		return JSON.toJavaObject(jsonObejct, className);
 	}
@@ -54,7 +57,7 @@ public class JsonUtils {
 	 * @author hzl 2020-08-19 2:20 PM
 	 * @return
 	 */
-	public static Object cloneObject(Object object,Class className){
+	public static <T> T cloneObject(Object object,Class<T> className){
 		String cloneObject=objectToString(object);
 		return jsonStringToObeject(cloneObject,className);
 	}
@@ -66,7 +69,7 @@ public class JsonUtils {
 	 * @author hzl 2020-11-05 12:34 PM
 	 * @return
 	 */
-	public static Object cloneObjectList(Object object,Class className){
+	public static <T> List<T> cloneObjectList(Object object, Class<T> className){
 		String cloneObject =objectToString(object);
 		return JSONObject.parseArray(cloneObject,className);
 	}
