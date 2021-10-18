@@ -71,7 +71,7 @@ public class LoginController {
 
 	/**
 	 * <p>
-	 * 获取当前登陆人信息
+	 * 获取当前登陆人信息 todo
 	 * </p>
 	 *
 	 * @author hzl 2020/01/08 12:41 PM
@@ -86,7 +86,7 @@ public class LoginController {
 
 	/**
 	 * <p>
-	 * 获取token
+	 * 获取token todo
 	 * </p>
 	 *
 	 * @author hzl 2020/01/08 12:41 PM
