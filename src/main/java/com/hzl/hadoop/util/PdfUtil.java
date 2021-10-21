@@ -321,6 +321,73 @@ public class PdfUtil {
 	}
 
 	/**
+	 * 移除水印,测试可用
+	 * @param srcPath 带水印pdf
+	 * @param buildPath 去除水印pdf
+	 * @return
+	 */
+	public static String removeWatermark(String srcPath, String buildPath){
+
+		//注意，这将破坏所有层的文档中，只有当你没有额外的层使用
+		try {
+			PdfReader reader =new PdfReader(srcPath);
+			//从文档中彻底删除的OCG组。
+			//占位符变量
+			reader.removeUnusedObjects();
+			int pageCount = reader.getNumberOfPages();
+			PRStream prStream=null;
+			PdfDictionary curPage;
+			PdfArray contentarray;
+			//循环遍历每个页面
+			for(int i=1; i<=pageCount; i++){
+				//获取页面
+				curPage = reader.getPageN(i);
+				//获取原始内容
+				contentarray = curPage.getAsArray(PdfName.CONTENTS);
+				if(contentarray != null){
+					//循环遍历内容
+					//获取涂层数量
+					System.out.println("长度"+contentarray.size());
+					for(int j=0; j<contentarray.size(); j++){
+						//获取原始字节流
+						prStream =(PRStream)contentarray.getAsStream(j);
+						// 去除指定涂层，默认水印为数组下标最大的涂层,替换contentarray.size()-1可以删除指定涂层
+						if (j == contentarray.size()-1){
+							//给它零长度和零数据删除它
+							prStream.put(PdfName.LENGTH, new PdfNumber(0));
+							prStream.setData(new byte[0]);
+						}
+					}
+				}
+			}
+			//写出来的内容
+			FileOutputStream fos = new FileOutputStream(buildPath);
+			Document doc = new Document(prStream.getReader().getPageSize(1));
+			PdfCopy copy = new PdfCopy(doc, fos);
+			doc.open();
+			for (int j = 1; j <= pageCount; j++) {
+				doc.newPage();
+				PdfImportedPage page = copy.getImportedPage(prStream.getReader(), j);
+				copy.addPage(page);
+			}
+			doc.close();
+			return "success";
+		} catch (BadPdfFormatException e) {
+			e.printStackTrace();
+			return "0";
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return "1";
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "2";
+		} catch (DocumentException e) {
+			e.printStackTrace();
+			return "3";
+		}
+	}
+
+	/**
 	 * <p>
 	 * 文件添加二维码工具类
 	 * </p>
@@ -475,7 +542,7 @@ public class PdfUtil {
 	 *
 	 * @author hzl 2020/01/10 2:41 PM
 	 */
-	public static String getPdfFileStr(byte[] bytes,int page) {
+	public static String getPdfFileStr(byte[] bytes, int page) {
 		// 存放读取出的文档内容
 		String content = "";
 		try {
@@ -483,7 +550,7 @@ public class PdfUtil {
 			PdfReader reader = new PdfReader(bytes);
 			// 获得页数
 			int PageNum = reader.getNumberOfPages();
-			content+=PdfTextExtractor.getTextFromPage(reader, page);
+			content += PdfTextExtractor.getTextFromPage(reader, page);
 		} catch (IOException e) {
 			log.info("错误：" + e.getMessage());
 			e.printStackTrace();
@@ -548,10 +615,10 @@ public class PdfUtil {
 	 * 生成印章图片
 	 *
 	 * @param
-	 * @author hzl 2020-03-23 10:12 AM
 	 * @return
+	 * @author hzl 2020-03-23 10:12 AM
 	 */
-	public static void  stampImage(){
+	public static void stampImage() {
 
 	}
 }
