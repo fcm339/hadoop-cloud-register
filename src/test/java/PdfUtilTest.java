@@ -1,6 +1,7 @@
 import com.hzl.hadoop.util.PdfUtil;
 import com.hzl.hadoop.util.textCompare.diff_match_patch;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -74,12 +75,12 @@ public class PdfUtilTest {
 
 		String url = "http://ekpapp.ysservice.com.cn/km/review/km_review_main/kmReviewMain.do?method=view&fdId=17338879f9e9254e33fd69249f9a710e";
 		String content = "SRDC2020000531";
-		String water = "上海永升物业";
+		String water = "就我一个人";
 
 		try {
-			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/1-售场物业服务合同--旭辉版本.pdf");
+			FileSystemResource tempInputStream = new FileSystemResource("/Users/hzl/Desktop/阿里技术开发手册嵩山版.pdf");
 			//FileInputStream fileInputStream =new FileInputStream(new File("/Users/hzl/Desktop/pdf.pdf"));
-			outputStream = new FileOutputStream("/Users/hzl/Desktop/1-售场物业服务合同--旭辉版本1.pdf");
+			outputStream = new FileOutputStream("/Users/hzl/Desktop/阿里技术开发手册嵩山版1.pdf");
 			addPdfTextMark(tempInputStream.getInputStream(), tempOutputStream, water, 200, 200, url, content);
 			outputStream.write(tempOutputStream.toByteArray());
 			tempOutputStream.flush();
@@ -89,6 +90,18 @@ public class PdfUtilTest {
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * 移除pdf涂层
+	 *
+	 * @param null
+	 * @author hzl 2021-10-21 7:50 PM
+	 * @return 
+	 */
+	@Test
+	public void  removeWatermark(){
+		PdfUtil.removeWatermark("/Users/hzl/Desktop/阿里技术开发手册嵩山版1.pdf","/Users/hzl/Desktop/阿里技术开发手册嵩山版2.pdf");
 	}
 
 	/**
