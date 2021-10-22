@@ -128,7 +128,7 @@ public class HdfsTemplateServiceImpl implements HdfsTemplateService {
 		Path srcPath = new Path(path);
 		log.info("文件内容"+content);
 		FSDataOutputStream outputStream = fs.create(srcPath);
-		IOUtils.copyBytes(content, outputStream, FileConstant.bufferSize);
+		IOUtils.copyBytes(content, outputStream, FileConstant.BUFFER_SIZE);
 //		IOUtils.closeStream(content);
 		IOUtils.closeStream(outputStream);
 		IOUtils.closeStream(fs);

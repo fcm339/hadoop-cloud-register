@@ -36,7 +36,7 @@ public class ExcelParseToMapUtil {
 	 */
 	public static Map<String, List<Map<String, String>>> parseExcelFile(MultipartFile file) throws Exception {
 		//sheetMap：key为sheet名，value为该页中所有行的集合
-		Map<String, List<Map<String, String>>> sheetMap = new HashMap<>();
+		Map<String, List<Map<String, String>>> sheetMap = new HashMap<>(16);
 		//一个sheet页中所有行的集合，第一条数据为表头
 		List<Map<String, String>> lineList;
 		//LineMap：key为字段名，value为cell值
@@ -59,7 +59,7 @@ public class ExcelParseToMapUtil {
 		//循环所有sheet页
 		for (int i = 0; i < sheetNum; i++) {
 			boolean isFirstRow = true;
-			Map<Integer, String> titleMap = new HashMap<>();
+			Map<Integer, String> titleMap = new HashMap<>(16);
 			Sheet sheet = workbook.getSheetAt(i);
 			if (sheet.getPhysicalNumberOfRows() == 0) {
 				continue;
@@ -68,7 +68,7 @@ public class ExcelParseToMapUtil {
 			//循环遍历sheet页中所有的行
 			for (int numRow = sheet.getFirstRowNum(); numRow <= sheet.getLastRowNum(); numRow++) {
 				log.info("第几行：" + numRow);
-				LineMap = new HashMap<>();
+				LineMap = new HashMap<>(16);
 				Row row = sheet.getRow(numRow);
 				if (null == row) {
 					continue;

@@ -233,8 +233,9 @@ public class ZxingEncoder {
 		matrix.clear();
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				if (bitMatrix.get(i + rectangle[0], j + rectangle[1]))
+				if (bitMatrix.get(i + rectangle[0], j + rectangle[1])) {
 					matrix.set(i, j);
+				}
 			}
 		}
 		return matrix;

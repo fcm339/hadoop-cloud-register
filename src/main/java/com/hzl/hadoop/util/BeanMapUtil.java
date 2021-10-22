@@ -16,7 +16,7 @@ public class BeanMapUtil {
 	 * @return
 	 */
 	public static Map<String, Object> entityToMap(Object object) {
-		Map<String, Object> map = new HashMap();
+		Map<String, Object> map = new HashMap(16);
 		for (Field field : object.getClass().getDeclaredFields()) {
 			try {
 				boolean flag = field.isAccessible();

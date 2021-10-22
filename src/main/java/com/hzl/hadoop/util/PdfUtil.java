@@ -32,7 +32,7 @@ public class PdfUtil {
 	//字体文件
 	public static final String FONTS_PATH = "/fonts/simsun.ttf";
 
-	public static final BaseColor water = new BaseColor(224, 224, 224);
+	public static final BaseColor WATER = new BaseColor(224, 224, 224);
 
 	public static final String KEYSTORE = "F:\\ZzCert\\test.p12";
 	public static final char[] PASSWORD = "111111".toCharArray();//keystory密码
@@ -264,7 +264,7 @@ public class PdfUtil {
 				// under = stamp.getOverContent(i);
 				under.beginText();
 				// 文字水印 颜色
-				under.setColorFill(water);
+				under.setColorFill(WATER);
 				// 文字水印 字体及字号
 				under.setFontAndSize(font, 16);
 				// 文字水印 起始位置
@@ -287,6 +287,8 @@ public class PdfUtil {
 						case 3:
 							x = width - 100;
 							break;
+						default:
+
 					}
 					for (int sect = 1; sect <= 3; ++sect) {
 						float y = 0;
@@ -300,6 +302,7 @@ public class PdfUtil {
 							case 3:
 								y = height - 100;
 								break;
+							default:
 						}
 
 						under.showTextAligned(Element.ALIGN_LEFT, textMark, x, y, 40);
