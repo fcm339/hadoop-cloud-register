@@ -29,8 +29,12 @@ public class EndPriceVO {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof EndPriceVO)) return false;
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof EndPriceVO)) {
+			return false;
+		}
 		EndPriceVO that = (EndPriceVO) o;
 		return Objects.equals(getSeries(), that.getSeries()) &&
 				Objects.equals(getX(), that.getX()) &&

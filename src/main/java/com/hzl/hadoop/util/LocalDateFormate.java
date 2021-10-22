@@ -24,9 +24,9 @@ import static com.hzl.hadoop.constant.DataConstant.SHANGHAI;
  */
 public class LocalDateFormate {
 
-	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DataConstant.DATE);
+	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DataConstant.DATE);
 
-	private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(DataConstant.DATETIME);
+	private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(DataConstant.DATETIME);
 
 
 	/**
@@ -37,11 +37,11 @@ public class LocalDateFormate {
 	 * @author hzl 2020/01/03 5:17 PM
 	 */
 	public static LocalDate localDateFormate(String localDate) {
-		if (StringUtils.isEmpty(localDate)) {
-			return null;
-		} else {
-			LocalDate localDateConvert = LocalDate.parse(localDate, formatter);
+		if (StringUtils.hasLength(localDate)) {
+			LocalDate localDateConvert = LocalDate.parse(localDate, FORMATTER);
 			return localDateConvert;
+		} else {
+			return null;
 		}
 
 	}
@@ -55,11 +55,11 @@ public class LocalDateFormate {
 	 * @author hzl 2020/01/03 5:17 PM
 	 */
 	public static LocalDateTime stringTolocalDateTime(String localDateTime) {
-		if (StringUtils.isEmpty(localDateTime)) {
-			return null;
-		} else {
-			LocalDateTime localDateTimeConvert = LocalDateTime.parse(localDateTime, timeFormatter);
+		if (StringUtils.hasLength(localDateTime)) {
+			LocalDateTime localDateTimeConvert = LocalDateTime.parse(localDateTime, TIME_FORMATTER);
 			return localDateTimeConvert;
+		} else {
+			return null;
 		}
 
 	}
@@ -86,9 +86,7 @@ public class LocalDateFormate {
 	 * @author hzl 2020-01-20 6:51 PM
 	 */
 	public static Date localStringToDate(String stringDate) {
-		if (StringUtils.isEmpty(stringDate)) {
-			return null;
-		} else {
+		if (StringUtils.hasLength(stringDate)) {
 			try {
 				SimpleDateFormat simpleDateFormat = null;
 				if (stringDate.length() > 10) {
@@ -103,6 +101,9 @@ public class LocalDateFormate {
 				e.printStackTrace();
 				throw new CommonException("string转date异常");
 			}
+
+		} else {
+			return null;
 		}
 
 	}

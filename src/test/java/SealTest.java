@@ -168,7 +168,7 @@ public class SealTest {
 		 */
 		SealFont mainFont = SealFont.builder()
 				.bold(true)
-				.fontText("私人电子印章刻章服务")
+				.fontText("黄鑫私人印章服务")
 				.fontSize(35)
 				.fontSpace(35.0)
 				.build();
@@ -204,7 +204,7 @@ public class SealTest {
 				.bold(true)
 				.fontFamily("宋体")
 				.fontSize(22)
-				.fontText("不具备法律效应")
+				.fontText("鑫仔之印")
 				.marginSize(68)
 				.build();
 
@@ -249,7 +249,7 @@ public class SealTest {
 		SealFont font = SealFont.builder()
 				.fontSize(120)
 				.bold(true)
-				.fontText("张晔印章")
+				.fontText("黄鑫印章")
 				.build();
 
 		SealUtil.buildAndStorePersonSeal(300, 16, font, "印章", "/Users/hzl/Desktop/私章.png");

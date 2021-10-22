@@ -81,16 +81,9 @@ public class ZxingDecoder {
         }
     }
 
-    public Result decodeByBytes(byte[] bytes, String encoding) {
-        ByteArrayInputStream inputStream = null;
-        try {
-            inputStream = new ByteArrayInputStream(bytes);
-
+    public Result decodeByBytes(byte[] bytes, String encoding) throws IOException {
+        try(ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes)){
             return decodeByInputStream(inputStream, encoding);
-        } finally {
-            if (inputStream != null) {
-                IOUtils.closeQuietly(inputStream);
-            }
         }
     }
 

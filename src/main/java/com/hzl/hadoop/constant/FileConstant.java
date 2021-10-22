@@ -7,5 +7,5 @@ package com.hzl.hadoop.constant;
  */
 public interface FileConstant {
 
-	int bufferSize=2048;
+	int BUFFER_SIZE=2048;
 }

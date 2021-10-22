@@ -18,7 +18,7 @@ import java.io.*;
  * @Author Ran.chunlin
  * @Date: Created in 18:24 2018-10-03
  */
-public abstract class SealUtil {
+public class SealUtil {
 
 	/**
 	 * 默认从10x10的位置开始画，防止左上部分画布装不下

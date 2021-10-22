@@ -52,7 +52,7 @@ public class FreeMarkerZxingController {
 			String barcodeImg = Base64.encodeBase64String(bytes).toString();
 			log.info("条形码字节大小" + bytes.length);
 			//费用明细
-			HashMap map = new HashMap();
+			HashMap map = new HashMap(8);
 			map.put("receiptType", "增值税发票");
 			map.put("amount", "100¥");
 			List<HashMap> receiptList = new ArrayList<>();

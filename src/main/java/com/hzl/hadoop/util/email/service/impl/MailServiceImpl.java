@@ -132,7 +132,7 @@ public class MailServiceImpl implements MailService {
 		String barcodeImg = Base64.encodeBase64String(bytes).toString();
 		log.info("条形码字节大小" + bytes.length);
 		//费用明细
-		HashMap map = new HashMap();
+		HashMap map = new HashMap(8);
 		map.put("receiptType", "增值税发票");
 		map.put("amount", "100¥");
 		List<HashMap> receiptList = new ArrayList<>();
@@ -145,7 +145,7 @@ public class MailServiceImpl implements MailService {
 				.submitDate(LocalDate.now())
 				.receiptList(receiptList)
 				.build();
-		Map value = new HashMap();
+		Map value = new HashMap(4);
 		value.put("paymentVO", paymentVO);
 		htmlText = freemarkerService.getFreemarkerHtml("payZxing.html", value);
 
