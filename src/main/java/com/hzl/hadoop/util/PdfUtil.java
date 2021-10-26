@@ -47,8 +47,8 @@ public class PdfUtil {
 	 *
 	 * @author hzl 2020/01/02 5:40 PM
 	 */
-	public static void concatPDFsNew(List<String> streamOfPDFFiles,
-									 OutputStream outputStream) {
+	public static void concatPdf(List<String> streamOfPDFFiles,
+								 OutputStream outputStream) {
 		Document document = new Document();
 		try {
 			List<String> pdfs = streamOfPDFFiles;
@@ -80,10 +80,10 @@ public class PdfUtil {
 			PdfImportedPage page;
 			int currentPageNumber = 0;
 			int pageOfCurrentReaderPDF = 0;
-			Iterator<PdfReader> iteratorPDFReader = readers.iterator();
+			Iterator<PdfReader> iteratorPdfReader = readers.iterator();
 
-			while (iteratorPDFReader.hasNext()) {
-				pdfReader = iteratorPDFReader.next();
+			while (iteratorPdfReader.hasNext()) {
+				pdfReader = iteratorPdfReader.next();
 
 				if (null != pdfReader) {
 					while (pageOfCurrentReaderPDF < pdfReader.getNumberOfPages()) {
@@ -130,11 +130,11 @@ public class PdfUtil {
 	 *
 	 * @author hzl 2020/01/02 5:59 PM
 	 */
-	public static void concatPDFsAndAddPage(List<String> streamOfPDFFiles,
+	public static void concatPdfsAndAddPage(List<String> streamOfPdfFiles,
 											OutputStream outputStream, boolean paginate) {
 		Document document = new Document();
 		try {
-			List<String> pdfs = streamOfPDFFiles;
+			List<String> pdfs = streamOfPdfFiles;
 			List<PdfReader> readers = new ArrayList<PdfReader>();
 			int totalPages = 0;
 			Iterator<String> iteratorPDFs = pdfs.iterator();
@@ -167,21 +167,21 @@ public class PdfUtil {
 
 			PdfImportedPage page;
 			int currentPageNumber = 0;
-			int pageOfCurrentReaderPDF = 0;
-			Iterator<PdfReader> iteratorPDFReader = readers.iterator();
+			int pageOfCurrentReaderPdf = 0;
+			Iterator<PdfReader> iteratorPdfReader = readers.iterator();
 
-			while (iteratorPDFReader.hasNext()) {
-				pdfReader = iteratorPDFReader.next();
+			while (iteratorPdfReader.hasNext()) {
+				pdfReader = iteratorPdfReader.next();
 				// Create a new page in the target for each source page.
 				if (null != pdfReader) {
-					while (pageOfCurrentReaderPDF < pdfReader.getNumberOfPages()) {
-						log.info("文件大小" + pdfReader.getPageSize(pageOfCurrentReaderPDF + 1));
-						document.setPageSize(pdfReader.getPageSize(pageOfCurrentReaderPDF + 1));
+					while (pageOfCurrentReaderPdf < pdfReader.getNumberOfPages()) {
+						log.info("文件大小" + pdfReader.getPageSize(pageOfCurrentReaderPdf + 1));
+						document.setPageSize(pdfReader.getPageSize(pageOfCurrentReaderPdf + 1));
 						document.newPage();
-						pageOfCurrentReaderPDF++;
+						pageOfCurrentReaderPdf++;
 						currentPageNumber++;
 						page = writer.getImportedPage(pdfReader,
-								pageOfCurrentReaderPDF);
+								pageOfCurrentReaderPdf);
 						cb.addTemplate(page, 0, 0);
 
 						// Code for pagination.
@@ -195,7 +195,7 @@ public class PdfUtil {
 						}
 					}
 				}
-				pageOfCurrentReaderPDF = 0;
+				pageOfCurrentReaderPdf = 0;
 			}
 			outputStream.flush();
 			if (document.isOpen()) {
@@ -325,37 +325,38 @@ public class PdfUtil {
 
 	/**
 	 * 移除水印,测试可用
-	 * @param srcPath 带水印pdf
+	 *
+	 * @param srcPath   带水印pdf
 	 * @param buildPath 去除水印pdf
 	 * @return
 	 */
-	public static String removeWatermark(String srcPath, String buildPath){
+	public static String removeWatermark(String srcPath, String buildPath) {
 
 		//注意，这将破坏所有层的文档中，只有当你没有额外的层使用
 		try {
-			PdfReader reader =new PdfReader(srcPath);
+			PdfReader reader = new PdfReader(srcPath);
 			//从文档中彻底删除的OCG组。
 			//占位符变量
 			reader.removeUnusedObjects();
 			int pageCount = reader.getNumberOfPages();
-			PRStream prStream=null;
+			PRStream prStream = null;
 			PdfDictionary curPage;
 			PdfArray contentarray;
 			//循环遍历每个页面
-			for(int i=1; i<=pageCount; i++){
+			for (int i = 1; i <= pageCount; i++) {
 				//获取页面
 				curPage = reader.getPageN(i);
 				//获取原始内容
 				contentarray = curPage.getAsArray(PdfName.CONTENTS);
-				if(contentarray != null){
+				if (contentarray != null) {
 					//循环遍历内容
 					//获取涂层数量
-					System.out.println("长度"+contentarray.size());
-					for(int j=0; j<contentarray.size(); j++){
+					System.out.println("长度" + contentarray.size());
+					for (int j = 0; j < contentarray.size(); j++) {
 						//获取原始字节流
-						prStream =(PRStream)contentarray.getAsStream(j);
+						prStream = (PRStream) contentarray.getAsStream(j);
 						// 去除指定涂层，默认水印为数组下标最大的涂层,替换contentarray.size()-1可以删除指定涂层
-						if (j == contentarray.size()-1){
+						if (j == contentarray.size() - 1) {
 							//给它零长度和零数据删除它
 							prStream.put(PdfName.LENGTH, new PdfNumber(0));
 							prStream.setData(new byte[0]);
