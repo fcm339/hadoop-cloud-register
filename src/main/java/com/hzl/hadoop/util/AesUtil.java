@@ -12,7 +12,7 @@ import java.security.SecureRandom;
  *
  * @author hzl 2019/08/08 11:17 PM
  */
-public class AESUtil {
+public class AesUtil {
 	private static String key = "test";
 
 	/**

@@ -1,7 +1,6 @@
 import com.hzl.hadoop.util.PdfUtil;
 import com.hzl.hadoop.util.textCompare.diff_match_patch;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -34,7 +33,7 @@ public class PdfUtilTest {
 			streamOfPDFFiles.add(file1);
 			streamOfPDFFiles.add(file2);
 			OutputStream outputStream = new FileOutputStream(savePath);
-			concatPDFsNew(streamOfPDFFiles, outputStream);
+			concatPdf(streamOfPDFFiles, outputStream);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,7 +52,7 @@ public class PdfUtilTest {
 			streamOfPDFFiles.add(file1);
 			streamOfPDFFiles.add(file2);
 			OutputStream outputStream = new FileOutputStream(savePath);
-			concatPDFsAndAddPage(streamOfPDFFiles, outputStream, true);
+			concatPdfsAndAddPage(streamOfPDFFiles, outputStream, true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,12 +95,12 @@ public class PdfUtilTest {
 	 * 移除pdf涂层
 	 *
 	 * @param null
+	 * @return
 	 * @author hzl 2021-10-21 7:50 PM
-	 * @return 
 	 */
 	@Test
-	public void  removeWatermark(){
-		PdfUtil.removeWatermark("/Users/hzl/Desktop/阿里技术开发手册嵩山版1.pdf","/Users/hzl/Desktop/阿里技术开发手册嵩山版2.pdf");
+	public void removeWatermark() {
+		PdfUtil.removeWatermark("/Users/hzl/Desktop/阿里技术开发手册嵩山版1.pdf", "/Users/hzl/Desktop/阿里技术开发手册嵩山版2.pdf");
 	}
 
 	/**
