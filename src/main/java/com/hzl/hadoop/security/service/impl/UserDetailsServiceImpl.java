@@ -6,6 +6,7 @@ import com.hzl.hadoop.security.dataobject.SysUser;
 import com.hzl.hadoop.security.service.MyUserDetailsService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
  * @author hzl 2021/09/09 5:06 PM
  */
 @Service
+@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired

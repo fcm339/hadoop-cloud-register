@@ -1,5 +1,9 @@
 package com.hzl.hadoop.util;
 
+import java.util.function.Predicate;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+
 /**
  * description
  * 单纯用来进行测试
@@ -18,8 +22,10 @@ public class TestUtils {
 //
 //		System.out.println("sql拼接"+String.format("%s = {0}", "name"));
 //		System.out.println("sql拼接"+String.format("{%s}", "name"));
+		Predicate<Integer> predOdd = integer -> integer % 2 == 1;
+		System.out.println(predOdd.test(5));
 
-
+		//System.out.println(APPLICATION_JSON_UTF8.getSubtype());
 	}
 
 }

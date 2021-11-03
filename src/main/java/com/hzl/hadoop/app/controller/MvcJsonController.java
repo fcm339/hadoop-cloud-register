@@ -1,7 +1,6 @@
 package com.hzl.hadoop.app.controller;
 
 import cn.hutool.extra.pinyin.PinyinUtil;
-import com.hzl.cloud.config.mybatis.DataSource;
 import com.hzl.hadoop.app.dataobject.ContractDO;
 import com.hzl.hadoop.app.service.MybatisService;
 import com.hzl.hadoop.app.service.RedisService;
@@ -80,7 +79,6 @@ public class MvcJsonController {
 	 * @author hzl 2020/01/08 12:42 PM
 	 */
 	@GetMapping(value = "/querysalve")
-	@DataSource(name = "salve1")
 	public ResponseEntity<ContractDO> qeuerySlave() {
 
 		return new ResponseEntity<ContractDO>(mybatisService.select(), HttpStatus.OK);

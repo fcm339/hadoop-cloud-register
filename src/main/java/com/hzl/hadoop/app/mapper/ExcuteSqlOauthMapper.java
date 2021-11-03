@@ -1,7 +1,7 @@
 package com.hzl.hadoop.app.mapper;
 
-import com.hzl.cloud.config.mybatis.BaseMapperUtil;
 import com.hzl.hadoop.app.dataobject.ExcuteSqlOauthDO;
+import com.hzl.hadoop.config.mybatis.BaseMapperUtil;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

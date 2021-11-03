@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 public class SqlSessionUtils {
 
 	@Autowired
-	@Qualifier("clusterSqlSessionFactory")
 	SqlSessionFactory sqlSessionFactory;
 
 	public  SqlSession getSqlSessionBatch(){

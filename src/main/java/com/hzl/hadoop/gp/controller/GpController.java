@@ -1,12 +1,17 @@
 package com.hzl.hadoop.gp.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
+import com.hzl.hadoop.gp.repository.GpRepository;
 import com.hzl.hadoop.gp.service.GpService;
 import com.hzl.hadoop.gp.vo.GpVO;
+import com.hzl.hadoop.gp.vo.VolumeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,9 +26,11 @@ public class GpController {
 
 	private GpService gpService;
 
-	public GpController(GpService gpService) {
-		this.gpService = gpService;
+	private GpRepository gpRepository;
 
+	public GpController(GpService gpService, GpRepository gpRepository) {
+		this.gpService = gpService;
+		this.gpRepository = gpRepository;
 	}
 
 	/**
@@ -38,7 +45,13 @@ public class GpController {
 		return new ResponseEntity<>(gpService.insert(code), HttpStatus.OK);
 	}
 
-
+	@GetMapping(value = "/gp/yl/query/volume/{code}/page")
+	public ResponseEntity<PageInfo<VolumeVO>> queryVolumePage(@PathVariable String code, VolumeVO volumeVO, @RequestParam int start, @RequestParam int pageSize) {
+		volumeVO.setGpCode(code);
+		PageInfo page1 = gpRepository.queryVolumePage(volumeVO);
+		log.info("返回结果-------"+page1.toString());
+		return new ResponseEntity(page1, HttpStatus.OK);
+	}
 
 
 }

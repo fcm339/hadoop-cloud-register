@@ -1,6 +1,6 @@
 package com.hzl.hadoop.security.mapper;
 
-import com.hzl.cloud.config.mybatis.BaseMapperUtil;
+import com.hzl.hadoop.config.mybatis.BaseMapperUtil;
 import com.hzl.hadoop.security.dataobject.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -45,4 +45,27 @@
         GROUP BY DATE_FORMAT( gz.created_date, '%Y-%m-%d' )
         )
     </select>
+
+    <select id="queryVolumeYlPage" resultType="com.hzl.hadoop.gp.vo.VolumeVO">
+        SELECT
+        gz.id,
+        gz.turnover,
+        gz.gp_code,
+        gz.number/10000 as number,
+        DATE_FORMAT(gz.created_date,'%y-%m-%d' ) as date,
+        gz.current_price
+        FROM
+        gp_yl gz
+        WHERE
+        gz.id IN (
+        select max( gz.id )
+        FROM gp_yl gz
+        <where>
+            <if test="gpCode!=null and gpCode!=''">
+                and gz.gp_code=#{gpCode}
+            </if>
+        </where>
+        GROUP BY DATE_FORMAT( gz.created_date, '%Y-%m-%d' )
+        )
+    </select>
 </mapper>

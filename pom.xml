@@ -23,7 +23,7 @@
         <apache.poi>5.0.0</apache.poi>
         <poi-ooxml>5.0.0</poi-ooxml>
         <poi-scratchpad>5.0.0</poi-scratchpad>
-        <druid>1.1.21</druid>
+        <druid>1.1.22</druid>
         <easyexcel>2.1.6</easyexcel>
         <ant>1.10.7</ant>
         <commons-compress>1.19</commons-compress>
@@ -31,6 +31,8 @@
         <hadoop-client>3.2.1</hadoop-client>
         <hzl.mybatis.plug>0.0.1-SNAPSHOT</hzl.mybatis.plug>
         <hutool>5.7.4</hutool>
+        <mybatis-plus-baomi>3.4.3.4</mybatis-plus-baomi>
+        <dynamic-datasource>3.2.1</dynamic-datasource>
     </properties>
 
 
@@ -108,18 +110,23 @@
             <artifactId>poi-scratchpad</artifactId>
             <version>${poi-scratchpad}</version>
         </dependency>
-        <!--&lt;!&ndash;druid连接池&ndash;&gt;-->
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba</groupId>-->
-            <!--<artifactId>druid-spring-boot-starter</artifactId>-->
-            <!--<version>${druid}</version>-->
-        <!--</dependency>-->
-        <!--集成自定义多数据源插件-->
+        <!--druid连接池-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
         <dependency>
-            <groupId>com.hzl.cloud</groupId>
-            <artifactId>mybatis-starter</artifactId>
-            <version>${hzl.mybatis.plug}</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid}</version>
+        </dependency>
+        <!--集成自定义多数据源插件-->
+        <!--<dependency>-->
+            <!--<groupId>com.hzl.cloud</groupId>-->
+            <!--<artifactId>mybatis-starter</artifactId>-->
+            <!--<version>${hzl.mybatis.plug}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${dynamic-datasource}</version>
         </dependency>
         <!--阿里开源的excel工具-->
         <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
@@ -241,6 +248,16 @@
         </dependency>
 
         <!--限流组件结束-->
+        <!--mybatis插件-->
+        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-baomi}</version>
+        </dependency>
+        <!--mybatis插件结束-->
+
+
     </dependencies>
 
 

@@ -1,6 +1,6 @@
 package com.hzl.hadoop.gp.mapper;
 
-import com.hzl.cloud.config.mybatis.BaseMapperUtil;
+import com.hzl.hadoop.config.mybatis.BaseMapperUtil;
 import com.hzl.hadoop.gp.vo.GpVO;
 import com.hzl.hadoop.gp.vo.YlVO;
 import org.apache.ibatis.annotations.Mapper;

@@ -5,6 +5,7 @@ import com.hzl.hadoop.security.dataobject.SysUser;
 import com.hzl.hadoop.security.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +24,7 @@ import java.util.Collection;
  * @author hzl 2021/09/09 8:32 PM
  */
 @Component
+@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
 	/**

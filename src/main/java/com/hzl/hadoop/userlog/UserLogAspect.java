@@ -1,8 +1,6 @@
 package com.hzl.hadoop.userlog;
 
-import com.hzl.cloud.config.mybatis.DBContextHolder;
-import com.hzl.cloud.config.mybatis.DataSource;
-import com.hzl.cloud.constant.DBTypeEnum;
+
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -81,25 +79,25 @@ public class UserLogAspect {
 
 		GetMapping getMapping = method.getAnnotation(GetMapping.class);
 		//获取类上的注解
-		RequestMapping requestMapping=point.getTarget().getClass().getAnnotation(RequestMapping.class);
-		StringBuilder classPath=new StringBuilder();
-		if(requestMapping!=null){
+		RequestMapping requestMapping = point.getTarget().getClass().getAnnotation(RequestMapping.class);
+		StringBuilder classPath = new StringBuilder();
+		if (requestMapping != null) {
 			classPath.append(requestMapping.value().toString());
 
 		}
 		//请求地址
-		String methodPath= getMapping.value().toString();
+		String methodPath = getMapping.value().toString();
 		classPath.append(methodPath);
 
 		//操作名称
-		String option=getMapping.name();
+		String option = getMapping.name();
 
 		//获取访问人的ip
 		//获取请求上下文
 		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 		ServletRequestAttributes sra = (ServletRequestAttributes) ra;
 		HttpServletRequest request = sra.getRequest();
-		String ip=getIpAddress(request);
+		String ip = getIpAddress(request);
 		//获取请求上下文结束
 		return point.proceed();
 	}
