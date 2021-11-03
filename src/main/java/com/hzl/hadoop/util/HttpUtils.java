@@ -29,8 +29,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.http.MediaType.*;
 
 /**
  * description
@@ -204,7 +203,7 @@ public class HttpUtils {
 			status = HttpStatus.REQUEST_TIMEOUT.value();
 		}
 
-		if (status >= 200 && status < 300) {
+		if (status >= HttpStatus.OK.value() && status < HttpStatus.MULTIPLE_CHOICES.value()) {
 			// 目前，要素类型新增接口无返回内容，状态码为 202
 			if (status == HttpStatus.ACCEPTED.value()) {
 				return null;
@@ -224,27 +223,26 @@ public class HttpUtils {
 	 */
 	private static void processPostContentType(MediaType contentType, Map<String, ?> bodyParam,
 											   HttpURLConnection connection) throws IOException {
-		Supplier<String> buildParam = null;
+		Supplier<String> buildParam;
 		contentType = Objects.isNull(contentType) ? APPLICATION_FORM_URLENCODED : contentType;
 		if (APPLICATION_FORM_URLENCODED.getSubtype().equalsIgnoreCase(contentType.getSubtype())) {
 			buildParam = () -> buildForm(bodyParam);
-		} else if (APPLICATION_JSON_UTF8.getSubtype().equalsIgnoreCase(contentType.getSubtype())) {
+		} else if (APPLICATION_JSON.getSubtype().equalsIgnoreCase(contentType.getSubtype())) {
 			buildParam = () -> buildJSON(bodyParam);
 		} else {
 			// 默认 form形式
 			contentType = APPLICATION_FORM_URLENCODED;
 			buildParam = () -> buildForm(bodyParam);
 		}
-		PrintWriter out = null;
+
 		connection.setRequestProperty("Content-type", contentType.toString());
-		try {
-			out = new PrintWriter(new OutputStreamWriter(connection.getOutputStream(), UTF_8));
+		try (PrintWriter out = new PrintWriter(new OutputStreamWriter(connection.getOutputStream(), UTF_8))) {
 			out.print(buildParam.get());
 			out.flush();
-		} finally {
-			if (Objects.nonNull(out)) {
-				out.close();
-			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -322,7 +320,7 @@ public class HttpUtils {
 			} catch (IOException e) {
 				for (in = new BufferedReader(new InputStreamReader(connection.getErrorStream(), UTF_8)); (line =
 						in.readLine()) != null; result = result + line) {
-					;
+
 				}
 			}
 

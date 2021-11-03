@@ -23,7 +23,7 @@ IF
 	EXISTS `excute_sql_oauth`;
 CREATE TABLE `excute_sql_oauth` (
 	`id` BIGINT ( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT,
-	`sql_id` BIGINT ( 20, 2 ) DEFAULT NULL COMMENT 'excute_sql的主键',
+	`sql_id` BIGINT (20) NOT NULL DEFAULT '0' COMMENT 'excute_sql的主键',
 	`employee_num` VARCHAR ( 128 ) DEFAULT NULL COMMENT '员工编号',
 	`object_version_number` BIGINT ( 20 ) NOT NULL DEFAULT '1' COMMENT '行版本号，用来处理锁',
 	`created_by` BIGINT ( 20 ) NOT NULL DEFAULT '-1' COMMENT '记录创建人',

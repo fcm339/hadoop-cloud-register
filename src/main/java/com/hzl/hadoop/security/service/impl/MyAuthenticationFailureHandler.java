@@ -3,6 +3,7 @@ package com.hzl.hadoop.security.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -19,6 +20,7 @@ import java.io.IOException;
  * @author hzl 2021/09/10 11:13 AM
  */
 @Component
+@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class MyAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
 	@Autowired

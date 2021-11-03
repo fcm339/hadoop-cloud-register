@@ -8,6 +8,7 @@ import com.hzl.hadoop.security.vo.SysUserVO;
 import com.hzl.hadoop.util.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @author hzl 2021/09/09 5:10 PM
  */
 @Service
+@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class MyUserDetailsServiceImpl implements MyUserDetailsService {
 
 	SysUserMapper sysUserMapper;

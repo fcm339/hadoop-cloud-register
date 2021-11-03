@@ -1,5 +1,7 @@
 package com.hzl.hadoop.gp.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hzl.hadoop.gp.repository.GpRepository;
 import com.hzl.hadoop.gp.service.GpNoticeService;
 import com.hzl.hadoop.gp.service.GpService;
 import com.hzl.hadoop.gp.vo.MaxMinHtmlVO;
@@ -60,4 +62,6 @@ public class GpMaxMinController {
 
 		return "endPrice";
 	}
+
+
 }

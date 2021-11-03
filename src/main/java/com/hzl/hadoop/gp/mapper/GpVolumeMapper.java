@@ -1,6 +1,8 @@
 package com.hzl.hadoop.gp.mapper;
 
-import com.hzl.cloud.config.mybatis.BaseMapperUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.pagehelper.Page;
+import com.hzl.hadoop.config.mybatis.BaseMapperUtil;
 import com.hzl.hadoop.gp.vo.VolumeVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,5 +20,6 @@ public interface GpVolumeMapper extends BaseMapperUtil<VolumeVO> {
 
 	List<VolumeVO> queryVolumeYl(VolumeVO volumeVO);
 
+	Page<VolumeVO> queryVolumeYlPage(VolumeVO volumeVO);
 
 }

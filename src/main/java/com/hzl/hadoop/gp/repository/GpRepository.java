@@ -1,5 +1,9 @@
 package com.hzl.hadoop.gp.repository;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.pagehelper.PageInfo;
 import com.hzl.hadoop.gp.vo.GpVO;
 import com.hzl.hadoop.gp.vo.VolumeVO;
 import com.hzl.hadoop.gp.vo.YlVO;
@@ -12,7 +16,7 @@ import java.util.List;
  *
  * @author hzl 2020/10/31 5:16 PM
  */
-public interface GpRepository {
+public interface GpRepository  {
 	int insert(YlVO ylVO);
 
 	int insert(ZXVO zxvo);
@@ -48,4 +52,7 @@ public interface GpRepository {
 	 * @author hzl 2020-11-04 9:45 AM
 	 */
 	List<VolumeVO> queryVolume(VolumeVO volumeVO);
+
+	PageInfo<VolumeVO> queryVolumePage(VolumeVO volumeVO);
+
 }

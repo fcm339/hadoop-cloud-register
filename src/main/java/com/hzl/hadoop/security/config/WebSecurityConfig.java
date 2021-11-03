@@ -2,6 +2,7 @@ package com.hzl.hadoop.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -31,6 +32,7 @@ import java.util.Arrays;
  */
 @Configuration
 @EnableWebSecurity
+@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	//指定密码加密策略
@@ -119,7 +121,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests() // 授权配置
 				//无需权限访问
-				.antMatchers("/css/**", "/error404","/register").permitAll()
+				.antMatchers("/css/**", "/error404","/register","/druid/**").permitAll()
 				//必须经过认证以后才能访问
 				.anyRequest().access("@roleOauthService.hasPermission(request,authentication)");
 

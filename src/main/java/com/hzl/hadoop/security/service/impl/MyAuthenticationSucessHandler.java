@@ -3,6 +3,7 @@ package com.hzl.hadoop.security.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -24,6 +25,7 @@ import java.io.IOException;
  */
 @Slf4j
 @Component
+@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandler {
 
 	private RequestCache requestCache = new HttpSessionRequestCache();

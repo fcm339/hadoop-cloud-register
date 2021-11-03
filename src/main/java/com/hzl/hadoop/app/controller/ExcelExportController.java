@@ -1,5 +1,6 @@
 package com.hzl.hadoop.app.controller;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.hzl.hadoop.app.dataobject.ExcuteSqlDO;
 import com.hzl.hadoop.app.service.ExcuteSqlService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import java.net.URLEncoder;
  */
 @RestController
 @Slf4j
+@DS("slave1")
 public class ExcelExportController {
 
 	private ExcuteSqlService excuteSqlService;

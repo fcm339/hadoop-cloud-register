@@ -1,5 +1,8 @@
 package com.hzl.hadoop.gp.repository.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hzl.hadoop.exception.CommonException;
 import com.hzl.hadoop.gp.constant.GpUrlConstant;
 import com.hzl.hadoop.gp.mapper.GpVolumeMapper;
@@ -22,7 +25,7 @@ import java.util.List;
  * @author hzl 2020/10/31 5:17 PM
  */
 @Component
-public class GpRepositoryImpl implements GpRepository {
+public class GpRepositoryImpl implements GpRepository  {
 
 	GpYlMapper gpYlMapper;
 	GpZxMapper gpZxMapper;
@@ -58,8 +61,8 @@ public class GpRepositoryImpl implements GpRepository {
 		if (GpUrlConstant.GP_CODE_YL.equals(gpCode)) {
 			gpVOS = JsonUtils.cloneObjectList(gpYlMapper.selectMaxPriceVolatility(), GpVO.class);
 		} else if (GpUrlConstant.GP_CODE_ZX.equals(gpCode)) {
-			gpVOS =  JsonUtils.cloneObjectList(gpZxMapper.selectMaxPriceVolatility(gpCode), GpVO.class);
-		}else{
+			gpVOS = JsonUtils.cloneObjectList(gpZxMapper.selectMaxPriceVolatility(gpCode), GpVO.class);
+		} else {
 			gpVOS = JsonUtils.cloneObjectList(gpZxMapper.selectMaxPriceVolatility(gpCode), GpVO.class);
 		}
 
@@ -70,12 +73,12 @@ public class GpRepositoryImpl implements GpRepository {
 	public List<GpVO> selectMinPriceVolatility(String gpCode) {
 		List<GpVO> gpVOS = new ArrayList<>();
 		if (GpUrlConstant.GP_CODE_YL.equals(gpCode)) {
-			gpVOS =  JsonUtils.cloneObjectList((gpYlMapper.selectMinPriceVolatility()), GpVO.class);
+			gpVOS = JsonUtils.cloneObjectList((gpYlMapper.selectMinPriceVolatility()), GpVO.class);
 		} else if (GpUrlConstant.GP_CODE_ZX.equals(gpCode)) {
-			gpVOS =  JsonUtils.cloneObjectList((gpZxMapper.selectMinPriceVolatility(gpCode)), GpVO.class);
+			gpVOS = JsonUtils.cloneObjectList((gpZxMapper.selectMinPriceVolatility(gpCode)), GpVO.class);
 
-		}else{
-			gpVOS =  JsonUtils.cloneObjectList((gpZxMapper.selectMinPriceVolatility(gpCode)), GpVO.class);
+		} else {
+			gpVOS = JsonUtils.cloneObjectList((gpZxMapper.selectMinPriceVolatility(gpCode)), GpVO.class);
 		}
 		return gpVOS;
 	}
@@ -95,10 +98,17 @@ public class GpRepositoryImpl implements GpRepository {
 
 	@Override
 	public List<VolumeVO> queryVolume(VolumeVO volumeVO) {
-		if(GpUrlConstant.GP_CODE_YL.equals(volumeVO.getGpCode())){
+		if (GpUrlConstant.GP_CODE_YL.equals(volumeVO.getGpCode())) {
 			return gpVolumeMapper.queryVolumeYl(volumeVO);
 		}
 		return gpVolumeMapper.queryVolume(volumeVO);
+	}
+
+	@Override
+	public PageInfo<VolumeVO> queryVolumePage(VolumeVO volumeVO) {
+		PageInfo<VolumeVO> pageResult = PageHelper.startPage(1, 10).doSelectPageInfo(() -> gpVolumeMapper.select(volumeVO));
+
+		return pageResult;
 	}
 
 
