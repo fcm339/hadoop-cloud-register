@@ -47,7 +47,7 @@ public class GpBasicInfoJob {
 	 * @author hzl 2020-11-03 2:27 PM
 	 * @}eturn
 	 */
-//	@Scheduled(cron = "0 0/1 9-11 ? * MON-FRI")
+//	@Scheduled(cron = "0 30/1 9-11 ? * MON-FRI")
 //	public void getBasicInfoYl() {
 //		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
 //		gpService.insert(GpUrlConstant.GP_CODE_MD);
@@ -61,7 +61,7 @@ public class GpBasicInfoJob {
 //		gpService.insert(GpUrlConstant.GP_CODE_HE);
 //
 //	}
-
+//
 //	@Scheduled(cron = "0 0/1 13-15 ? * MON-FRI")
 //	public void getBasicInfoYlT() {
 //		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
@@ -76,8 +76,8 @@ public class GpBasicInfoJob {
 //		gpService.insert(GpUrlConstant.GP_CODE_HE);
 //
 //	}
-
-
+//
+//
 //	@Scheduled(cron = "0 1 15 ? * MON-FRI")
 //	public void getBasicInfoYlTL() {
 //		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
