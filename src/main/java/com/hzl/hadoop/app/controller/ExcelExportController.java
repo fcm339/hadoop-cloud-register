@@ -3,7 +3,9 @@ package com.hzl.hadoop.app.controller;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.hzl.hadoop.app.dataobject.ExcuteSqlDO;
 import com.hzl.hadoop.app.service.ExcuteSqlService;
+import com.hzl.hadoop.interfacemanager.annotation.Permission;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +21,7 @@ import java.net.URLEncoder;
 @RestController
 @Slf4j
 @DS("slave1")
+@Permission(isLogin = true)
 public class ExcelExportController {
 
 	private ExcuteSqlService excuteSqlService;
@@ -34,7 +37,7 @@ public class ExcelExportController {
 	 *
 	 * @author hzl 2020/01/05 2:36 PM
 	 */
-	@GetMapping(value = "/export/excel")
+	@GetMapping(value = "/export/excel" ,name = "通用下载接口")
 	public void downFileResponse(@RequestParam String fileName, HttpServletResponse response) {
 
 		response.setContentType("application/x-msdownload;charset=utf-8");

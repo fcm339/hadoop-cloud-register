@@ -1,4 +1,5 @@
 #计划安排，集成spring cloud aliababa ，hadoop，前端vue
+登陆记录，异常ip检测。
 集成 email（完成，后期集成数据库）
 
 日志配置logback实现了slf4j，指定日志目录，分片，日志查询脚本grep.sh（完成)

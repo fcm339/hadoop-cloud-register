@@ -10,7 +10,8 @@ import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.CacheErrorHandler;
@@ -21,6 +22,9 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
@@ -37,10 +41,12 @@ import java.time.Duration;
  * 2：StringRedisTemplate继承了RedisTemplate
  * 3：配置redis的序列化策略，这里我们配置json的序列化，不然每个类都需要实现Serializable
  * 参考：https://blog.csdn.net/sz85850597/article/details/89301331
- *https://blog.csdn.net/zzhongcy/article/details/102584028?utm_medium=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase&depth_1-utm_source=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase
+ * https://blog.csdn.net/zzhongcy/article/details/102584028?utm_medium=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase&depth_1-utm_source=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase
+ *
  * @author hzl 2020/01/17 10:57 AM
  * @EnableCaching开启springboot的@cache注解
  */
+@Slf4j
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
@@ -131,10 +137,9 @@ public class RedisConfig extends CachingConfigurerSupport {
 	 *
 	 * @author hzl 2020/01/17 3:10 PM
 	 */
-	@Bean
-	@ConditionalOnMissingBean
+	@Bean(value = "redisTemplate")
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-
+		log.info("自定义redis工厂{}", factory.getClass().getName());
 
 		//日期格式化结束
 		Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
@@ -146,8 +151,57 @@ public class RedisConfig extends CachingConfigurerSupport {
 		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 		//设置值的序列化为json
-		redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
-		redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+		redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+		redisTemplate.setValueSerializer(new StringRedisSerializer());
+
+		return redisTemplate;
+	}
+
+
+	/**
+	 * <p>
+	 * 多数据源
+	 * </p>
+	 * N
+	 *
+	 * @author hzl 2020/01/17 3:10 PM
+	 */
+	@Bean(value = "redisTemplate1")
+	public RedisTemplate<String, Object> redisTemplate2(RedisConnectProperties redisConnectProperties) {
+		log.info("自定义redis配置类{}", redisConnectProperties.toString());
+
+		/* ========= 基本配置 ========= */
+		RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
+		configuration.setHostName(redisConnectProperties.getHost());
+		configuration.setPort(redisConnectProperties.getPort());
+		configuration.setDatabase(redisConnectProperties.getDatabase());
+		/* ========= 连接池通用配置 ========= */
+		GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
+		genericObjectPoolConfig.setMaxIdle(redisConnectProperties.getLettuce().getPool().getMaxIdle());
+		genericObjectPoolConfig.setMinIdle(redisConnectProperties.getLettuce().getPool().getMinIdle());
+		genericObjectPoolConfig.setMaxTotal(redisConnectProperties.getLettuce().getPool().getMaxActive());
+		/* ========= lettuce pool ========= */
+		LettucePoolingClientConfiguration.LettucePoolingClientConfigurationBuilder builder = LettucePoolingClientConfiguration.builder();
+		builder.poolConfig(genericObjectPoolConfig);
+		builder.commandTimeout(redisConnectProperties.getTimeout());
+
+		LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(configuration, builder.build());
+		connectionFactory.afterPropertiesSet();
+
+		//上面是工厂定义
+		log.info("自定义redis工厂{}", connectionFactory.getClass().getName());
+		//日期格式化结束
+		Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+		jackson2JsonRedisSerializer.setObjectMapper(objectMapper());
+
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+		redisTemplate.setConnectionFactory(connectionFactory);
+		//设置键的序列号为string
+		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+		//设置值的序列化为json
+		redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+		redisTemplate.setValueSerializer(new StringRedisSerializer());
 
 		return redisTemplate;
 	}

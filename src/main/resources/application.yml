@@ -36,7 +36,7 @@ spring:
   cache:
     type: none #设置cache的类型可以是redis,none是禁用cache缓存
   redis:
-    host: localhost
+    host: 123
     port: 6379
     # redis默认情况下有16个分片，这里配置具体使用的分片，默认为0
     database: 0
@@ -51,7 +51,25 @@ spring:
         max-idle: 8
         #连接池中最新空闲连接
         min-idle: 0
-    password: hzl
+    password:
+    timeout: 10000ms
+  redis1:
+    host: 123
+    port: 6379
+    # redis默认情况下有16个分片，这里配置具体使用的分片，默认为0
+    database: 0
+    #在 Spring Boot 2.x 以后底层不再使用 Jedis，而是换成了 Lettuce。
+    lettuce:
+      pool:
+        # 连接池最大连接数(使用负数表示没有限制),默认8
+        max-active: 9
+        #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        #连接池中最大空闲连接
+        max-idle: 9
+        #连接池中最新空闲连接
+        min-idle: 0
+    password:
     timeout: 10000ms
 
   #mysql连接
@@ -111,6 +129,36 @@ spring:
           driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
+#消息中间件配置
+  rabbitmq:
+    host: 11
+    port: 5672
+    # 集群地址，用逗号分隔
+    connection-timeout: 60000
+    password: 12333
+    # 使用启用消息确认模式 true
+    username: 3333
+    virtual-host: 123
+    #Correlated 值是发布消息成功到交换器后会触发回调方法
+    publisher-confirm-type: correlated
+    #生产者发送的消息，经 Exchange 交换器路由到某个Queue队列中。如果消息没有到达Queue，则将消息返回给生产者（需要和Mandatory 参数一起用
+    publisher-returns: true
+    #当 mandatory 参数设置为true时，交换器无法根据自身的类型和路由键找到一个符合条件对队列，那么 RabbitMQ 会调用 Basic.Return 命令将消息返回给生产者。
+    #当 mandatory 参数设置为 false 时，出现上述情况，则消息直接被丢弃
+    template:
+      mandatory: true
+    listener:
+      direct:
+        acknowledge-mode: manual
+        prefetch: 6
+        auto-startup: false
+      simple:
+        acknowledge-mode: manual
+        prefetch: 6
+        batch-size: 3
+        auto-startup: false
+      type: direct
+
 
 
 # 包扫描或者在启动类上添加@MapperScan或者在每个mapper接口上添加@Mapper注解
@@ -134,16 +182,16 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
 
+
 #关闭httpbasic认证
-httpbasic:
-  isOpen: true
+#httpbasic:
+#  isOpen: "true"
 ##tk插件配置,作废后测试没问题，暂时不删除，等有问题了方便参考
 #mapper:
 #  identity: mysql
 #  mappers:
 #      - com.hzl.cloud.config.mybatis.BaseMapperUtil
 #  not-empty: false
-
 
 #dubbo配置
 #dubbo:
@@ -155,6 +203,8 @@ httpbasic:
 #      port: -1
 #  registry:
 #    address: spring-cloud://localhost
+
+
 ---
 
 spring:

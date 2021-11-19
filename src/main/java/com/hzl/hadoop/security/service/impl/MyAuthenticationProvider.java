@@ -1,11 +1,8 @@
 package com.hzl.hadoop.security.service.impl;
 
 import com.hzl.hadoop.exception.CommonException;
-import com.hzl.hadoop.security.dataobject.SysUser;
-import com.hzl.hadoop.security.service.MyUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,8 +20,8 @@ import java.util.Collection;
  *
  * @author hzl 2021/09/09 8:32 PM
  */
+@Slf4j
 @Component
-@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
 	/**
@@ -45,10 +42,10 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		if (userInfo == null) {
 			throw new BadCredentialsException("用户名不存在");
 		}
-		System.out.println("密码1"+password);
-		System.out.println("密码2"+userInfo.getPassword());
-		boolean flag = passwordEncoder.matches(password,userInfo.getPassword());
-		System.out.println("密码对比"+flag);
+		log.info("登陆密码{}", password);
+		log.info("数据库密码:{}", userInfo.getPassword());
+		boolean flag = passwordEncoder.matches(password, userInfo.getPassword());
+		log.info("密码对比结果:{}", flag);
 
 		if (!flag) {
 			throw new CommonException("密码不正确");

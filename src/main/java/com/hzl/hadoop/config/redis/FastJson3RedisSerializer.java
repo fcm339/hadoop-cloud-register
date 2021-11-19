@@ -53,8 +53,8 @@ public class FastJson3RedisSerializer<T> extends FastJsonRedisSerializer<T> {
 	public T deserialize(byte[] bytes) throws SerializationException {
 		if (bytes != null && bytes.length != 0) {
 			try {
-				T s=(T) JSON.parseObject(bytes, this.fastJsonConfig.getCharset(), this.type, this.fastJsonConfig.getParserConfig(), this.fastJsonConfig.getParseProcess(), JSON.DEFAULT_PARSER_FEATURE, this.fastJsonConfig.getFeatures());
-				System.out.println("测试是否转换成功"+s.toString());
+				T s = (T) JSON.parseObject(bytes, this.fastJsonConfig.getCharset(), this.type, this.fastJsonConfig.getParserConfig(), this.fastJsonConfig.getParseProcess(), JSON.DEFAULT_PARSER_FEATURE, this.fastJsonConfig.getFeatures());
+				System.out.println("测试是否转换成功" + s.toString());
 				return s;
 			} catch (Exception var3) {
 				throw new SerializationException("Could not deserialize: " + var3.getMessage(), var3);

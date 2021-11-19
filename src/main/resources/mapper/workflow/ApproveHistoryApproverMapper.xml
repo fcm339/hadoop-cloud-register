@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hzl.hadoop.workflow.mapper.ApproveHistoryMapper">
+<mapper namespace="com.hzl.hadoop.workflow.mapper.ApproveHistoryApproverMapper">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.hzl.hadoop.workflow.entity.ApproveHistoryEntity" id="approveHistoryMap">
+    <resultMap type="com.hzl.hadoop.workflow.entity.ApproveHistoryApproverEntity" id="approveHistoryApproverMap">
         <result property="id" column="id"/>
         <result property="processId" column="process_id"/>
         <result property="currentNodeId" column="current_node_id"/>

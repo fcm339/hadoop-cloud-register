@@ -24,7 +24,7 @@ import org.springframework.http.ResponseEntity;
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-03 17:38:26
+ * @date 2021-11-03 18:55:14
  */
 @RestController
 @RequestMapping("workflow/processhistory")
@@ -36,7 +36,7 @@ public class ProcessHistoryController {
      * 列表
      */
     @RequestMapping("/list")
-    public ResponseEntity<PageInfo<ProcessHistoryEntity>> list(@RequestParam ProcessHistoryEntity params,@RequestParam int start, @RequestParam int pageSize){
+    public ResponseEntity<PageInfo<ProcessHistoryEntity>> list(ProcessHistoryEntity params,@RequestParam int start, @RequestParam int pageSize){
 		PageInfo<ProcessHistoryEntity> page = processHistoryService.queryPage(params,start,pageSize);
 
         return new ResponseEntity(page, HttpStatus.OK);

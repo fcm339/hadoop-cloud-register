@@ -1,7 +1,7 @@
 package com.hzl.hadoop.workflow.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import com.hzl.hadoop.config.mybatis.BaseMapperUtil;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;;
 import com.hzl.hadoop.workflow.entity.ProcessMountEntity;
 
 
@@ -10,9 +10,9 @@ import com.hzl.hadoop.workflow.entity.ProcessMountEntity;
  * 
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-03 17:38:26
+ * @date 2021-11-03 18:55:13
  */
 @Mapper
-public interface ProcessMountMapper extends BaseMapperUtil<ProcessMountEntity> {
+public interface ProcessMountMapper extends BaseMapper<ProcessMountEntity> {
 	
 }

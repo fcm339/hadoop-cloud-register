@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-03 17:38:26
+ * @date 2021-11-03 18:55:14
  */
 public interface ApproveGroupUserService extends IService<ApproveGroupUserEntity> {
 

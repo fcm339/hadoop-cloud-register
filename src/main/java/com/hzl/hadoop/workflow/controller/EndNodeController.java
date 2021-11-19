@@ -24,7 +24,7 @@ import org.springframework.http.ResponseEntity;
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-03 17:38:25
+ * @date 2021-11-03 18:55:13
  */
 @RestController
 @RequestMapping("workflow/endnode")
@@ -36,7 +36,7 @@ public class EndNodeController {
      * 列表
      */
     @RequestMapping("/list")
-    public ResponseEntity<PageInfo<EndNodeEntity>> list(@RequestParam EndNodeEntity params,@RequestParam int start, @RequestParam int pageSize){
+    public ResponseEntity<PageInfo<EndNodeEntity>> list(EndNodeEntity params,@RequestParam int start, @RequestParam int pageSize){
 		PageInfo<EndNodeEntity> page = endNodeService.queryPage(params,start,pageSize);
 
         return new ResponseEntity(page, HttpStatus.OK);

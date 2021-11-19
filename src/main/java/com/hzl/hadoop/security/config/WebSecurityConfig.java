@@ -2,7 +2,6 @@ package com.hzl.hadoop.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -23,16 +22,15 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.util.Arrays;
 
 /**
  * description
  * 参考：https://www.jianshu.com/p/defa75b65a46
+ *
  * @author hzl 2021/09/09 4:44 PM
  */
 @Configuration
 @EnableWebSecurity
-@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	//指定密码加密策略
@@ -48,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	/**
 	 * 记住我功能的token存取器配置
+	 *
 	 * @return
 	 */
 	@Bean
@@ -99,7 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				//登录处理
 				.formLogin() //表单方式，或httpBasic
-			    .loginPage("/loginPage")
+				.loginPage("/loginPage")
 				.loginProcessingUrl("/form")
 				.successHandler(myAuthenticationSuccessHandler)
 				.failureHandler(myAuthenticationFailHander)
@@ -108,11 +107,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				//.failureUrl("/loginError")
 				.permitAll()
 				.and();
-		http    .rememberMe()
+		http.rememberMe()
 				.rememberMeParameter("remember-me").userDetailsService(userDetailsService)
 				.tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(60);
-		http    .logout()   //退出登录相关配置
+		http.logout()   //退出登录相关配置
 				.logoutUrl("/logout")   //自定义退出登录页面
 				//.logoutSuccessHandler(new CoreqiLogoutSuccessHandler()) //退出成功后要做的操作（如记录日志），和logoutSuccessUrl互斥
 				//.logoutSuccessUrl("/index") //退出成功后跳转的页面
@@ -121,14 +120,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests() // 授权配置
 				//无需权限访问
-				.antMatchers("/css/**", "/error404","/register","/druid/**").permitAll()
+				.antMatchers("/css/**", "/error404", "/register", "/druid/**","/redis/migration").permitAll()
 				//必须经过认证以后才能访问
 				.anyRequest().access("@roleOauthService.hasPermission(request,authentication)");
 
 
-				//.antMatchers("/user/**").hasRole("USER")
-				//其他接口需要登录后才能访问
-				//.anyRequest().authenticated();
+		//.antMatchers("/user/**").hasRole("USER")
+		//其他接口需要登录后才能访问
+		//.anyRequest().authenticated();
 
 	}
 
@@ -137,8 +136,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(provider);
 	}
-
-
 
 
 }

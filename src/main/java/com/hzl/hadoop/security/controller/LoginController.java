@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @Slf4j
 @Controller
-@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class LoginController {
 
 	@Autowired
@@ -65,9 +64,8 @@ public class LoginController {
 	 *
 	 * @author hzl 2020/01/08 12:41 PM
 	 */
-	@GetMapping(value = "/loginOut")
-	public String loginout(@RequestBody SysUserVO sysUserVO) {
-
+	@GetMapping(value = "/login/out/{username}")
+	public String loginout(@PathVariable("username") String userName) {
 		return "loginout";
 	}
 
