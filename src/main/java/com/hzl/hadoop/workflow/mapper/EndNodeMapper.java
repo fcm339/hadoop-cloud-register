@@ -1,7 +1,7 @@
 package com.hzl.hadoop.workflow.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import com.hzl.hadoop.config.mybatis.BaseMapperUtil;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;;
 import com.hzl.hadoop.workflow.entity.EndNodeEntity;
 
 
@@ -10,9 +10,9 @@ import com.hzl.hadoop.workflow.entity.EndNodeEntity;
  * 
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-03 17:38:25
+ * @date 2021-11-03 18:55:13
  */
 @Mapper
-public interface EndNodeMapper extends BaseMapperUtil<EndNodeEntity> {
+public interface EndNodeMapper extends BaseMapper<EndNodeEntity> {
 	
 }

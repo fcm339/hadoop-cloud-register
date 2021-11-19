@@ -20,10 +20,7 @@ import org.springframework.http.MediaType;
 import sun.misc.BASE64Encoder;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.net.*;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;

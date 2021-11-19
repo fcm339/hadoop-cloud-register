@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
  * @author hzl 2021/09/09 5:06 PM
  */
 @Service
-@ConditionalOnProperty(prefix = "httpbasic", name = "isOpen", havingValue = "true", matchIfMissing = false)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired

@@ -24,7 +24,7 @@ import org.springframework.http.ResponseEntity;
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-03 17:38:25
+ * @date 2021-11-03 18:55:13
  */
 @RestController
 @RequestMapping("workflow/approver")
@@ -36,7 +36,7 @@ public class ApproverController {
      * 列表
      */
     @RequestMapping("/list")
-    public ResponseEntity<PageInfo<ApproverEntity>> list(@RequestParam ApproverEntity params,@RequestParam int start, @RequestParam int pageSize){
+    public ResponseEntity<PageInfo<ApproverEntity>> list(ApproverEntity params,@RequestParam int start, @RequestParam int pageSize){
 		PageInfo<ApproverEntity> page = approverService.queryPage(params,start,pageSize);
 
         return new ResponseEntity(page, HttpStatus.OK);

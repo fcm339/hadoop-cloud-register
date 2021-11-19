@@ -25,6 +25,7 @@ import java.util.Date;
 @ToString
 public class SysUserVO extends BaseDO {
 
+
 	private Long id;
 
 	private String name;

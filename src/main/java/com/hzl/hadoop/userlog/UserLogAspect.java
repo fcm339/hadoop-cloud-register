@@ -1,26 +1,23 @@
 package com.hzl.hadoop.userlog;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.hzl.hadoop.userlog.entity.RequestLogsEntity;
+import com.hzl.hadoop.userlog.service.RequestLogsService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.DefaultParameterNameDiscoverer;
-import org.springframework.core.ParameterNameDiscoverer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 /**
  * description
@@ -33,8 +30,8 @@ import java.util.Map;
 @Component
 public class UserLogAspect {
 
-	@Value("${hadoop.openMulti: false}")
-	private Boolean openMulti;
+	@Autowired
+	private RequestLogsService requestLogsService;
 
 	@Pointcut("@annotation(org.springframework.web.bind.annotation.GetMapping)")
 	public void getMappingPointCut() {
@@ -56,50 +53,54 @@ public class UserLogAspect {
 
 	}
 
+	@Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+	public void requestMappingPointCut() {
+
+	}
+
 
 	@Around("getMappingPointCut()")
 	public Object around(ProceedingJoinPoint point) throws Throwable {
-		MethodSignature signature = (MethodSignature) point.getSignature();
-		Method method = signature.getMethod();
+		//MethodSignature signature = (MethodSignature) point.getSignature();
+		//Method method = signature.getMethod();
 		//获取参数,不能获取对象继承的父类
 		Object[] args = point.getArgs();
-		//获取参数值,不能获取对象继承的父类
-		ParameterNameDiscoverer pnd = new DefaultParameterNameDiscoverer();
-		String[] parameterNames = pnd.getParameterNames(method);
-		//封装参数map
-		Map<String, Object> paramMap = new HashMap<>(32);
-		for (int i = 0; i < parameterNames.length; i++) {
-			paramMap.put(parameterNames[i], args[i]);
-		}
-		log.info("方法参数" + paramMap.toString());
 
-		//获取方法返回值
-		Object returnResult = point.proceed(args);
-		log.info("打印返回结果" + returnResult.toString());
-
-		GetMapping getMapping = method.getAnnotation(GetMapping.class);
-		//获取类上的注解
-		RequestMapping requestMapping = point.getTarget().getClass().getAnnotation(RequestMapping.class);
-		StringBuilder classPath = new StringBuilder();
-		if (requestMapping != null) {
-			classPath.append(requestMapping.value().toString());
-
-		}
-		//请求地址
-		String methodPath = getMapping.value().toString();
-		classPath.append(methodPath);
-
-		//操作名称
-		String option = getMapping.name();
-
-		//获取访问人的ip
 		//获取请求上下文
 		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 		ServletRequestAttributes sra = (ServletRequestAttributes) ra;
 		HttpServletRequest request = sra.getRequest();
+
+		String requestParam = getArgs(args, request);
+
+		log.info("方法参数:{}", requestParam);
+
+		//获取方法返回值
+		Object returnResult = point.proceed(args);
+
+		log.info("打印返回结果:{}", returnResult.toString());
+
+		//获取访问人的ip
+
+
+		String option = request.getMethod();
+		String url = request.getRequestURI();
 		String ip = getIpAddress(request);
-		//获取请求上下文结束
-		return point.proceed();
+
+		System.out.println("地址option" + option);
+
+		System.out.println("地址url" + url);
+		//用户日志记录,后期换成异步不影响请求性能
+		RequestLogsEntity requestLogsEntity = RequestLogsEntity.builder()
+				.ip(ip)
+				.requestParam(requestParam)
+				.url(url)
+				.method(option)
+				.response(returnResult.toString())
+				.build();
+		requestLogsService.save(requestLogsEntity);
+		//用户日志记录结束
+		return returnResult;
 	}
 
 
@@ -123,4 +124,27 @@ public class UserLogAspect {
 		return ip;
 	}
 
+	/**
+	 * 获取请求参数
+	 *
+	 * @param args
+	 * @param request
+	 * @return
+	 */
+	private String getArgs(Object[] args, HttpServletRequest request) {
+		String strArgs = StringPool.EMPTY;
+
+		try {
+			if (!request.getContentType().contains("multipart/form-data")) {
+				strArgs = JSONObject.toJSONString(args);
+			}
+		} catch (Exception e) {
+			try {
+				strArgs = Arrays.toString(args);
+			} catch (Exception ex) {
+				log.warn("解析参数异常", ex);
+			}
+		}
+		return strArgs;
+	}
 }

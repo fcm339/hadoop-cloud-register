@@ -43,7 +43,7 @@ public class RedisUtils{
 
 	/**
 	 * 指定缓存失效时间
-	 *
+	 * 设置为-1,key会被删除，正常插入默认为-1不需要重新设置
 	 * @param key  键
 	 * @param time 时间(秒)
 	 * @return
@@ -355,7 +355,7 @@ public class RedisUtils{
 
 	/**
 	 * 根据value从一个set中查询,是否存在
-	 *
+	 * 直接赋值set集合的时候，需要toArray
 	 * @param key   键
 	 * @param value 值
 	 * @return true 存在 false不存在
@@ -667,6 +667,7 @@ public class RedisUtils{
 	}
 
 	//=========BoundListOperations 用法 End============
+
 
 
 }

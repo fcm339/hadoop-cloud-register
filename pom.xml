@@ -257,6 +257,12 @@
         </dependency>
         <!--mybatis插件结束-->
 
+        <!--添加rabbitmq-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <!--添加rabbitmq结束-->
 
     </dependencies>
 

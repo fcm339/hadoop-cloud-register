@@ -24,7 +24,7 @@ import org.springframework.http.ResponseEntity;
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-03 17:38:26
+ * @date 2021-11-03 18:55:13
  */
 @RestController
 @RequestMapping("workflow/processmount")
@@ -36,7 +36,7 @@ public class ProcessMountController {
      * 列表
      */
     @RequestMapping("/list")
-    public ResponseEntity<PageInfo<ProcessMountEntity>> list(@RequestParam ProcessMountEntity params,@RequestParam int start, @RequestParam int pageSize){
+    public ResponseEntity<PageInfo<ProcessMountEntity>> list(ProcessMountEntity params,@RequestParam int start, @RequestParam int pageSize){
 		PageInfo<ProcessMountEntity> page = processMountService.queryPage(params,start,pageSize);
 
         return new ResponseEntity(page, HttpStatus.OK);

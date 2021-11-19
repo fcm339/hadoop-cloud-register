@@ -4,11 +4,7 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.hzl.hadoop.workflow.entity.WorkflowNodeTypeEntity;
 import com.hzl.hadoop.workflow.service.WorkflowNodeTypeService;
@@ -24,7 +20,7 @@ import org.springframework.http.ResponseEntity;
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-03 17:38:26
+ * @date 2021-11-03 18:55:14
  */
 @RestController
 @RequestMapping("workflow/workflownodetype")
@@ -36,7 +32,7 @@ public class WorkflowNodeTypeController {
      * 列表
      */
     @RequestMapping("/list")
-    public ResponseEntity<PageInfo<WorkflowNodeTypeEntity>> list(@RequestParam WorkflowNodeTypeEntity params,@RequestParam int start, @RequestParam int pageSize){
+    public ResponseEntity<PageInfo<WorkflowNodeTypeEntity>> list(WorkflowNodeTypeEntity params,@RequestParam int start, @RequestParam int pageSize){
 		PageInfo<WorkflowNodeTypeEntity> page = workflowNodeTypeService.queryPage(params,start,pageSize);
 
         return new ResponseEntity(page, HttpStatus.OK);
@@ -56,7 +52,7 @@ public class WorkflowNodeTypeController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity save(@RequestBody WorkflowNodeTypeEntity workflowNodeType){
 		workflowNodeTypeService.save(workflowNodeType);
 
