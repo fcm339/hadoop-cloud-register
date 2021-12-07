@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,6 +20,9 @@ import java.time.LocalDateTime;
  * @email sunlightcs@gmail.com
  * @date 2021-11-03 18:55:13
  */
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @TableName("process_variable")
 public class ProcessVariableEntity implements Serializable {

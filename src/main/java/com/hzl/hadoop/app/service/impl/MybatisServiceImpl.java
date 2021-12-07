@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @Slf4j
-public class MybatisServiceimpl implements MybatisService, DisposableBean {
+public class MybatisServiceImpl implements MybatisService, DisposableBean {
 
 	@Autowired
 	private Contractmapper contractmapper;

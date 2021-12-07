@@ -19,12 +19,12 @@ import java.util.List;
  * @author hzl 2020/11/16 3:06 PM
  */
 @Service
-public class ExcuteSqlServiceimpl implements ExcuteSqlService {
+public class ExcuteSqlServiceImpl implements ExcuteSqlService {
 	private ExcuteSqlMapper excuteSqlMapper;
 
 	private ExcuteSqlOauthMapper excuteSqlOauthMapper;
 
-	public ExcuteSqlServiceimpl(ExcuteSqlMapper excuteSqlMapper, ExcuteSqlOauthMapper excuteSqlOauthMapper) {
+	public ExcuteSqlServiceImpl(ExcuteSqlMapper excuteSqlMapper, ExcuteSqlOauthMapper excuteSqlOauthMapper) {
 		this.excuteSqlMapper = excuteSqlMapper;
 		this.excuteSqlOauthMapper = excuteSqlOauthMapper;
 	}
@@ -45,10 +45,10 @@ public class ExcuteSqlServiceimpl implements ExcuteSqlService {
 	}
 
 	@Override
-	public void excuteSql(HttpServletResponse response,ExcuteSqlDO excuteSqlDO) {
-		List<LinkedHashMap<String, Object>> result=excuteSqlMapper.executeSql(excuteSqlDO.getSqlString());
+	public void excuteSql(HttpServletResponse response, ExcuteSqlDO excuteSqlDO) {
+		List<LinkedHashMap<String, Object>> result = excuteSqlMapper.executeSql(excuteSqlDO.getSqlString());
 		try {
-			EasyExcelUtils.downloadFailedUsingJson(response,result,"模版");
+			EasyExcelUtils.downloadFailedUsingJson(response, result, "模版");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,6 +1,9 @@
 package com.hzl.hadoop.config.redis;
 
 import com.alibaba.fastjson.parser.ParserConfig;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -10,8 +13,10 @@ import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.hzl.hadoop.constant.CharsetConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.CacheErrorHandler;
@@ -210,6 +215,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 	 * <p>
 	 * https://github.com/alibaba/fastjson/issues/2802
 	 * https://blog.csdn.net/imtzc/article/details/102569671
+	 * http://www.javashuo.com/article/p-mulwkhbw-ep.html
 	 * 当前引用的版本存在bug，后期修改
 	 * todo 反序列化有问题
 	 * </p>
@@ -243,7 +249,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 //		fastJsonConfig.setCharset(CharsetConstant.DEFAULT_CHARSET);
 //
 //		FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
-//		//fastJsonRedisSerializer.setFastJsonConfig(fastJsonConfig);
+//		fastJsonRedisSerializer.setFastJsonConfig(fastJsonConfig);
 //
 //		RedisTemplate<String, Object> redisTemplate = new RedisTemplate();
 //		redisTemplate.setConnectionFactory(factory);

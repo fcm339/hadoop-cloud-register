@@ -17,7 +17,7 @@ import java.time.LocalDate;
  */
 @Component
 @Slf4j
-public class TestServiceimpl implements TestService {
+public class TestServiceImpl implements TestService {
 
 	@Autowired
 	private Contractmapper contractmapper;

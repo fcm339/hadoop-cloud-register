@@ -23,9 +23,9 @@ public class StartNodeVO implements Serializable {
 
 	private Long id;
 	/**
-	 * 流程描述
+	 * 流程图id
 	 */
-	private String processDescribe;
+	private Long charId;
 	/**
 	 * 节点编号
 	 */

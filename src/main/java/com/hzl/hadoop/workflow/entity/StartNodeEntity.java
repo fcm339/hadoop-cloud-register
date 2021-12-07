@@ -34,9 +34,9 @@ public class StartNodeEntity implements Serializable {
 	@TableId
 	private Long id;
 	/**
-	 * 流程描述
+	 * 流程图id
 	 */
-	private String processDescribe;
+	private Long charId;
 	/**
 	 * 节点编号
 	 */
@@ -61,8 +61,9 @@ public class StartNodeEntity implements Serializable {
 	 * 下一节点类型（关联审批节点表的node_type）
 	 */
 	private Integer nextNodeType;
+
 	/**
-	 * 全局监听（监听所有节点的类）
+	 * TODO 待改成表关联 全局监听（监听所有节点的类）
 	 */
 	private String globalListen;
 	/**

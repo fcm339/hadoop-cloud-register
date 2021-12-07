@@ -1,26 +1,31 @@
 package com.hzl.hadoop.workflow.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import lombok.Data;
-
 
 /**
- * 网关节点
+ * 前端生成的流程图，需要转换成开始节点，审批节点，网关节点，结束节点
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-03 18:55:13
+ * @date 2021-11-24 09:34:57
  */
 @Data
-@TableName("gateway_node")
-public class GatewayNodeEntity implements Serializable {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("workflow_char")
+public class WorkflowCharEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -29,33 +34,15 @@ public class GatewayNodeEntity implements Serializable {
 	@TableId
 	private Long id;
 	/**
-	 * 节点编号
+	 * 流程图json数据
 	 */
-	private String nodeNum;
+	private String charData;
+
 	/**
-	 * 审批人
+	 * 工作流名称
 	 */
-	private Long approverId;
-	/**
-	 * 审批组（全组同意，或者任意一人同意）
-	 */
-	private Long approverGroupId;
-	/**
-	 * 指定岗位编号
-	 */
-	private String positionNum;
-	/**
-	 * TODO 因为是一对多 根据数据库特性，建议一个对应关系生成一个行数据方便left join 下一节点（一对一，可以是网管，审批节点）
-	 */
-	private Long nextNodeId;
-	/**
-	 * 下一节点类型（关联审批节点表的node_type）
-	 */
-	private Integer nextNodeType;
-	/**
-	 * 开始节点id
-	 */
-	private Long startId;
+	private String descr;
+
 	/**
 	 * 租户id
 	 */
