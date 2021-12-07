@@ -40,13 +40,13 @@ public class GpBasicInfoJob {
 	}
 
 
-	/**
-	 * fixedDelay 上传方法执行完成后开始计算
-	 * 30秒执行一次@Scheduled(fixedDelay = 30 * 1000)
-	 *0 0/1 9,11 ? * MON-FR,周一到周五，9点到11
-	 * @author hzl 2020-11-03 2:27 PM
-	 * @}eturn
-	 */
+//	/**
+//	 * fixedDelay 上传方法执行完成后开始计算
+//	 * 30秒执行一次@Scheduled(fixedDelay = 30 * 1000)
+//	 *0 0/1 9,11 ? * MON-FR,周一到周五，9点到11
+//	 * @author hzl 2020-11-03 2:27 PM
+//	 * @}eturn
+//	 */
 //	@Scheduled(cron = "0 30/1 9-11 ? * MON-FRI")
 //	public void getBasicInfoYl() {
 //		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
@@ -62,7 +62,7 @@ public class GpBasicInfoJob {
 //
 //	}
 //
-//	@Scheduled(cron = "0 0/1 13-15 ? * MON-FRI")
+//	@Scheduled(cron = "0 0/1 13-14 ? * MON-FRI")
 //	public void getBasicInfoYlT() {
 //		log.info("定时器获取中兴时时基础数据d----------------------------------------------------" + Thread.currentThread());
 //		gpService.insert(GpUrlConstant.GP_CODE_MD);

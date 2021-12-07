@@ -1,6 +1,7 @@
 package com.hzl.hadoop.userlog;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.hzl.hadoop.userlog.entity.RequestLogsEntity;
@@ -18,6 +19,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * description
@@ -59,70 +62,64 @@ public class UserLogAspect {
 	}
 
 
-	@Around("getMappingPointCut()")
+	@Around(value = "getMappingPointCut()")
+	public Object aroundGet(ProceedingJoinPoint point) throws Throwable {
+		return around(point);
+	}
+
+	@Around(value = "deleteMappingPointCut()")
+	public Object aroundDelete(ProceedingJoinPoint point) throws Throwable {
+		return around(point);
+	}
+
+
+	@Around(value = "putMappingPointCut()")
+	public Object aroundPut(ProceedingJoinPoint point) throws Throwable {
+		return around(point);
+	}
+
+
+	@Around(value = "postMappingPointCut()")
+	public Object aroundPost(ProceedingJoinPoint point) throws Throwable {
+		return around(point);
+	}
+
+
+	@Around(value = "requestMappingPointCut()")
+	public Object aroundRequest(ProceedingJoinPoint point) throws Throwable {
+		return around(point);
+	}
+
 	public Object around(ProceedingJoinPoint point) throws Throwable {
-		//MethodSignature signature = (MethodSignature) point.getSignature();
-		//Method method = signature.getMethod();
+		Object returnResult;
 		//获取参数,不能获取对象继承的父类
 		Object[] args = point.getArgs();
 
 		//获取请求上下文
-		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-		ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-		HttpServletRequest request = sra.getRequest();
+		HttpServletRequest request = getRequest();
 
 		String requestParam = getArgs(args, request);
 
 		log.info("方法参数:{}", requestParam);
-
 		//获取方法返回值
-		Object returnResult = point.proceed(args);
+		// 计算耗时
+		long startTime = System.nanoTime();
 
-		log.info("打印返回结果:{}", returnResult.toString());
+		long consumeTime;
+		try {
+			returnResult = point.proceed(args);
+		} finally {
+			consumeTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
+		}
 
-		//获取访问人的ip
+		log.info("打印返回结果:{}", String.valueOf(returnResult));
 
-
-		String option = request.getMethod();
-		String url = request.getRequestURI();
-		String ip = getIpAddress(request);
-
-		System.out.println("地址option" + option);
-
-		System.out.println("地址url" + url);
-		//用户日志记录,后期换成异步不影响请求性能
-		RequestLogsEntity requestLogsEntity = RequestLogsEntity.builder()
-				.ip(ip)
-				.requestParam(requestParam)
-				.url(url)
-				.method(option)
-				.response(returnResult.toString())
-				.build();
-		requestLogsService.save(requestLogsEntity);
+		//插入记录到数据库 TODO 后期改成异步操作，或者消息中间件
+		insertTable(request, requestParam, consumeTime);
 		//用户日志记录结束
 		return returnResult;
 	}
 
-
-	public static String getIpAddress(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_CLIENT_IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
-	}
 
 	/**
 	 * 获取请求参数
@@ -133,10 +130,10 @@ public class UserLogAspect {
 	 */
 	private String getArgs(Object[] args, HttpServletRequest request) {
 		String strArgs = StringPool.EMPTY;
-
 		try {
 			if (!request.getContentType().contains("multipart/form-data")) {
 				strArgs = JSONObject.toJSONString(args);
+
 			}
 		} catch (Exception e) {
 			try {
@@ -147,4 +144,50 @@ public class UserLogAspect {
 		}
 		return strArgs;
 	}
+
+
+	/**
+	 * <p>
+	 * 获取上下午request
+	 * </p>
+	 *
+	 * @author hzl 2021/11/22 9:49 AM
+	 */
+	public HttpServletRequest getRequest() {
+		//获取请求上下文
+		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+		ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
+		return servletRequestAttributes.getRequest();
+	}
+
+
+	/**
+	 * <p>
+	 * 将请求记录保存数据库
+	 * </p>
+	 *
+	 * @author hzl 2021/11/22 9:51 AM
+	 */
+	public boolean insertTable(HttpServletRequest request, String requestParam, long consumeTime) {
+		//参数封装，插入数据库
+		String option = request.getMethod();
+		String url = request.getRequestURI();
+		//获取访问人的ip
+		String ip = IPUtil.getIpAddress(request);
+		String city = IPUtil.getCityInfo(ip);
+
+
+		//用户日志记录,后期换成异步不影响请求性能
+		RequestLogsEntity requestLogsEntity = RequestLogsEntity.builder()
+				.ip(ip)
+				.requestParam(JSON.toJSONString(requestParam))
+				.url(url)
+				.method(option)
+				.city(city)
+				.consumeTime(consumeTime)
+				.build();
+		return requestLogsService.save(requestLogsEntity);
+	}
+
+
 }

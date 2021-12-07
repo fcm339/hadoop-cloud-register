@@ -36,7 +36,7 @@ spring:
   cache:
     type: none #设置cache的类型可以是redis,none是禁用cache缓存
   redis:
-    host: 123
+    host: tt
     port: 6379
     # redis默认情况下有16个分片，这里配置具体使用的分片，默认为0
     database: 0
@@ -54,7 +54,7 @@ spring:
     password:
     timeout: 10000ms
   redis1:
-    host: 123
+    host: tt
     port: 6379
     # redis默认情况下有16个分片，这里配置具体使用的分片，默认为0
     database: 0

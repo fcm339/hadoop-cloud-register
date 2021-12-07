@@ -1,4 +1,4 @@
-package com.hzl.hadoop.userlog.vo;
+package com.hzl.hadoop.workflow.vo;
 
 
 import lombok.AllArgsConstructor;
@@ -10,49 +10,31 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 请求日志
+ * 前端生成的流程图，需要转换成开始节点，审批节点，网关节点，结束节点
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2021-11-19 16:18:12
+ * @date 2021-11-24 09:34:57
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestLogsVO{
+public class WorkflowCharVO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 *
 	 */
 	private Long id;
 	/**
-	 *
+	 * 流程图json数据
 	 */
-	private String ip;
+	private String charData;
 	/**
-	 *
+	 * 工作流名称
 	 */
-	private String url;
-	/**
-	 *
-	 */
-	private String requestParam;
-
-	/**
-	 *操作类型
-	 */
-	private String method;
-
-	/**
-	 * ip地址
-	 *
-	 * */
-	private String city;
-	/**
-	 *耗时
-	 */
-	private long consumeTime;
+	private String descr;
 	/**
 	 * 租户id
 	 */

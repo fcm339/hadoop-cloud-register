@@ -33,15 +33,15 @@ public class RequestLogsEntity{
 	@TableId
 	private Long id;
 	/**
-	 *
+	 *ip来源
 	 */
 	private String ip;
 	/**
-	 *
+	 *接口地址
 	 */
 	private String url;
 	/**
-	 *
+	 *请求参数
 	 */
 	private String requestParam;
 	/**
@@ -49,9 +49,15 @@ public class RequestLogsEntity{
 	 */
 	private String method;
 	/**
-	 *
+	 *耗时
 	 */
-	private String response;
+	private long consumeTime;
+
+	/**
+	* ip地址
+	 *
+	 * */
+	private String city;
 	/**
 	 * 租户id
 	 */

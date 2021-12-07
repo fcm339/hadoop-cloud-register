@@ -79,7 +79,6 @@ public class MvcJsonController {
 	 */
 	@GetMapping(value = "/query/pinyin")
 	public ResponseEntity<String> qeueryPinyin(@RequestParam String zw) {
-		System.out.println("测试执行次数");
 
 		String pinyin = PinyinUtil.getPinyin(zw, " ");
 

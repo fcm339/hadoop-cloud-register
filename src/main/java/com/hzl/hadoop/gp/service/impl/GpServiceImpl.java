@@ -9,8 +9,6 @@ import com.hzl.hadoop.gp.yili.Convert;
 import com.hzl.hadoop.util.JsonUtils;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,7 +23,6 @@ import java.util.stream.Collectors;
  */
 @Service
 public class GpServiceImpl implements GpService {
-	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DataConstant.DATESIM);
 
 	GpRepository gpRepository;
 
@@ -64,11 +61,11 @@ public class GpServiceImpl implements GpService {
 	@Override
 	public MaxMinHtmlVO queryVolume(VolumeVO volumeVO) {
 		List<VolumeVO> volumeVOS = gpRepository.queryVolume(volumeVO);
-		List<EndPriceVO> endPrice = volumeVOS.stream().map(a -> EndPriceVO.builder().series("收盘价/元(需除10)").x(a.getDate()).y(a.getCurrentPrice().doubleValue()*10).build()).collect(Collectors.toList());
+		List<EndPriceVO> endPrice = volumeVOS.stream().map(a -> EndPriceVO.builder().series("收盘价/元(需除10)").x(a.getDate()).y(a.getCurrentPrice().doubleValue() * 10).build()).collect(Collectors.toList());
 		List<EndPriceVO> number = volumeVOS.stream().map(a -> EndPriceVO.builder().series("成交额/万手").x(a.getDate()).y(Double.valueOf(a.getNumber())).build()).collect(Collectors.toList());
 		List<EndPriceVO> turnover = volumeVOS.stream().map(a -> EndPriceVO.builder().series("成交额/亿元").x(a.getDate()).y(a.getTurnover().doubleValue()).build()).collect(Collectors.toList());
-		List<EndPriceVO> forecast = volumeVOS.stream().map(a -> EndPriceVO.builder().series("预估价格/元(需除10)").x(a.getDate()).y(((a.getTurnover().doubleValue()*100*10)/a.getNumber())).build()).collect(Collectors.toList());
-		List<EndPriceVO> forecastPercent = volumeVOS.stream().map(a -> EndPriceVO.builder().series("(预估价格-收盘价格)/收盘价格").x(a.getDate()).y(((((a.getTurnover().doubleValue()*100)/a.getNumber())-a.getCurrentPrice().doubleValue())/(a.getCurrentPrice().doubleValue()*100))*1000000).build()).collect(Collectors.toList());
+		List<EndPriceVO> forecast = volumeVOS.stream().map(a -> EndPriceVO.builder().series("预估价格/元(需除10)").x(a.getDate()).y(((a.getTurnover().doubleValue() * 100 * 10) / a.getNumber())).build()).collect(Collectors.toList());
+		List<EndPriceVO> forecastPercent = volumeVOS.stream().map(a -> EndPriceVO.builder().series("(预估价格-收盘价格)/收盘价格").x(a.getDate()).y(((((a.getTurnover().doubleValue() * 100) / a.getNumber()) - a.getCurrentPrice().doubleValue()) / (a.getCurrentPrice().doubleValue() * 100)) * 1000000).build()).collect(Collectors.toList());
 		//根据成交额和
 
 
