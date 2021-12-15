@@ -5,10 +5,7 @@ import com.hzl.hadoop.exception.CommonException;
 import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
@@ -27,6 +24,8 @@ public class LocalDateFormate {
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DataConstant.DATE);
 
 	private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(DataConstant.DATETIME);
+
+	private static final DateTimeFormatter TIME_FORMATTER_MM = DateTimeFormatter.ofPattern(DataConstant.DATETIME_MM);
 
 
 	/**
@@ -57,6 +56,24 @@ public class LocalDateFormate {
 	public static LocalDateTime stringTolocalDateTime(String localDateTime) {
 		if (StringUtils.hasLength(localDateTime)) {
 			LocalDateTime localDateTimeConvert = LocalDateTime.parse(localDateTime, TIME_FORMATTER);
+			return localDateTimeConvert;
+		} else {
+			return null;
+		}
+
+	}
+
+	/**
+	 * <p>
+	 * 将字符串的LocalDateTime类型日期，转换成LocalDateTime类型
+	 * localDateTime格式：2020-11-04 23:00
+	 * </p>
+	 *
+	 * @author hzl 2020/01/03 5:17 PM
+	 */
+	public static LocalDateTime stringTolocalDateTimeM(String localDateTime) {
+		if (StringUtils.hasLength(localDateTime)) {
+			LocalDateTime localDateTimeConvert = LocalDateTime.parse(localDateTime, TIME_FORMATTER_MM);
 			return localDateTimeConvert;
 		} else {
 			return null;
@@ -109,11 +126,11 @@ public class LocalDateFormate {
 	}
 
 	/**
+	 * 将long转换为LocalDateTime
 	 *
-	 *将long转换为LocalDateTime
 	 * @param timestamp
-	 * @author hzl 2020-03-19 5:46 PM
 	 * @return
+	 * @author hzl 2020-03-19 5:46 PM
 	 */
 	public static LocalDateTime longToLocalDateTime(long timestamp) {
 		Instant instant = Instant.ofEpochMilli(timestamp);
@@ -123,11 +140,11 @@ public class LocalDateFormate {
 	}
 
 	/**
+	 * 将LocalDateTime转换为long
 	 *
-	 *将LocalDateTime转换为long
 	 * @param localDateTime
-	 * @author hzl 2020-03-19 5:46 PM
 	 * @return
+	 * @author hzl 2020-03-19 5:46 PM
 	 */
 	public static long localDateTimeTolong(LocalDateTime localDateTime) {
 		//ZoneId zone = ZoneId.systemDefault();
@@ -136,4 +153,14 @@ public class LocalDateFormate {
 		return instant.toEpochMilli();
 	}
 
+	/**
+	 * <p>
+	 * 获取今天凌晨的时间
+	 * </p>
+	 *
+	 * @author hzl 2021/12/15 10:47 AM
+	 */
+	public static LocalDateTime getTodayInitTime(){
+		return LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
+	}
 }

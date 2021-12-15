@@ -29,4 +29,10 @@ public interface GpUrlConstant {
 
 	//竞价结束时间
 	String BADDING_END="2020-11-04 09:25:00";
+
+	//新浪个股新闻接口
+	String SINGLE_STOCK_NEW="https://vip.stock.finance.sina.com.cn/corp/go.php/vCB_AllNewsStock/symbol/";
+
+	//新闻来源-新浪
+	String NEWS_SOURCE="xl";
 }

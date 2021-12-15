@@ -2,12 +2,12 @@ package com.hzl.hadoop.gp.service.impl;
 
 import com.hzl.hadoop.app.service.FreemarkerService;
 import com.hzl.hadoop.gp.constant.GpUrlConstant;
+import com.hzl.hadoop.gp.convert.GpConvert;
 import com.hzl.hadoop.gp.repository.GpRepository;
 import com.hzl.hadoop.gp.service.GpNoticeService;
 import com.hzl.hadoop.gp.vo.GpVO;
 import com.hzl.hadoop.gp.vo.MaxMinHtmlVO;
 import com.hzl.hadoop.gp.vo.MaxMinVO;
-import com.hzl.hadoop.gp.yili.Convert;
 import com.hzl.hadoop.util.JsonUtils;
 import com.hzl.hadoop.util.LocalDateFormate;
 import com.hzl.hadoop.util.email.service.MailService;
@@ -48,12 +48,12 @@ public class GpNoticeServiceImpl implements GpNoticeService {
 
 	@Override
 	public void bidding(String gpCode) {
-		Convert convert = new Convert();
+		GpConvert gpConvert = new GpConvert();
 		//每天早上9点15执行-9:25结束
 		LocalDateTime localDateTimeNow = LocalDateTime.now();
 		if (localDateTimeNow.toLocalTime().isAfter(LocalDateFormate.stringTolocalDateTime(BADDING_START).toLocalTime()) &&
 				localDateTimeNow.toLocalTime().isBefore(LocalDateFormate.stringTolocalDateTime(BADDING_END).toLocalTime())) {
-			Map<String, String> date = convert.getGpInfo(GpUrlConstant.GP_BASE_URL.concat(gpCode), null);
+			Map<String, String> date = gpConvert.getGpInfo(GpUrlConstant.GP_BASE_URL.concat(gpCode), null);
 			String name = date.get("股票名字");
 			BigDecimal yesterdayEndPrice = new BigDecimal(date.get("昨日收盘价"));
 			BigDecimal currentPrice = new BigDecimal(date.get("竞买价，即买一报价"));
@@ -90,8 +90,8 @@ public class GpNoticeServiceImpl implements GpNoticeService {
 		//List<GpVO> gpVOCurrent = gpRepository.selectCurrentPriceAll(gpCode);
 
 		//获取当前股票价格
-		Convert convert = new Convert();
-		Map<String, String> date = convert.getGpInfo(GpUrlConstant.GP_BASE_URL.concat(gpCode), null);
+		GpConvert gpConvert = new GpConvert();
+		Map<String, String> date = gpConvert.getGpInfo(GpUrlConstant.GP_BASE_URL.concat(gpCode), null);
 		GpVO gpVO = new GpVO();
 		gpVO.init(date);
 		gpVO.setGpCode(gpCode);

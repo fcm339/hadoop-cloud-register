@@ -121,11 +121,6 @@ public class AesUtil {
 		return encrypt(content, key);
 	}
 
-	public static void main(String args[]) {
-		//System.out.println(encrypt("饿恶533饿"));
-		//System.out.println(decrypt("恶额饿43"));
-		//文件加密
-		//文件揭秘
-	}
+
 
 }

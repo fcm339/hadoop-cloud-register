@@ -33,4 +33,11 @@ public class AesUtilTest {
 		fileOutputStream.write(AesUtil.decryptFile(output, "test"));
 
 	}
+
+	//加密
+	@Test
+	public void encrypt() throws IOException {
+		String result=AesUtil.encrypt("https://finance.sina.com.cn/stock/bxjj/2021-12-15/doc-ikyamrmy9033885.shtml","sz000651");
+		System.out.println(result);
+	}
 }

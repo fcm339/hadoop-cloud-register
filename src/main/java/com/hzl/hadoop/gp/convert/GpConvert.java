@@ -1,4 +1,4 @@
-package com.hzl.hadoop.gp.yili;
+package com.hzl.hadoop.gp.convert;
 
 import com.hzl.hadoop.util.HttpResponseException;
 import com.hzl.hadoop.util.HttpUtils;
@@ -15,7 +15,7 @@ import java.util.Map;
  * @author hzl 2020/10/31 12:53 PM
  */
 @Slf4j
-public class Convert {
+public class GpConvert {
 
 	//===============================================================================
 	//参考：https://blog.csdn.net/cxu123321/article/details/104239214
