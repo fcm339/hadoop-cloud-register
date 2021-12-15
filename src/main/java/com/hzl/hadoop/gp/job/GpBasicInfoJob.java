@@ -3,6 +3,7 @@ package com.hzl.hadoop.gp.job;
 import com.hzl.hadoop.gp.constant.GpUrlConstant;
 import com.hzl.hadoop.gp.service.GpNoticeService;
 import com.hzl.hadoop.gp.service.GpService;
+import com.hzl.hadoop.gp.service.XinLangNews;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,8 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 
 /**
@@ -25,6 +28,9 @@ public class GpBasicInfoJob {
 	private GpService gpService;
 	@Autowired
 	private GpNoticeService gpNoticeService;
+
+	@Autowired
+	private XinLangNews xinLangNews;
 
 	/**
 	 * 设置定时器的线程池
@@ -92,6 +98,24 @@ public class GpBasicInfoJob {
 //		gpService.insert(GpUrlConstant.GP_CODE_HE);
 //
 //	}
+
+	/**
+	 * 半小时执行一次，用于获取个股新闻数据，暂时只爬去新浪网
+	 *
+	 * @author hzl 2021-12-15 12:40 PM
+	 * @return
+	 */
+//	@Scheduled(cron = "0 0/30 * * * ?")
+//	public void getTodayNews(){
+//		try {
+//			xinLangNews.getTodayNews(GpUrlConstant.GP_CODE_GL);
+//			xinLangNews.getTodayNews(GpUrlConstant.GP_CODE_HE);
+//			xinLangNews.getTodayNews(GpUrlConstant.GP_CODE_MD);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+
 
 	/**
 	 * fixedDelay 上传方法执行完成后开始计算

@@ -1,15 +1,13 @@
 package com.hzl.hadoop.gp.service.impl;
 
-import com.hzl.hadoop.constant.DataConstant;
 import com.hzl.hadoop.gp.constant.GpUrlConstant;
+import com.hzl.hadoop.gp.convert.GpConvert;
 import com.hzl.hadoop.gp.repository.GpRepository;
 import com.hzl.hadoop.gp.service.GpService;
 import com.hzl.hadoop.gp.vo.*;
-import com.hzl.hadoop.gp.yili.Convert;
 import com.hzl.hadoop.util.JsonUtils;
 import org.springframework.stereotype.Service;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -34,9 +32,9 @@ public class GpServiceImpl implements GpService {
 	@Override
 	public GpVO insert(String code) {
 
-		Convert convert = new Convert();
+		GpConvert gpConvert = new GpConvert();
 		//通过url获取转化后的数据
-		Map<String, String> date = convert.getGpInfo(GpUrlConstant.GP_BASE_URL.concat(code), null);
+		Map<String, String> date = gpConvert.getGpInfo(GpUrlConstant.GP_BASE_URL.concat(code), null);
 		//生成对象
 		GpVO gpVO = new GpVO();
 		//初始化对象参数
@@ -79,11 +77,5 @@ public class GpServiceImpl implements GpService {
 		MaxMinHtmlVO maxMinHtmlVO = MaxMinHtmlVO.builder().data(JsonUtils.objectToString(all)).build();
 		return maxMinHtmlVO;
 	}
-
-//	public static void main(String args[]){
-//		BigDecimal bg = new BigDecimal(2.562);
-//		double f1 = bg.setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
-//		System.out.println(f1);
-//	}
 
 }
